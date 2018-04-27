@@ -10,9 +10,58 @@ Do commit ao rebase.
 
 ### O que é Repositório
 
+> Local do Git criado para guardar seu projeto e todas as versões que o mesmo possa ter.
+
 ### O que é Commit
 
+> Ponto do processo onde é informado as mudanças que foram feitas através de uma mensagem para ser marcada e documentada no histórico do projeto.
+
 ### O que é Branch
+
+> Uma vertente do projeto onde uma funcionalidade foi ou esta sendo criada em paralelo sem estar afetando o resto do projeto.
+
+### O que é Merge
+
+> O processo de juntar duas `branchs` de trabalho em um so, sendo assim, sincronizando o trabalho e funções de ambas as versões.
+
+```mermaid
+graph LR
+Z((Inicio)) --> A
+A((Master)) --> B((Dev.1))
+B --> C((Dev.2))
+C --> D((Dev.3))
+D --> E((Dev.4))
+E --> F((Master))
+A --> F
+F --> G((Fim))
+```
+
+### O que é Rebase
+
+> Continua com a mesma ideia do `merge` porem com a ideia agora de passar os `commits` que aconteceram com a `branch` para a `branch` de destino.
+1. Antes do `rebase`
+
+    ```mermaid
+      graph LR
+      Z((Inicio)) --> A
+      A((Master)) --> B((Dev.1))
+      B --> C((Dev.2))
+      C --> D((Dev.3))
+      D --> E((Dev.4))
+      A --> F((Master.1))
+    ```
+
+2. Depois do `rebase`
+
+    ```mermaid
+      graph LR
+      Z((Inicio)) --> A
+      A((Master)) --> B((Master.1))
+      B --> C((Dev.1))
+      C --> D((Dev.2))
+      D --> E((Dev.3))
+      E --> F((Dev.4))
+    ```
 
 ## Comandos
 
