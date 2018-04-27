@@ -43,8 +43,8 @@ F-->G((Fim))
 
     ```mermaid
       graph LR;
-      Z((Inicio))-->A
-      A((Master))-->B((Dev.1))
+      Z((Inicio))-->A((Master))
+      A-->B((Dev.1))
       B-->C((Dev.2))
       C-->D((Dev.3))
       D-->E((Dev.4))
@@ -55,8 +55,8 @@ F-->G((Fim))
 
     ```mermaid
       graph LR;
-      Z((Inicio))-->A
-      A((Master))-->B((Master.1))
+      Z((Inicio))-->A((Master))
+      A-->B((Master.1))
       B-->C((Dev.1))
       C-->D((Dev.2))
       D-->E((Dev.3))
