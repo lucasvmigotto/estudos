@@ -1,188 +1,278 @@
-# Git
+# Bash / Shell
 
-Do commit ao rebase.
+Anotações sobre Bash / Shell para consulta e estudo.
 
-## O que é
+## Conceito básico
 
-> Git é um controle de versionamento `open source` para gerenciamento de um projeto visando a velocidade e eficiência.
+### O que é
 
-## Termos
+> Um script em shell é uma lista de comandos para execução do  sistema, tirando a necessidade de repeti-los toda vez para cumprir determinado objectivo ou ação.
 
-### O que é Repositório
+## Construção do arquivo
 
-> Local do Git criado para guardar seu projeto e todas as versões que o mesmo possa ter.
+### Nomenclatura
 
-### O que é Commit
+> Deve se adotar o nome desta maneira: `scriptName`< `.sh` | `.bash` >
+> Pode-se usar tanto `.sh` quanto `.bash` para ser a extensão do arquivo
 
-> Ponto do processo onde é informado as mudanças que foram feitas através de uma mensagem para ser marcada e documentada no histórico do projeto.
+### Execução
 
-### O que é Branch
+1. Por comando em linha
+    > Pode-se usar o seguinte comando para executar o script:
 
-> Uma vertente do projeto onde uma funcionalidade foi ou esta sendo criada em paralelo sem estar afetando o resto do projeto.
-
-### O que é Merge
-
-> O processo de juntar duas `branchs` de trabalho em um so, sendo assim, sincronizando o trabalho e funções de ambas as versões.
-
-```mermaid
-graph LR;
-Z((Inicio))-->A
-A((Master))-->B((Dev.1))
-B-->C((Dev.2))
-C-->D((Dev.3))
-D-->E((Dev.4))
-E-->F((Master))
-A-->F
-F-->G((Fim))
-```
-
-### O que é Rebase
-
-> Continua com a mesma ideia do `merge` porem com a ideia agora de passar os `commits` que aconteceram com a `branch` para a `branch` de destino.
-1. Antes do `rebase`
-
-    ```mermaid
-      graph LR;
-      Z((Inicio))-->A((Master))
-      A-->B((Dev.1))
-      B-->C((Dev.2))
-      C-->D((Dev.3))
-      D-->E((Dev.4))
-      A-->F((Master.1))
+    ```bash
+    sudo <sh | bash> scritpName<.sh | .bash>
     ```
+    > Embora tenha dois comandos (`sh` e `bash`), é recomendado que se opte pelo segundo.
 
-2. Depois do `rebase`
+2. Usando `chmod`
+    > Utiliza-se também o comando `chmod` para que execute-se o script apenas usando `./scriptName`
+    * `chmod 555 <scriptName>` Permissões de leitura e escrita para todos.
+    * `chmod +rx <scriptName>` Permissões de leitura e escrita para todos.
+    * `chmod u+rx <scriptName>` Permissão de leitura e escrita apenas para o dono do arquivo.
 
-    ```mermaid
-      graph LR;
-      Z((Inicio))-->A((Master))
-      A-->B((Master.1))
-      B-->C((Dev.1))
-      C-->D((Dev.2))
-      D-->E((Dev.3))
-      E-->F((Dev.4))
-    ```
+3. De forma direta
+    > Colocando o script na pasta `/usr/local/bin` - como root - você poderá executar penas usando `<scriptName>` e pressionando ENTER.
 
-## Comandos
+### Comentários
 
-### Init
-
-> Cria e inicializa uma pasta `.git/` dentro do diretório do projeto.
+> Cria-se um comentário utilizando o `#`, a partir dele, sera desconsiderado para fins de execução qualquer elemento ou comando, a menos que o mesmo esteja previamente escapado com `"`, `'` ou `\`.
 
 ```bash
-git init
+# Isso é um comentário
+echo "Eu vou ser impresso"
+echo # "Eu nao vou ser impresso"
 ```
 
-### Remote
+### Header do arquivo
 
-> Configura o(s) repositório(s) remoto(s).
-1. #### add
-    > Adiciona um novo endereço de repositório remoto.
+> Para indicar o interpretador de comandos para ser usado na execução do script adicione esse comando na primeira linha: `#!/bin/bash`
 
-    ```bash
-    git remote add <nome> <endereco HTTP ou SHH>
-    ```
-2. #### remove
-    > Remove um endereço de um repositório remoto.
+### Método correto para a saída de um script
 
-    ```bash
-    git remote remove <name>
-    ```
-3. #### rename
-    > Renomeia um repositório já cadastrado.
-    ```bash
-    git remote rename <nome velho> <novo nome>
-    ```
-
-### Branch
-
-> Exibe todas as `branches` - remotas e locais - e destaca a que esta em uso.
+> Para finalizar de forma correta um script deve-se adicionar o comando `exit`. Exemplo:
 
 ```bash
-git branch
+#!/bin/bash
+echo "Hello, world!"
+exit
 ```
 
-### Checkout
+#### Usando um código de saída
 
-> Troca a `branch` de trabalho atual.
+> Pode-se passar também apos o `exit` um código para indicar o valor de retorno, sendo `0` para sucesso e `1` para erro, mas um código personalizado pode ser usado para uso posterior. Quando não informado, o código de saída sera aquele que o ultimo comando ou função retornou.
+
+### Criação de uma variável
+
+> A sintaxe correta para a criação de uma variável é:
 
 ```bash
-git checkout <nome da branch>
+#!/bin/bash
+MSG='Hello, world!'
+echo $MSG
+exit
 ```
 
-1. Opção -b
-    > Ao invés de trocar a `branch`, cria-se uma nova.
-    ```bash
-    git checkou -b <nome da nova branch>
-    ```
+#### Tipos de variáveis
 
-### Status
+> Em Bash não há tipagem de variáveis, isso é tanto uma benção quanto uma maldição. Não ter tipagem ajuda numa maior flexibilidade do script, mas permit erros e maus hábitos de programação.
 
-> Mostra como os arquivos da branch local estão em relação a remota.
+### Uso da variável
+
+> Como visto, para ser usado o valor de uma variável, deve-se usar `$` antes de escreve-la
 
 ```bash
-git status
+MSG='Ola'
+echo $MSG
 ```
 
-### Add
+### Escape
 
-> Adiciona arquivos alterados para posteriormente fazer commit dos mesmos.
+> Escapar um caracter é um método para apresentar ao interpretador de script o caracter com o seu valor literal. Ou seja, ao escapar o `\` como `\\` o interpretador ira entender como uma contra barra comum. Porem alguns caracteres escapados guardam um significado para a execução.
+
+|         Caracter      |           Significado             |
+| :-------------------: | :-------------------------------: |
+|         \n            | Representa uma nova linha
+|         \r            | Representa o retorno
+|         \t            | Representa um _tab_
+|         \v            | Representa um _tab_ vertical
+|         \b            | Representa um _basckspace_
+|         \a            | Representa um _alert_
+|         \0xx          | Representa o retorno em ASCII de um valor octal
+
+### Construtores de Teste
+
+> Um teste para o Bash é uma estrutura com `[` que retornara um valor de 0 ou 1, sendo 0 verdadeiro e 1 falso. O interpretador enxerga uma estrutura como `[[ $a -lt $b ]]` sendo um elemento único com retorno.
+
+### If, If Else, If Else If Else
+
+> A estrutura condicional If em bash segue os mesmos padrões que outras linguagens assim como suas estruturas encadeadas. Precisa-se de um teste para ter um retorno definindo assim o que sera feito, sendo a primeira ação sempre a com retorno `true` e a segunda `false`.
 
 ```bash
-git add <filename>
+# Estrutura simples
+if [[ $a != $b ]]; then
+    echo "Verdadeiro"
+fi
+# Estrutura com else
+if [[ $a != $b ]]; then
+    echo "Verdadeiro"
+else
+    echo "Falso"
+fi
+# Estrutura encadeada
+if [[ $a != $b ]]; then
+    echo "Verdadeiro"
+elif [[ $c != $a ]]; then
+    echo "Verdadeiro do falso"
+else
+    echo "Falso do falso"
+fi
 ```
 
-### Commit
+## Boas práticas
 
-> Armazena os arquivos mudados em um ponto com uma mensagem definida pelo usuário explicando e listando as mudanças.
-1. Opção `-a --all`
-    > Adiciona a mensagem para todos os arquivos alterados.
-    ```bash
-    git commit -a <mensagem>
-    ```
-2. Opção `-m --message`
-    > Adiciona a mensagem para apenas os aquivos previamente adicionados na `Stage changes`
-    ```bash
-    git commmit -m "<mensagem>"
-    git commit --message="<message>"
-    ```
+### Ponto e virgulas
 
-### Push
-
-> Publica as mudanças adicionadas e `commitadas` no repositório remoto em um determinada `branch` especificada previamente.
+> Não se usa `;` em Bash scripts.
 
 ```bash
-git push <repositorio> <branch destino>
+# Certo
+echo "Hello, world!"
+# Errado
+echo "Hello, world!";
 ```
 
-### Diff
-
-> Exibe a diferença entre duas `branchs` ou dois `commits`
+> Salvo alguns casos em que seu uso é necessário para a construção de uma estrutura:
 
 ```bash
-git diff <master..dev>
-git diff <d80daf58..7d85fad8>
+if [ $algumaCois ]; then
+    echo "Fazendo algo"
+fi
 ```
 
-### Rebase
+### Estrutura condicional `If`
 
-1. Opção `-i --interactive`
-    > Inicia o processo de `rebase` de forma interativa, abrindo janelas para seguintes configurações.
-    ```bash
-    git rebase -i <branch>
-    ```
+> Deve-se usar o `then` na mesma linha de seu respectivo `if`.
 
-2. Opção --continue
-    > Confirma o processo configurado de `rebase` previamente realizado no `git rebase -i`
+```bash
+# Certo
+if [[ $algumaCoisa ]]; then
+    echo "Fazendo algo"
+fi
+# Errado
+if [[ $algumaCoisa ]]
+then
+    echo "Fazendo algo"
+fi
+```
 
-3. Opção --abort
-    > Aborta o processo de `rebase`
+### Estrutura de repetição `While`
 
-### Merge
+> Deve-se assim como no `if`, deixar o `do` na mesma linha de seu `while`.
 
-> Realiza o `merge` de duas `branchs` diferentes.
-1. Opção --no-ff
-    > Cria apos o `merge` um `commit` para indicar a junção ocorrida.
-    ```bash
-    git merge --no-ff <branch>
-    ```
+```bash
+# Certo
+while [[ $algumaCoisa ]]; do
+    echo "Fazendo algo"
+done
+# Errado
+while [[ $algumaCoisa ]]
+do
+    echo "Fazendo algo"
+done
+```
+
+### Substituição de comando
+
+> Deve-se usar `$(<command>)` para substituir por um comando,
+
+```bash
+# Certo
+foo=$(data)
+# Errado
+foo=`data`
+```
+
+### Funções
+
+> Não se usa a `function` keyword para declarar uma função. Todas as variáveis criadas em uma função devem ser locais.
+
+```bash
+# Certo
+foo() {
+    local a=foo
+}
+# Errado
+function foo() {
+    a=foo
+}
+```
+
+### Tests
+
+> Usar estrutura com duplo `[` ao invés de somente um.
+
+```bash
+# Certo
+if [[ $a == $b ]]; then
+    echo 'Verdade!'
+fi
+# Errado
+if [ $a == $b ]; then
+    echo 'Falso!'
+fi
+```
+
+## Caracteres especiais
+
+|    Caracter   | Uso                                                                       |
+| :-----------: | :-----------------------------------------------------------------------: |
+|       #       | Criação de comentários.
+|       ;       | Encerramento de comando para realizar um novo na mesma linha.
+|      ;;       | Encerramento de comando `case`.
+|    ;;& ;&     | Encerramento de uma `case option`.
+|       .       | [Source] Invoca e executa um scrip dentro do código.
+|       .       | [Filename component] Um único uso `./` é considerado o diretório atual de trabalho, já dois seguidos `../` considera-se como o diretório pai.
+|       '       | Preserva todos os caracteres especiais da interpretação.
+|       "       | Preserva alguns dos caracteres especiais da interpretação.
+|       ,       | Junta varias operações aritmética, realiza todas porem retorna somente a ultima.
+|       \       | Caracter usado para `escape` dos outros, qualquer um que seja posterior a ele terá seu valor literal.
+|       /       | Usado para construir e separar caminhos de arquivos. Exemplo:`/usr/local/bin`
+|       `       | Torna o retorno de um comando disponível para associar a uma variável.
+|       :       | Pode ser considerado um um sinônimo de true para o Shell, sendo assim o seu código de saída.
+|       !       | Inverte o retorno de uma saída de teste ou de um comando.
+|       *       | [Filename component] Corresponde a qualquer nome de arquivo ou de extensão do diretório.
+|       *       | [Operador aritmético] Representa a operação de multiplicação
+|       ?       | [Operador de teste] Indica uma expressão de teste assim como um operador ternário
+|       ?       | [Filename component] Corresponde a somente um caracter do nome de um arquivo.
+|       $       | [Variável] Retorna o valor de uma variável.
+|       $       | [Expressão regular] Representa o fim que uma expressão regular deve corresponder.
+|      ${}      | Substituição de parâmetro
+|     $'...'    | Utilizado para `escape` de hexadecimais, octais...
+|       $?      | Retorna o valor de saída de um comando, de uma função ou do script em si.
+|       $$      | Mantem o valor de `process ID` do script.
+|       ()      | Cria um agrupamento de comandos, executando-os em um `subshell`, variáveis internas não são visíveis para o resto do script.
+|   {xx,yy,zz}  | Cria uma expansão de elementos informados dentro do `{ }`.
+|     {a..z}    | Informa os elementos existentes dentre doi valores informados.
+|       {}      | [Bloco de código] Delimita o espaço de uma função anonima.
+|       []      | Representa uma expressão de teste.
+|      [[]]     | Uma forma mais flexível que a maneira simples `[]`.
+|     $[...]    | Realiza o calculo de uma expressão com inteiros.
+|       <<      | Redirecionamento usado em um documento local
+|       <<<     | Redirecionamento usado em uma string local
+|      < , >    | Comparador de elementos `ASCII`
+|       $?      | Realiza as delimitações de espaço de um expressão regular.
+|  &#124;&#124; | Operador logico `OR`
+|        &&     | Operador logico `AND`
+|        &      | Delimita que um processo seja realizado em background.
+|     &#124;    | Passa o valor de retorno do comando anterior para o valor de entrada do próximo. Esse método é utilizado para encadear comandos.
+|       -       | [Operador aritmético] Realiza a operacao de subtração.
+|       -       | [Prefixo] Operador em que se passa uma `flag` opcional para o comando.
+|       --      | [Prefixo] Operado em que se passa uma `flag` opcional para um comando de forma extensa.
+|       =       | Operador de atribuição de valor.
+|       +       | [Operador aritmético] Realiza a operação de soma.
+|       %       | Operador de modulo, retorna o resultado de uma divisão.
+|       ~       | Representa o diretório `home`.
+|       ~+      | Representa o diretório de trabalho atual.
+|       ~-      | Representa o diretório de trabalho passado.
+|       ^       | [Expressão regular] Representa o fim que uma expressão regular deve corresponder.
