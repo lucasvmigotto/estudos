@@ -25,7 +25,7 @@ Do commit ao rebase.
 > O processo de juntar duas `branchs` de trabalho em um so, sendo assim, sincronizando o trabalho e funções de ambas as versões.
 
 ```mermaid
-graph LR
+graph LR;
 Z((Inicio))-->A
 A((Master))-->B((Dev.1))
 B-->C((Dev.2))
@@ -42,7 +42,7 @@ F-->G((Fim))
 1. Antes do `rebase`
 
     ```mermaid
-      graph LR
+      graph LR;
       Z((Inicio))-->A
       A((Master))-->B((Dev.1))
       B-->C((Dev.2))
@@ -54,7 +54,7 @@ F-->G((Fim))
 2. Depois do `rebase`
 
     ```mermaid
-      graph LR
+      graph LR;
       Z((Inicio))-->A
       A((Master))-->B((Master.1))
       B-->C((Dev.1))
