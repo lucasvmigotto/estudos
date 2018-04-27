@@ -26,14 +26,14 @@ Do commit ao rebase.
 
 ```mermaid
 graph LR
-Z((Inicio)) --> A
-A((Master)) --> B((Dev.1))
-B --> C((Dev.2))
-C --> D((Dev.3))
-D --> E((Dev.4))
-E --> F((Master))
-A --> F
-F --> G((Fim))
+Z((Inicio))-->A
+A((Master))-->B((Dev.1))
+B-->C((Dev.2))
+C-->D((Dev.3))
+D-->E((Dev.4))
+E-->F((Master))
+A-->F
+F-->G((Fim))
 ```
 
 ### O que é Rebase
@@ -43,24 +43,24 @@ F --> G((Fim))
 
     ```mermaid
       graph LR
-      Z((Inicio)) --> A
-      A((Master)) --> B((Dev.1))
-      B --> C((Dev.2))
-      C --> D((Dev.3))
-      D --> E((Dev.4))
-      A --> F((Master.1))
+      Z((Inicio))-->A
+      A((Master))-->B((Dev.1))
+      B-->C((Dev.2))
+      C-->D((Dev.3))
+      D-->E((Dev.4))
+      A-->F((Master.1))
     ```
 
 2. Depois do `rebase`
 
     ```mermaid
       graph LR
-      Z((Inicio)) --> A
-      A((Master)) --> B((Master.1))
-      B --> C((Dev.1))
-      C --> D((Dev.2))
-      D --> E((Dev.3))
-      E --> F((Dev.4))
+      Z((Inicio))-->A
+      A((Master))-->B((Master.1))
+      B-->C((Dev.1))
+      C-->D((Dev.2))
+      D-->E((Dev.3))
+      E-->F((Dev.4))
     ```
 
 ## Comandos
