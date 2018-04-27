@@ -60,7 +60,7 @@ exit
 
 #### Usando um código de saída
 
-> Pode-se passar também apos o `exit` um código para indicar o valor de retorno, sendo `0` para sucesso e `1` para erro, mas um código personalizado pode ser usado para uso posterior.
+> Pode-se passar também apos o `exit` um código para indicar o valor de retorno, sendo `0` para sucesso e `1` para erro, mas um código personalizado pode ser usado para uso posterior. Quando não informado, o código de saída sera aquele que o ultimo comando ou função retornou.
 
 ### Criação de uma variável
 
@@ -84,6 +84,49 @@ exit
 ```bash
 MSG='Ola'
 echo $MSG
+```
+
+### Escape
+
+> Escapar um caracter é um método para apresentar ao interpretador de script o caracter com o seu valor literal. Ou seja, ao escapar o `\` como `\\` o interpretador ira entender como uma contra barra comum. Porem alguns caracteres escapados guardam um significado para a execução.
+
+|       Caracter        |            Significado            |
+| :-------------------: | :-------------------------------: |
+|         \n            | Representa uma nova linha
+|         \r            | Representa o retorno
+|         \t            | Representa um _tab_
+|         \v            | Representa um _tab_ vertical
+|         \b            | Representa um _basckspace_
+|         \a            | Representa um _alert_
+|         \0xx          | Representa o retorno em ASCII de um valor octal
+
+### Construtores de Teste
+
+> Um teste para o Bash é uma estrutura com `[` que retornara um valor de 0 ou 1, sendo 0 verdadeiro e 1 falso. O interpretador enxerga uma estrutura como `[[ $a -lt $b ]]` sendo um elemento único com retorno.
+
+### If, If Else, If Else If
+
+> A estrutura condicional If em bash segue os mesmos padrões que outras linguagens assim como suas estruturas encadeadas. Precisa-se de um teste para ter um retorno definindo assim o que sera feito, sendo a primeira ação sempre a com retorno `true` e a segunda `false`.
+
+```bash
+# Estrutura simples
+if [[ $a != $b ]]; then
+    echo "Verdadeiro"
+fi
+# Estrutura com else
+if [[ $a != $b ]]; then
+    echo "Verdadeiro"
+else
+    echo "Falso"
+fi
+# Estrutura encadeada
+if [[ $a != $b ]]; then
+    echo "Verdadeiro"
+elif [[ $c != $a ]]; then
+    echo "Verdadeiro do falso"
+else
+    echo "Falso do falso"
+fi
 ```
 
 ## Boas práticas
@@ -113,11 +156,11 @@ fi
 
 ```bash
 # Certo
-if [ $algumaCoisa ]; then
+if [[ $algumaCoisa ]]; then
     echo "Fazendo algo"
 fi
 # Errado
-if [ $algumaCoisa ]
+if [[ $algumaCoisa ]]
 then
     echo "Fazendo algo"
 fi
@@ -129,11 +172,11 @@ fi
 
 ```bash
 # Certo
-while [ $algumaCoisa ]; do
+while [[ $algumaCoisa ]]; do
     echo "Fazendo algo"
 done
 # Errado
-while [ $algumaCoisa ]
+while [[ $algumaCoisa ]]
 do
     echo "Fazendo algo"
 done
@@ -163,6 +206,21 @@ foo() {
 function foo() {
     a=foo
 }
+```
+
+### Tests
+
+> Usar estrutura com duplo `[` ao invés de somente um.
+
+```bash
+# Certo
+if [[ $a == $b ]]; then
+    echo 'Verdade!'
+fi
+# Errado
+if [ $a == $b ]; then
+    echo 'Falso!'
+fi
 ```
 
 ## Caracteres especiais
@@ -218,4 +276,3 @@ function foo() {
 |       ~+      | Representa o diretório de trabalho atual.
 |       ~-      | Representa o diretório de trabalho passado.
 |       ^       | [Expressão regular] Representa o fim que uma expressão regular deve corresponder.
-
