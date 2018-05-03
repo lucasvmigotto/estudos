@@ -39,6 +39,7 @@ F-->G((Fim))
 ### O que é Rebase
 
 > Continua com a mesma ideia do `merge` porem com a ideia agora de passar os `commits` que aconteceram com a `branch` para a `branch` de destino.
+
 1. Antes do `rebase`
 
     ```mermaid
