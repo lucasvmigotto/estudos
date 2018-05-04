@@ -77,6 +77,45 @@ exit
 
 > Em Bash não há tipagem de variáveis, isso é tanto uma benção quanto uma maldição. Não ter tipagem ajuda numa maior flexibilidade do script, mas permit erros e maus hábitos de programação.
 
+#### Comando `declare`
+
+>Embora, há possibilidade de declarar uma variável alterando a suas propriedades, sendo assim uma forma bem simples de tipagem.
+
+1. Apenas para leitura `-r`
+    > Define a variável para apenas leitura, nenhum valor após aquele indicado em sua declaração poderá ser associado a ela novamente.
+    ```bash
+    declare -r um=1
+    echo $um # 1
+    (( um++ )) # Error, readonly variable
+    ```
+2. Inteiro `-i`
+    > Define para que a variável trabalhe apenas com inteiros.
+    ```bash
+    declare -i numero=1
+    echo $numero # 1
+    numero=um
+    echo $numero # 0 - Tentou associar texto a um inteiro
+    ```
+3. Array (vetor) `-a`
+    > Trata a variável como um `Array`.
+    ```bash
+    declare -a vetor
+    ```
+4. Função `-f`
+    > Sem argumentos define todas as funções previamente criadas.
+    ```bash
+    declare -f
+    ```
+    > Com argumentos declara somete aquela nomeada,
+    ```bash
+    declare -f nomeDaFunção
+    ```
+5. Exportação
+    > Declara que a variável pode ser exportada para fora do escopo do script atual.
+    ```bash
+    declare -x variavelExportada
+    ```
+
 ### Uso da variável
 
 > Como visto, para ser usado o valor de uma variável, deve-se usar `$` antes de escreve-la
@@ -92,6 +131,7 @@ echo $MSG
 
 |        Variável        |                Valor                |
 |:----------------------:|:-----------------------------------:|
+|       **$RANDOM**      | Retorna um valor inteiro randômico entre 0 e 32767 |
 |        **$BASH**       | Retorna o caminho para o arquivo binário do Bash |
 |      **$BASH_ENV**     | Variável que será lida quando um script for invocado |
 |    **$BASH_SUBSHELL**  | Indica o nível do subshell atual |
