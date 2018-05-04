@@ -181,7 +181,7 @@ echo $MSG
 
 ### Escape
 
-> Escapar um caracter é um método para apresentar ao interpretador de script o caracter com o seu valor literal. Ou seja, ao escapar o `\` como `\\` o interpretador ira entender como uma contra barra comum. Porem alguns caracteres escapados guardam um significado para a execução.
+> Escapar um caracter é um método para apresentar ao interpretador de script o caracter com o seu valor literal. Ou seja, ao escapar o `\` como `\\` o interpretador ira entender como uma contra barra comum. Porem alguns caracteres escapados guardam um significado para aexecução.
 
 |       Caracter        |            Significado            |
 | :-------------------: | :-------------------------------: |
@@ -416,6 +416,10 @@ echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
     # Retirando apenas aqueles encontradas no fim da string
     echo ${string/%isso/aquilo} #issodeveviraraquilo
     ```
+
+#### Usando `awk`
+
+> Um script Bash pode escolher chamar as facilidades de manipulação de `strings` do comando `awk` como uma alternativa dos comando nativos para isso.
 
 ## Boas práticas
 
