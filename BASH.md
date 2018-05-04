@@ -86,6 +86,59 @@ MSG='Ola'
 echo $MSG
 ```
 
+### Variáveis internas
+
+> O Bash dispõe de algumas variáveis internas com informações úteis para o script como versão do Bash, diretórios de importantes arquivos e informações básicas de usuários.
+
+|        Variável        |                Valor                |
+|:----------------------:|:-----------------------------------:|
+|        **$BASH**       | Retorna o caminho para o arquivo binário do Bash |
+|      **$BASH_ENV**     | Variável que será lida quando um script for invocado |
+|    **$BASH_SUBSHELL**  | Indica o nível do subshell atual |
+|      **$BASHPID**      | Retorna o ID do processo da instancia atual do Bash, não é o mesmo que `$$` embora de o mesmo resultado |
+|    **$BASH_VERSION**   | Retorna a versão do Bash instalada no sistema |
+|  **$BASH_VERSINFO[n]** | Mesma informação que $BASH_VERSION, porem muito mais especificada em um Array de 6 posições contento informações |
+|      **$DIRSTACK**     | O primeiro valor da pilha do diretório |
+|       **$EDITOR**      | O editor padrão para edição de script |
+|        **$EUID**       | O ID do usuário |
+|      **$FUNCNAME**     | O nome da função atual |
+|     **$GLOBIGNORE**    | Lista de padrões de nomes para serem excluídas de caminhos de arquivos |
+|       **$GROUPS**      | O grupo que o usuário atual pertence |
+|        **$HOME**       | O diretório base do usuário, geralmente `home/usuário` |
+|      **$HOSTNAME**     | O nome do computador |
+|      **$HOSTTYPE**     | O tipo de `host`, como `x86_32`, `x86_64`... |
+|        **$IFS**        | Determina como o Bash reconhece campos e limites de palavras quando identificadas como `strings` |
+|     **$IGNOREEOF**     | Quantos `end-of-files` o Shell vai ignorar antes de sair |
+|     **$LC_COLLATE**    | Rege pela verificação de padroes e expansões de nomes de arquivos |
+|      **$LC_CTYPE**     | Controla o tipo de interpretação de caracter que será utilizado |
+|       **$LINENO**      | o número da linha que está sendo executado, grande uso para propósitos de depuração |
+|      **$MACHTYPE**     | Identifica o hardware do sistema |
+|       **$OLDPWD**      | Especifica o ultimo diretório de trabalho utilizado |
+|       **$OSTYPE**      | Especifica o sistema operacional |
+|        **$PATH**       | Exibe o(s) diretório(s) em que os arquivos binários estão alocados. |
+|     **$PIPESTATUS**    | `Array` que guarda os últimos valores de saída de processos de `pipe` feitos em `foreground` |
+|         **$PPID**      | O `ID` do processo pai em execução |
+|   **$PROMPT_COMMNAD**  |  |
+|          **$PS1**      | A linha do `prompt` principal |
+|          **$PS2**      | A linha de um `prompt` secundário, como padrão `>` |
+|          **$PS3**      | A linha de um `prompt` terciário apresentada em um `select loop` |
+|          **$PS4**      | A linha de um `prompt` quaternário que será exibida quando um comando for executado com `-x`. Por padrão `+` |
+|          **$PWD**      | Retorna o diretório de trabalho atual |
+|         **$REPLAY**    | Guarda o valor do ultimo `read` realizado sem uma variável para guardar o valor a ser recebido |
+|        **$SECONDS**    | O numero de segundos que o script vem sendo executado |
+|       **$SHELLOPTS**   | Retorna uma variável apenas de leitura com todas as opções habilitadas do shell |
+|         **$SHLVL**     | Retorna o nivel que o bash esta sendo executado, quando em linha de comando é 1, quando em script é 2. Porem não indica `sub shells`, para esse uso, utilize `$BASH_SUBSHELL` |
+|        **$TMOUT**      | Caso seja definida para um valor diferente de zero, o script irá encerrar após o numero de segundos informados |
+|         **$UID**       | Valor para o `ID` de uso atual que o usuário esta usando |
+|     **$1, $2, $3...**  | Valor que retorna os parâmetros passando para a execução do script |
+|          **$#**        | Numero de parâmetros passados |
+|          **$***        | Todos os parâmetros passados porem em uma so palavra |
+|          **$@**        | Mesmo uso que `$*` porem retorna as palavras contidas em `"` |
+|          **$!**        | Retorna o `ID` do processo do ultimo trabalho executado em `basckground` |
+|          **$_**        | O valor do parâmetro passado no ultimo comando |
+|          **$?**        | O valor de saída do ultimo comando, função ou ate mesmo do script em si |
+|          **$$**        | O valor de `PID (Proccess ID)` - Identificador do procedimento. |
+
 ### Escape
 
 > Escapar um caracter é um método para apresentar ao interpretador de script o caracter com o seu valor literal. Ou seja, ao escapar o `\` como `\\` o interpretador ira entender como uma contra barra comum. Porem alguns caracteres escapados guardam um significado para a execução.
@@ -139,15 +192,17 @@ else
 fi
 ```
 
-#### Operadores de teste com
+### Operadores
+
+#### Teste
 
 1. Arquivos
 
-    |       Operador      |                         Descrição                        |
-    | :-----------------: | :------------------------------------------------------: |
+    |        Operador      |                                     Descrição                             |
+    |  :-----------------:  |  :------------------------------------------------------: |
     |        **-e**       | Se o arquivo exite |
     |        **-a**       | Mesmo uso que o `-e` porem descontinuado |
-    |        **-f**       | Se é um arquivo regular e não um diretório |
+    |        **-f**        | Se é um arquivo regular e não um diretório |
     |        **-s**       | Se o arquivo não tem tamanho 0 |
     |        **-d**       | Se o arquivo é um diretório |
     |        **-b**       | Se o arquivo é um `block device` |
@@ -157,8 +212,8 @@ fi
     |        **-L**       | Meso uso do `-h` |
     |        **-S**       | Se o arquivo é um Socket |
     |        **-t**       | Se o arquivo é associado com o terminal |
-    |        **-r**       | Se o arquivo tem permissão de leitura |
-    |        **-w**       | Se o arquivo tem permissão de escrita |
+    |        **-r**        | Se o arquivo tem permissão de leitura |
+    |        **-w**      | Se o arquivo tem permissão de escrita |
     |        **-x**       | Se o arquivo tem permissão de execução |
     |        **-g**       | Se a `flag` `set-group-id` esta setada no arquivo ou diretório |
     |        **-u**       | Se a `flag` `set-user-id` esta setada no arquivo ou diretório |
@@ -203,6 +258,45 @@ fi
     | :-----------------: | :------------------------------------------------------: |
     |    ex1 **-a** ex2   | Retorna verdadeiro caso `ex1` e `ex2` sejam verdadeiros, ou seja, um conector logico `and` |
     |    ex1 **-o** ex2   | Retorna verdadeiro caso `ex1` ou `ex2` sejam verdadeiros, ou seja, um conector logico `or` |
+
+#### Assimilação (`assignment`)
+
+|     Operador      |                     Descrição                          |
+|:-----------------:|:------------------------------------------------------:|
+|       **=**       | Associa um valor a uma variável, alterando o antigo |
+
+#### Aritméticos
+
+|     Operador      |                     Descrição                          |
+|:-----------------:|:------------------------------------------------------:|
+|      **+**        | Operador para soma de valores |
+|      **-**        | Operador para a subtração de valores |
+|     **&#42;**     | Operador para a multiplicação de valores |
+|      **/**        | Operador para a divisão de valores |
+|     **&#42;**     | Operador para potenciação de valores |
+|      **%**        | Operador para modulo de valores |
+|      **+=**       | Operador de soma que associa o resultado ao valor original |
+|      **-=**       | Operador de subtração que associa o resultado ao valor original |
+|     **&#42;=**    | Operador de multiplicação que associa o resultado ao valor original |
+|      **/=**       | Operador de divisão que associa o resultado ao valor original |
+|      **%=**       | Operador de modulo que associa o resultado ao valor original |
+
+#### Lógicos
+
+|     Operador      |                     Descrição                          |
+|:-----------------:|:------------------------------------------------------:|
+|      **!**        | Operador lógico `NOT`, inverte a saída para o seu oposto |
+|      **&&**       | Operador lógico `AND`, retorna verdadeiro se todos os valores assim forem |
+| **&#124;&#124;**  | Operador lógico `OR`, retorna verdadeiro com apenas um deles sendo verdadeiro |
+
+### Constantes numéricas
+
+> Bash ira interpretar todo numero como sendo de base decimal caso não seja apresentado um prefixo indicando a mesma. Números iniciados com `0` serão octais e `0x` serão hexadecimais. Porem há como informar uma base especifica usando o padrão `base#num`, sendo `base` a base desejada e `num` o valor a ser informado.
+
+```bash
+echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
+#       1295           170            44822        3375
+```
 
 ## Boas práticas
 
