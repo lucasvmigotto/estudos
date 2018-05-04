@@ -338,6 +338,85 @@ echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
 #       1295           170            44822        3375
 ```
 
+### Manipulação de `Strings`
+
+> O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e manipular `strings`. Infelizmente não são bem definidas de forma que seu uso seja fácil ou funcional, acontecendo então alguns episódios de erros durante sua utilização.
+
+1. Comprimento da `String` - `String Length`
+    > Retorna o tamanho do comprimento da String informada com o comando $(expr lenght nomeDaString).
+
+    ```bash
+    nome="Peter Parker"
+    echo ${#nome} # 12
+    echo $(expr length $nome) # 12
+    ```
+
+2. Comprimento de uma `matching substring`
+    > Retorna o tamanho do comprimento de uma `matching substring`, com o comando $(expr ***stringPrincipal expressãoRegular***).
+
+    ```bash
+    string=abcABC123ABCabc
+    echo $(expr match "$string" 'acb[A-Z]*.2') #8
+    ```
+
+3. Index da `string`
+    > Retorna o index de quando um determinado padrão pre informado em um `substring` inicia em uma  `string`, com o comando $(expr index ***stringPrincipal stringParaEncontrar***)
+
+    ```bash
+    string="quandoissocomeca?"
+    echo $(expr index "$string" "isso") # 6
+    ```
+
+4. Extração de `substring`
+    > Retorna uma `substring` de uma `string` podendo informar a posição inicial e como parâmetro adicional opcional um comprimento que deve ser usado, com o comando ${***stringParaSerUsada***:***posiçãoDeInicio***}.
+
+    ```bash
+    string="peguessodaqui"
+    # Sem comprimento definido
+    echo ${string:5} # issoaqui
+
+    # Com comprimento definido
+    echo ${string:5:4} #isso
+    ```
+
+5. Remoção de uma parte da `string`
+    > Retorna a `string`  original sem um certo pedaço pré-especificado retirado da frente do texto principal.
+
+    ```bash
+    string="issonaoexiste"
+    # Reirar a menor sessão possível
+    echo ${string#i*o} # issoexiste
+    # Reirar a maior sessão possível
+    echo ${string##i*o} # existe
+    ```
+
+    > Retorna o mesque o anterior so que desta vez retirado da parte de trás da `string`
+
+    ```bash
+    string="issonaoexiste"
+    # Retirar a menor sessão possível
+    echo ${string%e*e} # issonao
+    # Retirar a maior sessão possível
+    echo ${string%o*e} # iss
+    ```
+
+6. Recolocar outra `string` no lugar
+    > Troca em uma `string` um certo valor por outro.
+
+    ```bash
+    string="retireissoecoloqueisso"
+    # Retirando somente a primeira vez que aparecer
+    echo ${string/isso/aquilo} # retireaquiloecloloqueisso
+    # Retirando todas as vezes que aparecerem
+    echo ${string/isso/aquilo} #retireaquiloecoloqueaquilo
+
+    # Retirando apenas aqueles encontradas no início da string
+    string="issodevevirarisso"
+    echo ${string/#isso/aquilo} #aquilodevevirarisso
+    # Retirando apenas aqueles encontradas no fim da string
+    echo ${string/%isso/aquilo} #issodeveviraraquilo
+    ```
+
 ## Boas práticas
 
 ### Ponto e virgulas
