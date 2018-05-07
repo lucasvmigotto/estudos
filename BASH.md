@@ -203,6 +203,8 @@ nome="Bruce Wayne"
 echo "Ola, eu sou ${nome}" # Ola, eu sou Bruce Wayne
 ```
 
+#### Valores padrões
+
 Há também a possibilidade de associar um valor padrão para caso a variável não seja usada ou até mesmo declarada.
 
 ```bash
@@ -223,6 +225,8 @@ echo ${var3-$var2} # 2
 
 O uso de `-` e `:-` se da dependendo do uso e da situação já que para o primeiro a variável não precisa estar declarada, já no segundo caso a mesma deve ter sido declarada e estar com  `null`
 
+#### Valores padrões imutáveis
+
 Para definir um valor padrão imutável para uma variável ainda não declarada basta usar `${var=value}`
 
 ```bash
@@ -231,6 +235,8 @@ echo ${nome=Kent} # Clark
     # Note que o segundo output foi 'Clark' já que foi previamente definida
 ```
 
+#### Substituindo o valor original
+
 Caso seja necessário que o valor de uma variável seja setado e seu valor original não vá ser usado, bastar definir um valor para a mesma definindo um padrão.
 
 ```bash
@@ -238,10 +244,87 @@ nome="Bruce"
 echo "Nome é ${nome:+Banner}" # Nome é Banner
 ```
 
+#### Mensagem de erro padrão
+
 Pode-se definir uma mensagem de erro para caso o `script` seja abortado durante a manipulação do valor.
 
 ```bash
 echo ${errorMessage?}
+```
+
+#### Comprimento de variável
+
+Para descobri o tamanho do comprimento de uma variável, basta se usar `${#var}`
+
+```bash
+nome="Stan Lee"
+echo ${#nome} # 8
+```
+
+#### Remoção de `substring`
+
+Pode-se passar um padrão para que seja retirado do começo de uma string, basta apenas escolher a variável e definir o padrão.
+
+```bash
+nome="barry allen"
+# A menor sessão possível
+echo ${nome#*a} # rry allen
+# A maior sessão possível
+echo ${nome##*a} # llen
+```
+
+Para que se use a remoção no final da `string` apenas trocar o `#` pelo `%`:
+
+```bash
+nome="haljordan"
+echo ${nome%a*n} # haljord
+echo ${nome%%a*n} # h
+```
+
+#### Comprimento de `string`
+
+O valor de uma variável poder ser exibido a partir de certo ponto apenas indicando o mesmo. Ou ainda informando o máximo que a expansão pode alcançar.
+
+```bash
+nome="Brainiac"
+# Sem limitar a expansão
+echo ${nome:3} # iniac
+# Limitando a expansão
+echo ${nome3:4} # inia
+```
+
+#### Substituição de padrões
+
+Substitui-se padrões encontrados em `strings` por `substrings` definidas:
+
+```bash
+nome="Steve Rogers"
+# Somente o primeiro caso encontrado
+echo ${nome/eve/even} # Steven Rogers
+# Em todos os casos encontrados
+echo ${nome//e/i} # Stivi Rogirs
+```
+
+Caso seja o caso que o padrão seja identificado no começo ou no fim da `string` basta seguir o exemplo:
+
+```bash
+nome="Steve Rogers"
+# Comeco da string
+echo ${nome/#S/C} # Cteve Rogers
+# Fim da string
+echo ${nome/%s/c} # Steve Rogerc
+```
+
+#### Listando variáveis com padrão
+
+Há como listar os nomes das variáveis previamente declaradas usando `${!prefixoDeVariável*}` ou `${!prefixoDeVariável}`
+
+```bash
+ezio="ezio"
+ezioauditore="ezioauditore"
+ezioauditoredelafirenze="ezioauditoredelafirenze"
+echo ${!ezio*} # ezio ezioauditore ezioauditoredelafirenze
+echo ${!ezio@} # ezio ezioauditore ezioauditoredelafirenze
 ```
 
 ### Construtores de Teste
