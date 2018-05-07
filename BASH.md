@@ -477,6 +477,7 @@ echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
 Laços de repetição são estruturas que facilitam e muito a construção de um script já que sua principal utilidade é diminuir a quantidade de código que será repetido várias veze sobre a mesma ação ou procedimento.
 
 1. For _loop_
+
     O `for` recebe uma lista para iteração e usa uma variável que cada valor passado seja alocado nela para manipulação.
 
     ```bash
@@ -513,6 +514,7 @@ Laços de repetição são estruturas que facilitam e muito a construção de um
     ```
 
 2. While _loop_
+
     O conceito de um `while` é diferente que o `for`, já que neste, não precisamos saber previamente o números de iterações possíveis. O laço irá continuar enquanto o teste feito primeiro continue retornando verdadeiro.
     ```bash
     # Estrutura básica
@@ -562,6 +564,7 @@ Laços de repetição são estruturas que facilitam e muito a construção de um
     ```
 
 3. Until _loop_
+
     Sendo o oposto do `while` _loop_, esta estrutura repete seus comandos enquanto o seu teste condicional é falso.
     ```bash
     # Estrutura básica
