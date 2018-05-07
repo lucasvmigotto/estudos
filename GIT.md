@@ -111,10 +111,16 @@ git branch
 git checkout <nome da branch>
 ```
 
-1. Opção -b
+1. `Flag` -b
     > Ao invés de trocar a `branch`, cria-se uma nova.
     ```bash
     git checkou -b <nome da nova branch>
+    ```
+
+1. Buscar de outra `branch`
+    > Busca um arquivo presente em outra `branch` para a atual.
+    ```bash
+    git checkout <nome da branch> -- <arquivo>
     ```
 
 ### Status
