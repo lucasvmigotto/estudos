@@ -18,22 +18,22 @@ Deve se adotar o nome desta maneira: `scriptName`< `.sh` | `.bash` >
 ### Execução
 
 1. Por comando em linha
-    > Pode-se usar o seguinte comando para executar o script:
+    Pode-se usar o seguinte comando para executar o script:
 
     ```bash
     sudo <sh | bash> scritpName<.sh | .bash>
     ```
 
-    > Embora tenha dois comandos (`sh` e `bash`), é recomendado que se opte pelo segundo.
+    Embora tenha dois comandos (`sh` e `bash`), é recomendado que se opte pelo segundo.
 
 2. Usando `chmod`
-    > Utiliza-se também o comando `chmod` para que execute-se o script apenas usando `./scriptName`
+    Utiliza-se também o comando `chmod` para que execute-se o script apenas usando `./scriptName`
     * `chmod 555 <scriptName>` Permissões de leitura e escrita para todos.
     * `chmod +rx <scriptName>` Permissões de leitura e escrita para todos.
     * `chmod u+rx <scriptName>` Permissão de leitura e escrita apenas para o dono do arquivo.
 
 3. De forma direta
-    > Colocando o script na pasta `/usr/local/bin` - como root - você poderá executar penas usando `<scriptName>` e pressionando ENTER.
+    Colocando o script na pasta `/usr/local/bin` - como root - você poderá executar penas usando `<scriptName>` e pressionando ENTER.
 
 ### Comentários
 
@@ -41,21 +41,21 @@ Cria-se um comentário utilizando o `#`, a partir dele, sera desconsiderado para
 
 ```bash
 # Isso é um comentário
-echo "Eu vou ser impresso"
-echo # "Eu nao vou ser impresso"
+echo 'Eu vou ser impresso'
+echo # 'Eu nao vou ser impresso'
 ```
 
 ### Header do arquivo
 
-Para indicar o interpretador de comandos para ser usado na execução do script adicione esse comando na primeira linha: `#!/bin/bash`
+Para indicar o interpretador de comandos para ser usado na execução do script adicione esse comando na primeira linha: `#!/usr/bin/env bash`
 
 ### Método correto para a saída de um script
 
 Para finalizar de forma correta um script deve-se adicionar o comando `exit`. Exemplo:
 
 ```bash
-#!/bin/bash
-echo "Hello, world!"
+#!/usr/bin/env bash
+echo 'Hello, world!'
 exit
 ```
 
@@ -68,7 +68,7 @@ Pode-se passar também apos o `exit` um código para indicar o valor de retorno,
 A sintaxe correta para a criação de uma variável é:
 
 ```bash
-#!/bin/bash
+#!/usr/bin/env bash
 MSG='Hello, world!'
 echo $MSG
 exit
@@ -83,14 +83,14 @@ Em Bash não há tipagem de variáveis, isso é tanto uma benção quanto uma ma
 Embora, há possibilidade de declarar uma variável alterando a suas propriedades, sendo assim uma forma bem simples de tipagem.
 
 1. Apenas para leitura `-r`
-    > Define a variável para apenas leitura, nenhum valor após aquele indicado em sua declaração poderá ser associado a ela novamente.
+    Define a variável para apenas leitura, nenhum valor após aquele indicado em sua declaração poderá ser associado a ela novamente.
     ```bash
     declare -r um=1
     echo $um # 1
     (( um++ )) # Error, readonly variable
     ```
 2. Inteiro `-i`
-    > Define para que a variável trabalhe apenas com inteiros.
+    Define para que a variável trabalhe apenas com inteiros.
     ```bash
     declare -i numero=1
     echo $numero # 1
@@ -98,21 +98,21 @@ Embora, há possibilidade de declarar uma variável alterando a suas propriedade
     echo $numero # 0 - Tentou associar texto a um inteiro
     ```
 3. Array (vetor) `-a`
-    > Trata a variável como um `Array`.
+    Trata a variável como um `Array`.
     ```bash
     declare -a vetor
     ```
 4. Função `-f`
-    > Sem argumentos define todas as funções previamente criadas.
+    Sem argumentos define todas as funções previamente criadas.
     ```bash
     declare -f
     ```
-    > Com argumentos declara somete aquela nomeada,
+    Com argumentos declara somete aquela nomeada,
     ```bash
     declare -f nomeDaFunção
     ```
 5. Exportação
-    > Declara que a variável pode ser exportada para fora do escopo do script atual.
+    Declara que a variável pode ser exportada para fora do escopo do script atual.
     ```bash
     declare -x variavelExportada
     ```
@@ -199,7 +199,7 @@ Escapar um caracter é um método para apresentar ao interpretador de script o c
 Seu uso principal é destinado para concatenar os valores das variáveis com `strings`, em certos momentos o uso de `${}` é mai recomendado por ser menos ambíguo.
 
 ```bash
-nome="Bruce Wayne"
+nome='Bruce Wayne'
 echo "Ola, eu sou ${nome}" # Ola, eu sou Bruce Wayne
 ```
 
@@ -209,7 +209,7 @@ Há também a possibilidade de associar um valor padrão para caso a variável n
 
 ```bash
 # Declarada
-echo "Qual a sua idade?"
+echo 'Qual a sua idade?'
 read idade
 echo "Sua idade é ${idade:-17}"
     # Se for informada: Sua idade é <idade>
@@ -240,7 +240,7 @@ echo ${nome=Kent} # Clark
 Caso seja necessário que o valor de uma variável seja setado e seu valor original não vá ser usado, bastar definir um valor para a mesma definindo um padrão.
 
 ```bash
-nome="Bruce"
+nome='Bruce'
 echo "Nome é ${nome:+Banner}" # Nome é Banner
 ```
 
@@ -257,7 +257,7 @@ echo ${errorMessage?}
 Para descobri o tamanho do comprimento de uma variável, basta se usar `${#var}`
 
 ```bash
-nome="Stan Lee"
+nome='Stan Lee'
 echo ${#nome} # 8
 ```
 
@@ -266,7 +266,7 @@ echo ${#nome} # 8
 Pode-se passar um padrão para que seja retirado do começo de uma string, basta apenas escolher a variável e definir o padrão.
 
 ```bash
-nome="barry allen"
+nome='barry allen'
 # A menor sessão possível
 echo ${nome#*a} # rry allen
 # A maior sessão possível
@@ -276,7 +276,7 @@ echo ${nome##*a} # llen
 Para que se use a remoção no final da `string` apenas trocar o `#` pelo `%`:
 
 ```bash
-nome="haljordan"
+nome='haljordan'
 echo ${nome%a*n} # haljord
 echo ${nome%%a*n} # h
 ```
@@ -286,7 +286,7 @@ echo ${nome%%a*n} # h
 O valor de uma variável poder ser exibido a partir de certo ponto apenas indicando o mesmo. Ou ainda informando o máximo que a expansão pode alcançar.
 
 ```bash
-nome="Brainiac"
+nome='Brainiac'
 # Sem limitar a expansão
 echo ${nome:3} # iniac
 # Limitando a expansão
@@ -298,7 +298,7 @@ echo ${nome3:4} # inia
 Substitui-se padrões encontrados em `strings` por `substrings` definidas:
 
 ```bash
-nome="Steve Rogers"
+nome='Steve Rogers'
 # Somente o primeiro caso encontrado
 echo ${nome/eve/even} # Steven Rogers
 # Em todos os casos encontrados
@@ -308,7 +308,7 @@ echo ${nome//e/i} # Stivi Rogirs
 Caso seja o caso que o padrão seja identificado no começo ou no fim da `string` basta seguir o exemplo:
 
 ```bash
-nome="Steve Rogers"
+nome='Steve Rogers'
 # Comeco da string
 echo ${nome/#S/C} # Cteve Rogers
 # Fim da string
@@ -320,9 +320,9 @@ echo ${nome/%s/c} # Steve Rogerc
 Há como listar os nomes das variáveis previamente declaradas usando `${!prefixoDeVariável*}` ou `${!prefixoDeVariável}`
 
 ```bash
-ezio="ezio"
-ezioauditore="ezioauditore"
-ezioauditoredelafirenze="ezioauditoredelafirenze"
+ezio='ezio'
+ezioauditore='ezioauditore'
+ezioauditoredelafirenze='ezioauditoredelafirenze'
 echo ${!ezio*} # ezio ezioauditore ezioauditoredelafirenze
 echo ${!ezio@} # ezio ezioauditore ezioauditoredelafirenze
 ```
@@ -338,21 +338,21 @@ A estrutura condicional If em bash segue os mesmos padrões que outras linguagen
 ```bash
 # Estrutura simples
 if [[ $a != $b ]]; then
-    echo "Verdadeiro"
+    echo 'Verdadeiro'
 fi
 # Estrutura com else
 if [[ $a != $b ]]; then
-    echo "Verdadeiro"
+    echo 'Verdadeiro'
 else
-    echo "Falso"
+    echo 'Falso'
 fi
 # Estrutura encadeada
 if [[ $a != $b ]]; then
-    echo "Verdadeiro"
+    echo 'Verdadeiro'
 elif [[ $c != $a ]]; then
-    echo "Verdadeiro do falso"
+    echo 'Verdadeiro do falso'
 else
-    echo "Falso do falso"
+    echo 'Falso do falso'
 fi
 ```
 
@@ -472,21 +472,240 @@ echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
 #       1295           170            44822        3375
 ```
 
+### Laços de repetição
+
+Laços de repetição são estruturas que facilitam e muito a construção de um script já que sua principal utilidade é diminuir a quantidade de código que será repetido várias veze sobre a mesma ação ou procedimento.
+
+1. For _loop_
+    O `for` recebe uma lista para iteração e usa uma variável que cada valor passado seja alocado nela para manipulação.
+
+    ```bash
+    # Estrutura básica
+    for var in $list;do
+        # comandos...
+    done
+
+    # Exemplo simples
+    for numero in {0..5};do
+        echo numero # 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+    done
+    # 0
+    # 1
+    # 2
+    # 3
+    # 4
+    # 5
+
+    # Exemplo com uma string
+    nome='Obi Wan Kenobi'
+    for word in $nome; do
+        echo $word
+    done
+    # Obi
+    # Wan
+    # Kenobi
+
+    # Sintaxe de linguagem C
+    for ((a=1; a<=5; a++)){
+        echo "| $a |"
+    }
+    # | 1 || 2 || 3 || 4 || 5 |
+    ```
+
+2. While _loop_
+    O conceito de um `while` é diferente que o `for`, já que neste, não precisamos saber previamente o números de iterações possíveis. O laço irá continuar enquanto o teste feito primeiro continue retornando verdadeiro.
+    ```bash
+    # Estrutura básica
+    while [[ condição ]]; do
+        # comandos...
+    done
+
+    # Exemplo simples
+    a=1
+    while [[ $a<="4" ]]; do
+        echo $a
+    done
+    # 1
+    # 2
+    # 3
+    # 4
+
+    # Condicional como função
+    a=0
+    condicao() {
+        if [[ $a<4 ]]; then
+            return 0
+        else
+            return 1
+        fi
+    }
+    while condicao; do
+        echo $a
+        ((a++))
+    done
+    # 0
+    # 1
+    # 2
+    # 3
+
+    # Sintaxe de linguagem C
+    a=0
+    while (( a<=4)); do
+        echo $a
+        ((a++))
+    done
+    # 0
+    # 1
+    # 2
+    # 3
+    # 4
+    ```
+
+3. Until _loop_
+    Sendo o oposto do `while` _loop_, esta estrutura repete seus comandos enquanto o seu teste condicional é falso.
+    ```bash
+    # Estrutura básica
+    until [[ condicao ]]; do
+        # comandos...
+    done
+
+    # Exemplo simples
+    a=0
+    until [[ $a = 4 ]]; do
+        echo $a
+        ((a++))
+    done
+
+    # Sintaxe de linguagem C
+    a=0
+    until (( a>4 )); do
+        echo $a
+        ((a++))
+    done
+    # 1
+    # 2
+    # 3
+    # 4
+    ```
+
+Um looping pode funcionar perfeitamente dentro de outro, como por exemplo em uma tabuada:
+
+```bash
+for a in {0..10}; do
+    for b in {0..10}; do
+        echo "$a x $b = $[$a*$b]"
+    done
+    echo '-------------'
+done
+# 0 x 0 = 0
+# 0 x 1 = 0
+# ...
+# 7 x 8 = 56
+# ...
+```
+
+Bash conta com dois comandos para controle do _loop_, o `break` e o `continue`. O `break` quado invocado termina o laço de repetição e continua a execução do script, já o `continue` pula para o próximo item de iteração, podendo respeitar regras e pular certos valores.
+
+```bash
+# Break - Esse exemplo para quando receber um número ímpar
+while [[ 1 ]]; do
+    echo 'Insira um número par:'
+    read numero
+    if [[ $[$numero] -ne 0 ]]; then
+        echo "$numero não é par"
+        break
+    else
+        echo "$numero é par"
+    fi
+done
+
+# Continue - Esse exemplo somente imprimirá valores pares
+for a in {0..10}; do
+    if [[ $[$a%2] -eq 0 ]]; then
+        echo $a
+    else
+        continue
+    fi
+```
+
+Caso o `break` seja acionado dentro de um outro laço, o atual irá parar e o laço pai continuará, já o `continue` irá atingir somente o laço em que está contextualizado. A atuação do `break` em múltiplos laços pode ser exemplificada com uma tabuada apenas dos números pares.
+
+```bash
+for a in {0..10}; do
+    for b in {0..10}; do
+        if [[ $[$a%2] -eq 0 ]]; then
+            echo "$a x $b = $[$a*$b]"
+        else
+            continue
+        fi
+    done
+done
+```
+
+### Estruturas de seleção
+
+Alem do `if`, existem estruturas de seleção para tratativas de casos que podem trabalhar em fluxo, manipulando os dados conforma instruído. Temos o `case` e o `select`.
+
+1. Estrutura `case`
+    Organiza as condicionais em forma de bloco, sendo uma segunda opção ao invés de diversos `if/elif/elif...` encadeados.
+    ```bash
+    # Estrutura básica
+    case "$variavel" in
+        "$condicao1")
+            # comandos...
+        ;;
+        "$condicao2")
+            # comandos...
+        ;;
+        # mutiplas condicoes...
+    esac
+
+    # Exemplo simples
+    echo 'Qual o final da sua placa?'
+    read placa
+    case "$placa" in
+        [1-2]) semana='segunda-feira';;
+        [3-4]) semana='terca-feira';;
+        [5-6]) semana='quarta-feira';;
+        [7-8]) semana='quinta-feira';;
+        [9]) semana='sexta-feira';;
+        [0]) semana='sexta-feira';;;
+    esac
+    echo "Seu rodízio é $semana"
+    ```
+
+2. Estrutura `select`
+    Usa a opção que o usuário escolheu a partir de uma lista que também é passada como parâmetro para  o `select`. Sua diferença comparada ao `case` se da quando no `select` so há um procedimento para ser feito e aplicado a todas as opções, enquanto no `case` pode-se ter tratativas individuais.
+    ```bash
+    # Estrutura básica
+    select $variavel in $lista; do
+        # comandos...
+    done
+
+    # Exemplo simples
+    PS3='Qual a sua idade?'
+    select idade in '15' '16' '17' '18' '19' '20'; do
+        echo "Voce tem $idade anos"
+        break
+    done
+    ```
+    > Caso o comando `break` não seja adicionado, a estrutura entrará em um _looping_ infinito, sempre irá refazer o procedimento e o menu de escolha.
+
 ### Manipulação de `Strings`
 
 O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e manipular `strings`. Infelizmente não são bem definidas de forma que seu uso seja fácil ou funcional, acontecendo então alguns episódios de erros durante sua utilização.
 
 1. Comprimento da `String` - `String Length`
-    > Retorna o tamanho do comprimento da String informada com o comando $(expr lenght nomeDaString).
+    Retorna o tamanho do comprimento da String informada com o comando $(expr lenght nomeDaString).
 
     ```bash
-    nome="Peter Parker"
+    nome='Peter Parker'
     echo ${#nome} # 12
     echo $(expr length $nome) # 12
     ```
 
 2. Comprimento de uma `matching substring`
-    > Retorna o tamanho do comprimento de uma `matching substring`, com o comando $(expr ***stringPrincipal expressãoRegular***).
+    Retorna o tamanho do comprimento de uma `matching substring`, com o comando $(expr ***stringPrincipal expressãoRegular***).
 
     ```bash
     string=abcABC123ABCabc
@@ -494,18 +713,18 @@ O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e 
     ```
 
 3. Index da `string`
-    > Retorna o index de quando um determinado padrão pre informado em um `substring` inicia em uma  `string`, com o comando $(expr index ***stringPrincipal stringParaEncontrar***)
+    Retorna o index de quando um determinado padrão pre informado em um `substring` inicia em uma  `string`, com o comando $(expr index ***stringPrincipal stringParaEncontrar***)
 
     ```bash
-    string="quandoissocomeca?"
+    string='quandoissocomeca?'
     echo $(expr index "$string" "isso") # 6
     ```
 
 4. Extração de `substring`
-    > Retorna uma `substring` de uma `string` podendo informar a posição inicial e como parâmetro adicional opcional um comprimento que deve ser usado, com o comando ${***stringParaSerUsada***:***posiçãoDeInicio***}.
+    Retorna uma `substring` de uma `string` podendo informar a posição inicial e como parâmetro adicional opcional um comprimento que deve ser usado, com o comando ${***stringParaSerUsada***:***posiçãoDeInicio***}.
 
     ```bash
-    string="peguessodaqui"
+    string='peguessodaqui'
     # Sem comprimento definido
     echo ${string:5} # issoaqui
 
@@ -514,10 +733,10 @@ O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e 
     ```
 
 5. Remoção de uma parte da `string`
-    > Retorna a `string`  original sem um certo pedaço pré-especificado retirado da frente do texto principal.
+    Retorna a `string`  original sem um certo pedaço pré-especificado retirado da frente do texto principal.
 
     ```bash
-    string="issonaoexiste"
+    string='issonaoexiste'
     # Reirar a menor sessão possível
     echo ${string#i*o} # issoexiste
     # Reirar a maior sessão possível
@@ -527,7 +746,7 @@ O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e 
     > Retorna o mesque o anterior so que desta vez retirado da parte de trás da `string`
 
     ```bash
-    string="issonaoexiste"
+    string='issonaoexiste'
     # Retirar a menor sessão possível
     echo ${string%e*e} # issonao
     # Retirar a maior sessão possível
@@ -535,17 +754,17 @@ O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e 
     ```
 
 6. Recolocar outra `string` no lugar
-    > Troca em uma `string` um certo valor por outro.
+    Troca em uma `string` um certo valor por outro.
 
     ```bash
-    string="retireissoecoloqueisso"
+    string='retireissoecoloqueisso'
     # Retirando somente a primeira vez que aparecer
     echo ${string/isso/aquilo} # retireaquiloecloloqueisso
     # Retirando todas as vezes que aparecerem
     echo ${string/isso/aquilo} #retireaquiloecoloqueaquilo
 
     # Retirando apenas aqueles encontradas no início da string
-    string="issodevevirarisso"
+    string='issodevevirarisso'
     echo ${string/#isso/aquilo} #aquilodevevirarisso
     # Retirando apenas aqueles encontradas no fim da string
     echo ${string/%isso/aquilo} #issodeveviraraquilo
@@ -563,16 +782,16 @@ Não se usa `;` em Bash scripts.
 
 ```bash
 # Certo
-echo "Hello, world!"
+echo 'Hello, world!'
 # Errado
-echo "Hello, world!";
+echo 'Hello, world!';
 ```
 
 Salvo alguns casos em que seu uso é necessário para a construção de uma estrutura:
 
 ```bash
 if [ $algumaCois ]; then
-    echo "Fazendo algo"
+    echo 'Fazendo algo'
 fi
 ```
 
@@ -583,12 +802,12 @@ Deve-se usar o `then` na mesma linha de seu respectivo `if`.
 ```bash
 # Certo
 if [[ $algumaCoisa ]]; then
-    echo "Fazendo algo"
+    echo 'Fazendo algo'
 fi
 # Errado
 if [[ $algumaCoisa ]]
 then
-    echo "Fazendo algo"
+    echo 'Fazendo algo'
 fi
 ```
 
@@ -599,12 +818,12 @@ Deve-se assim como no `if`, deixar o `do` na mesma linha de seu `while`.
 ```bash
 # Certo
 while [[ $algumaCoisa ]]; do
-    echo "Fazendo algo"
+    echo 'Fazendo algo'
 done
 # Errado
 while [[ $algumaCoisa ]]
 do
-    echo "Fazendo algo"
+    echo 'Fazendo algo'
 done
 ```
 
