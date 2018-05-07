@@ -777,6 +777,25 @@ O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e 
 
 Um script Bash pode escolher chamar as facilidades de manipulação de `strings` do comando `awk` como uma alternativa dos comando nativos para isso.
 
+### Substituição de comando
+
+Essa técnica disponibiliza o resultado de um ou mais comandos do bash para serem usados dentro do código. Pode-se usar para esse fim o &#96;...&#96; ou `$(...)`.
+
+```bash
+echo "O nome deste arquivo é $(basename $0)" # O nome deste arquivo é <nome do arquivo>
+```
+
+### Expansão aritmética
+
+Expansão aritmética é uma poderosa ferramenta para executar cálculos matemáticos dentro do script, fazendo com que `strings` sejam facilmente convertidas em números inteiros usando `((...))` ou `$((...))`
+
+```bash
+um=1
+dois=2
+echo $(($um+$dois)) # 3
+echo $(($um+1)) # 2
+```
+
 ## Boas práticas
 
 ### Ponto e virgulas
@@ -830,7 +849,7 @@ do
 done
 ```
 
-### Substituição de comando
+### Substituições de comandos
 
 Deve-se usar `$(<command>)` para substituir por um comando,
 
