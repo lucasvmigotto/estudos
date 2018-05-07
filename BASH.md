@@ -6,13 +6,13 @@ Anotações sobre Bash / Shell para consulta e estudo.
 
 ### O que é
 
-> Um script em shell é uma lista de comandos para execução do  sistema, tirando a necessidade de repeti-los toda vez para cumprir determinado objectivo ou ação.
+Um script em shell é uma lista de comandos para execução do  sistema, tirando a necessidade de repeti-los toda vez para cumprir determinado objectivo ou ação.
 
 ## Construção do arquivo
 
 ### Nomenclatura
 
-> Deve se adotar o nome desta maneira: `scriptName`< `.sh` | `.bash` >
+Deve se adotar o nome desta maneira: `scriptName`< `.sh` | `.bash` >
 > Pode-se usar tanto `.sh` quanto `.bash` para ser a extensão do arquivo
 
 ### Execução
@@ -23,6 +23,7 @@ Anotações sobre Bash / Shell para consulta e estudo.
     ```bash
     sudo <sh | bash> scritpName<.sh | .bash>
     ```
+
     > Embora tenha dois comandos (`sh` e `bash`), é recomendado que se opte pelo segundo.
 
 2. Usando `chmod`
@@ -36,7 +37,7 @@ Anotações sobre Bash / Shell para consulta e estudo.
 
 ### Comentários
 
-> Cria-se um comentário utilizando o `#`, a partir dele, sera desconsiderado para fins de execução qualquer elemento ou comando, a menos que o mesmo esteja previamente escapado com `"`, `'` ou `\`.
+Cria-se um comentário utilizando o `#`, a partir dele, sera desconsiderado para fins de execução qualquer elemento ou comando, a menos que o mesmo esteja previamente escapado com `"`, `'` ou `\`.
 
 ```bash
 # Isso é um comentário
@@ -46,11 +47,11 @@ echo # "Eu nao vou ser impresso"
 
 ### Header do arquivo
 
-> Para indicar o interpretador de comandos para ser usado na execução do script adicione esse comando na primeira linha: `#!/bin/bash`
+Para indicar o interpretador de comandos para ser usado na execução do script adicione esse comando na primeira linha: `#!/bin/bash`
 
 ### Método correto para a saída de um script
 
-> Para finalizar de forma correta um script deve-se adicionar o comando `exit`. Exemplo:
+Para finalizar de forma correta um script deve-se adicionar o comando `exit`. Exemplo:
 
 ```bash
 #!/bin/bash
@@ -60,11 +61,11 @@ exit
 
 #### Usando um código de saída
 
-> Pode-se passar também apos o `exit` um código para indicar o valor de retorno, sendo `0` para sucesso e `1` para erro, mas um código personalizado pode ser usado para uso posterior. Quando não informado, o código de saída sera aquele que o ultimo comando ou função retornou.
+Pode-se passar também apos o `exit` um código para indicar o valor de retorno, sendo `0` para sucesso e `1` para erro, mas um código personalizado pode ser usado para uso posterior. Quando não informado, o código de saída sera aquele que o ultimo comando ou função retornou.
 
 ### Criação de uma variável
 
-> A sintaxe correta para a criação de uma variável é:
+A sintaxe correta para a criação de uma variável é:
 
 ```bash
 #!/bin/bash
@@ -75,11 +76,11 @@ exit
 
 #### Tipos de variáveis
 
-> Em Bash não há tipagem de variáveis, isso é tanto uma benção quanto uma maldição. Não ter tipagem ajuda numa maior flexibilidade do script, mas permit erros e maus hábitos de programação.
+Em Bash não há tipagem de variáveis, isso é tanto uma benção quanto uma maldição. Não ter tipagem ajuda numa maior flexibilidade do script, mas permit erros e maus hábitos de programação.
 
 #### Comando `declare`
 
->Embora, há possibilidade de declarar uma variável alterando a suas propriedades, sendo assim uma forma bem simples de tipagem.
+Embora, há possibilidade de declarar uma variável alterando a suas propriedades, sendo assim uma forma bem simples de tipagem.
 
 1. Apenas para leitura `-r`
     > Define a variável para apenas leitura, nenhum valor após aquele indicado em sua declaração poderá ser associado a ela novamente.
@@ -118,7 +119,7 @@ exit
 
 ### Uso da variável
 
-> Como visto, para ser usado o valor de uma variável, deve-se usar `$` antes de escreve-la
+Como visto, para ser usado o valor de uma variável, deve-se usar `$` antes de escreve-la
 
 ```bash
 MSG='Ola'
@@ -127,7 +128,7 @@ echo $MSG
 
 ### Variáveis internas
 
-> O Bash dispõe de algumas variáveis internas com informações úteis para o script como versão do Bash, diretórios de importantes arquivos e informações básicas de usuários.
+O Bash dispõe de algumas variáveis internas com informações úteis para o script como versão do Bash, diretórios de importantes arquivos e informações básicas de usuários.
 
 |        Variável        |                Valor                |
 |:----------------------:|:-----------------------------------:|
@@ -181,7 +182,7 @@ echo $MSG
 
 ### Escape
 
-> Escapar um caracter é um método para apresentar ao interpretador de script o caracter com o seu valor literal. Ou seja, ao escapar o `\` como `\\` o interpretador ira entender como uma contra barra comum. Porem alguns caracteres escapados guardam um significado para aexecução.
+Escapar um caracter é um método para apresentar ao interpretador de script o caracter com o seu valor literal. Ou seja, ao escapar o `\` como `\\` o interpretador ira entender como uma contra barra comum. Porem alguns caracteres escapados guardam um significado para a execução.
 
 |       Caracter        |            Significado            |
 | :-------------------: | :-------------------------------: |
@@ -193,13 +194,63 @@ echo $MSG
 |         **\a**        | Representa um _alert_
 |         **\0xx**      | Representa o retorno em ASCII de um valor octal
 
+### Substituição de parâmetro
+
+Seu uso principal é destinado para concatenar os valores das variáveis com `strings`, em certos momentos o uso de `${}` é mai recomendado por ser menos ambíguo.
+
+```bash
+nome="Bruce Wayne"
+echo "Ola, eu sou ${nome}" # Ola, eu sou Bruce Wayne
+```
+
+Há também a possibilidade de associar um valor padrão para caso a variável não seja usada ou até mesmo declarada.
+
+```bash
+# Declarada
+echo "Qual a sua idade?"
+read idade
+echo "Sua idade é ${idade:-17}"
+    # Se for informada: Sua idade é <idade>
+    # Se não informada: Sua idade é 17
+
+# Não declarada
+var1=1
+var2=2
+# Não há uma variável declarada como var3
+echo ${var1-$var2} # 1
+echo ${var3-$var2} # 2
+```
+
+O uso de `-` e `:-` se da dependendo do uso e da situação já que para o primeiro a variável não precisa estar declarada, já no segundo caso a mesma deve ter sido declarada e estar com  `null`
+
+Para definir um valor padrão imutável para uma variável ainda não declarada basta usar `${var=value}`
+
+```bash
+echo ${nome=Clark} # Clark
+echo ${nome=Kent} # Clark
+    # Note que o segundo output foi 'Clark' já que foi previamente definida
+```
+
+Caso seja necessário que o valor de uma variável seja setado e seu valor original não vá ser usado, bastar definir um valor para a mesma definindo um padrão.
+
+```bash
+nome="Bruce"
+echo "Nome é ${nome:+Banner}" # Nome é Banner
+```
+
+Pode-se definir uma mensagem de erro para caso o `script` seja abortado durante a manipulação do valor.
+
+```bash
+echo ${errorMessage?}
+```
+
 ### Construtores de Teste
 
-> Um teste para o Bash é uma estrutura com `[` que retornara um valor de 0 ou 1, sendo 0 verdadeiro e 1 falso. O interpretador enxerga uma estrutura como `[[ $a -lt $b ]]` sendo um elemento único com retorno.
+Um teste para o Bash é uma estrutura com `[` que retornara um valor de 0 ou 1, sendo 0 verdadeiro e 1 falso. O interpretador enxerga uma estrutura como `[[ $a -lt $b ]]` sendo um elemento único com retorno.
 
 ### If, If Else, If Else If
 
-> A estrutura condicional If em bash segue os mesmos padrões que outras linguagens assim como suas estruturas encadeadas. Precisa-se de um teste para ter um retorno definindo assim o que sera feito, sendo a primeira ação sempre a com retorno `true` e a segunda `false`.
+A estrutura condicional If em bash segue os mesmos padrões que outras linguagens assim como suas estruturas encadeadas. Precisa-se de um teste para ter um retorno definindo assim o que sera feito, sendo a primeira ação sempre a com retorno `true` e a segunda `false`.
 
 ```bash
 # Estrutura simples
@@ -222,7 +273,7 @@ else
 fi
 ```
 
-> Pode-se evitar também o uso de varias estruturas `if else if...` apenas juntando testes que podem ser feitos juntos:
+Pode-se evitar também o uso de varias estruturas `if else if...` apenas juntando testes que podem ser feitos juntos:
 
 ```bash
 if [[ $a -gt "0" ]] && [[ $a -lt "5" ]]; then
@@ -331,7 +382,7 @@ fi
 
 ### Constantes numéricas
 
-> Bash ira interpretar todo numero como sendo de base decimal caso não seja apresentado um prefixo indicando a mesma. Números iniciados com `0` serão octais e `0x` serão hexadecimais. Porem há como informar uma base especifica usando o padrão `base#num`, sendo `base` a base desejada e `num` o valor a ser informado.
+Bash ira interpretar todo numero como sendo de base decimal caso não seja apresentado um prefixo indicando a mesma. Números iniciados com `0` serão octais e `0x` serão hexadecimais. Porem há como informar uma base especifica usando o padrão `base#num`, sendo `base` a base desejada e `num` o valor a ser informado.
 
 ```bash
 echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
@@ -340,7 +391,7 @@ echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
 
 ### Manipulação de `Strings`
 
-> O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e manipular `strings`. Infelizmente não são bem definidas de forma que seu uso seja fácil ou funcional, acontecendo então alguns episódios de erros durante sua utilização.
+O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e manipular `strings`. Infelizmente não são bem definidas de forma que seu uso seja fácil ou funcional, acontecendo então alguns episódios de erros durante sua utilização.
 
 1. Comprimento da `String` - `String Length`
     > Retorna o tamanho do comprimento da String informada com o comando $(expr lenght nomeDaString).
@@ -419,13 +470,13 @@ echo $((36#zz)) $((2#1010101010)) $((16#AF16)) $((53#1aA))
 
 #### Usando `awk`
 
-> Um script Bash pode escolher chamar as facilidades de manipulação de `strings` do comando `awk` como uma alternativa dos comando nativos para isso.
+Um script Bash pode escolher chamar as facilidades de manipulação de `strings` do comando `awk` como uma alternativa dos comando nativos para isso.
 
 ## Boas práticas
 
 ### Ponto e virgulas
 
-> Não se usa `;` em Bash scripts.
+Não se usa `;` em Bash scripts.
 
 ```bash
 # Certo
@@ -434,7 +485,7 @@ echo "Hello, world!"
 echo "Hello, world!";
 ```
 
-> Salvo alguns casos em que seu uso é necessário para a construção de uma estrutura:
+Salvo alguns casos em que seu uso é necessário para a construção de uma estrutura:
 
 ```bash
 if [ $algumaCois ]; then
@@ -444,7 +495,7 @@ fi
 
 ### Estrutura condicional `If`
 
-> Deve-se usar o `then` na mesma linha de seu respectivo `if`.
+Deve-se usar o `then` na mesma linha de seu respectivo `if`.
 
 ```bash
 # Certo
@@ -460,7 +511,7 @@ fi
 
 ### Estrutura de repetição `While`
 
-> Deve-se assim como no `if`, deixar o `do` na mesma linha de seu `while`.
+Deve-se assim como no `if`, deixar o `do` na mesma linha de seu `while`.
 
 ```bash
 # Certo
@@ -476,7 +527,7 @@ done
 
 ### Substituição de comando
 
-> Deve-se usar `$(<command>)` para substituir por um comando,
+Deve-se usar `$(<command>)` para substituir por um comando,
 
 ```bash
 # Certo
@@ -487,7 +538,7 @@ foo=`data`
 
 ### Funções
 
-> Não se usa a `function` keyword para declarar uma função. Todas as variáveis criadas em uma função devem ser locais.
+Não se usa a `function` keyword para declarar uma função. Todas as variáveis criadas em uma função devem ser locais.
 
 ```bash
 # Certo
@@ -502,7 +553,7 @@ function foo() {
 
 ### Tests
 
-> Usar estrutura com duplo `[` ao invés de somente um.
+Usar estrutura com duplo `[` ao invés de somente um.
 
 ```bash
 # Certo
