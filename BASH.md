@@ -6,7 +6,7 @@ Anotações sobre Bash / Shell para consulta e estudo.
 
 ### O que é
 
-Um script em shell é uma lista de comandos para execução do  sistema, tirando a necessidade de repeti-los toda vez para cumprir determinado objectivo ou ação.
+Um script em shell é uma lista de comandos para execução do  sistema, tirando a necessidade de repeti-los toda vez para cumprir determinado objetivo ou ação.
 
 ## Construção do arquivo
 
@@ -811,15 +811,33 @@ mv $HOME/Downloads/text.txt . # o arquivo .txt vai para o diretorio atual, sendo
 
 #### `ac`
 
+Retorna o tempo em que o usuário está logado, esse dado é retirado de _/var/log/wtmp_.
+
 ```bash
 ac # total        <valor de tempo>
 ```
 
-Retorna o tempo em que o usuário está logado, esse dado é retirado de _/var/log/wtmp_.
-
 ## Boas práticas
 
-### Ponto e virgulas
+Presentes em todas as linguagens, elas regem normas e padrões que mantem grande maioria de todos os códigos formatados seguindo um template único.
+
+### Estética
+
+É uma excelente prática manter um padrão visual para que o seu código fique sempre bem apresentado e organizado.
+
+#### Tabs ou Espaços
+
+O uso de _tabs_ é mais recomendado durante a construção de um script bash.
+
+#### Colunas por linha
+
+Recomenda-se que não se passe de 80 colunas por linha para que um padrão seja estabelecido - alem de um código mais organizado e visualmente organizado.
+
+#### Espaçamento
+
+Não é recomendado que se mantenha mais que dois caracteres de nova linha em branco consecutivos, bem como não mais que uma linha em branco em seguida de outra no código.
+
+#### Ponto e virgulas
 
 Não se usa `;` em Bash scripts.
 
@@ -838,7 +856,7 @@ if [ $algumaCois ]; then
 fi
 ```
 
-### Estrutura condicional `If`
+#### Estrutura condicional `If`
 
 Deve-se usar o `then` na mesma linha de seu respectivo `if`.
 
@@ -854,7 +872,7 @@ then
 fi
 ```
 
-### Estrutura de repetição `While`
+#### Estrutura de repetição `While`
 
 Deve-se assim como no `if`, deixar o `do` na mesma linha de seu `while`.
 
@@ -870,18 +888,7 @@ do
 done
 ```
 
-### Substituições de comandos
-
-Deve-se usar `$(<command>)` para substituir por um comando,
-
-```bash
-# Certo
-foo=$(data)
-# Errado
-foo=`data`
-```
-
-### Funções
+#### Funções
 
 Não se usa a `function` keyword para declarar uma função. Todas as variáveis criadas em uma função devem ser locais.
 
@@ -896,7 +903,22 @@ function foo() {
 }
 ```
 
-### Tests
+### Exclusividades do bash
+
+Sempre dê preferência a construtores e estruturas próprias do bash.
+
+#### Substituições de comandos
+
+Deve-se usar `$(<command>)` para substituir por um comando,
+
+```bash
+# Certo
+foo=$(data)
+# Errado
+foo=`data`
+```
+
+#### Tests
 
 Usar estrutura com duplo `[` ao invés de somente um.
 
@@ -909,6 +931,198 @@ fi
 if [ $a == $b ]; then
     echo 'Falso!'
 fi
+```
+
+#### Sequências
+
+Para criar sequências no bash, de preferência para os construtores padrões da linguagem.
+
+```bash
+# Certo
+for indice in {0..10}; do
+    # comandos...
+done
+
+# Errado
+for indice in ${seq 0 "$n"}; do
+    # comandos...
+done
+
+# Errado
+for indice in ${seq 0 10}; do
+    # comandos...
+done
+```
+
+#### Manipulação de inteiros
+
+Para trabalhar e calcular com números inteiros, utilize `((...))` ou `$((....))`.
+
+```bash
+# Certo
+if (( a > b )); then
+    # comandos...
+fi
+
+# Errado
+if [[ $a -gt $b ]]; then
+    # commandos...
+fi
+```
+
+> Não utilize o comando `let`.
+
+#### Expansão de parâmetros
+
+Dê preferência para a expansão de parâmetros ao invés de comandos externos como `echo`, `sed`, `awk`...
+
+```bash
+nome='Stephen Strange10'
+# Certo
+semNumeros='${nome//[0-9]/}'
+
+# Errado
+semNumeros='${echo "$nome" | sed -e 's/[0-9]//g'}'
+```
+
+#### Listagem de arquivos
+
+Utilize funções do próprio bash para realizar listagem de arquivos, ao invés de comandos internos como `ls`.
+
+```bash
+# Certo
+for file in *; do
+    # comandos...
+done
+
+# Errado
+for file in $(ls); do
+    # comandos...
+done
+```
+
+#### Arrays e Listas
+
+Para o uso em bash, use sempre `bash arrays` o invés de `strings` separadas por espaços, linhas em branco, novas linhas, _tabs_....
+
+```bash
+# Certo
+nomes=(Richard Sue Johnny Ben)
+for hero in "${nomes[@]}"; do
+    # comandos...
+done
+
+# Errado
+nomes='Richard Sue Johnny Ben'
+for hero in $nomes; do
+    # comandos...
+done
+```
+
+### Comandos externos
+
+Todo o universo não está exclusivo a somente para ser executado em um _GNU_ ou em _Linux_, então evite uso de opções específicas, como `awk`, `sed`, `grep`... para ser o mais multiplataforma possível. Quando estiver escrevendo em bash, irá perceber as muitas maneiras diferentes para se manipular `strings` ao invés de comandos externos.
+
+#### Uso desnecessário do comando `cat`
+
+Caso o programa a ser usado suporte leitura como entrada padrão, passe os dados através do redirecionamento do próprio bash.
+
+```bash
+# Certo
+grep valor < arquivo
+
+# Certo
+grep valor arquivo
+
+# Errado
+cat arquivo | grep valor
+```
+
+### Estilo de código
+
+#### Citações e uso das aspas
+
+Use aspas duplas `"..."` para `strings` que carreguem valores de variáveis ou substituição de comandos. Para todos os outros, use aspas simples `'...'`.
+
+```bash
+# Certo
+nome='Luke Cage'
+
+# Errdo
+nome="Luke Cage"
+
+# Errado - "From a certain point fo view" KENOBI, Obi Wan
+hero='Nome: $nome'
+```
+
+#### Declaração de variável
+
+Não use palavras maiúsculas para definir variáveis apenas se for realmente necessário. Não utilize `readonly` ou `let` para criação de variáveis. O uso de `declare` deve ser exclusivo de `arrays` associativos, assim como `local` deve ser somente usado em funções.
+
+```bash
+# Certo
+numero=5
+((numero++))
+leia='organa'
+tarkin=vader
+
+# Errado
+declare -i numero=5
+let nuemro++
+local leia='organa'
+TARKIN=vader
+```
+
+#### Localização do Bash
+
+Nem sempre o bash vai estar em _/bin/bash_, para prevenir erros decorrentes disso, utilize uma forma diferente para iniciar um arquivo _.bash_.
+
+```bash
+# Certo
+#!/usr/bin/env bash
+
+# Errado
+#!/bin/bash
+```
+
+#### Checagem de erros
+
+Para uma execução de um script mais fluída, a tratativa de errors é essencial, quando usar `cd` ou outros comando como, trate possíveis erros que possam ocorrer.
+
+```bash
+# Certo
+cd stark/fotos || exit
+rm ultron.png
+
+# Errado
+cd stark/fotos # Essa linha pode falhar por algum motivo
+rm ultron.png  # Caso ocorra, o que deletar então?
+```
+
+### Erros comuns
+
+#### Usando `{}` ao invés de `""`
+
+Usar `${}` resulta em resultados diferente que `"$f"` pela forma em que a `string` é dividia dependendo do dado que ela contem.
+
+```bash
+for space in '1 space' '2  space' '3   space'; do
+    echo ${space}
+done
+# 1 space
+# 2 space
+# 3 space
+```
+
+A perca dos espaços se da pela falta das `""`. Para evitar basta usar `"$f"`.
+
+```bash
+for space in '1 space' '2  space' '3   space'; do
+    echo "$space"
+done
+# 1 space
+# 2  space
+# 3   space
 ```
 
 ## Caracteres especiais
