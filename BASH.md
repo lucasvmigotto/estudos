@@ -796,11 +796,11 @@ echo $(($um+$dois)) # 3
 echo $(($um+1)) # 2
 ```
 
-### Comandos do Bash
+## Comandos do Bash
 
 Dominar os principais comandos do bash é imprescindível para aprender e aproveitar o máximo que a linguagem pode oferecer.
 
-#### `.` (dot)
+### `.` (dot)
 
 Representa o diretório atual.
 
@@ -809,7 +809,7 @@ Representa o diretório atual.
 mv $HOME/Downloads/text.txt . # o arquivo .txt vai para o diretorio atual, sendo ele o desktop.
 ```
 
-#### `ac`
+### `ac`
 
 Retorna o tempo em que o usuário está logado, esse dado é retirado de _/var/log/wtmp_.
 
