@@ -1,6 +1,6 @@
-# Bash / Shell
+# Bash/Shell
 
-Anotações sobre Bash / Shell para consulta e estudo.
+Anotações sobre Bash/Shell para consulta e estudo.
 
 ## Conceito básico
 
