@@ -331,6 +331,61 @@ echo ${!ezio@} # ezio ezioauditore ezioauditoredelafirenze
 
 Um teste para o Bash é uma estrutura com `[` que retornara um valor de 0 ou 1, sendo 0 verdadeiro e 1 falso. O interpretador enxerga uma estrutura como `[[ $a -lt $b ]]` sendo um elemento único com retorno.
 
+#### `[[` ou `[`
+
+O comando de teste (`[` ou `test`) e o novo comando de teste (`[[`) são usados para atribuir valor a expressões. Enquanto `[[` funciona perfeitamente no _Bash_, _Zsh_ e _Korn Shell_ e é muito mais poderoso, `[` funciona unicamente em _POSIX_ shells.
+
+Para simplificar `test` implementa o `[`, mas esse último precisando de um argumento final, sendo ele `]`.  Mas todos os shells modernos contam com essa implementação, ficando então sendo um executável externo. Caso sua aplicação vise a portabilidade, opte por utilizar o novo construtor de teste `[[`.
+
+Uma comparação entre os recursos, seus usos ou até disponibilidade entre as duas versões:
+
+1. Comparações com `strings`
+
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |       **>**       |       **\>**      |
+    |       **<**       |       **\<**      |
+    |    **= ou ==**    |       **=**       |
+    |       **!=**      |       **!=**      |
+
+2. Comparações com inteiros
+
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |      **-gt**      |      **-gt**      |
+    |      **-lt**      |      **-lt**      |
+    |      **-ge**      |      **-ge**      |
+    |      **-le**      |      **-le**      |
+    |      **-eq**      |      **-eq**      |
+    |      **-ne**      |      **-ne**      |
+
+3. Avaliação de concional
+
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |       **&&**      |      **-a**       |
+    | **&#124;&#124;**  |      **-o**       |
+
+4. Agrupamento de expressão
+
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |     **(...)**     |    **\(...\)**    |
+
+5. Correspondência de padrões
+
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |    **= ou ==**    |    **não há**     |
+
+6. Correspondências de expressões regulares
+
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |       **=~**      |    **não há**     |
+
+A explicação de ponto de vista teórico para a diferença entre `[` e `[[` é que, enquanto o construtor simples é considerado um comando interno que recebe argumentos como qualquer outro, o novo construtor é considerado um comando composto, tendo ele um contexto de avaliação especial, que são executados e analisados antes de qualquer outro processo, tal análise olha e considera de forma especial _palavras reservadas_ ou _operadores de controle_.
+
 ### If, If Else, If Else If
 
 A estrutura condicional If em bash segue os mesmos padrões que outras linguagens assim como suas estruturas encadeadas. Precisa-se de um teste para ter um retorno definindo assim o que sera feito, sendo a primeira ação sempre a com retorno `true` e a segunda `false`.
@@ -1178,3 +1233,63 @@ done
 |       **~+**      | Representa o diretório de trabalho atual.
 |       **~-**      | Representa o diretório de trabalho passado.
 |       **^**       | [Expressão regular] Representa o fim que uma expressão regular deve corresponder.
+
+## Atalhos
+
+Útil para aumentar e muito a sua produtividade durante a produção de seus scripts, o bash conta com um vasta gama de atalhos para seus usuários.
+
+### Comandos para edição
+
+|       Comando     | Descrição                                                                 |
+| :---------------: | :-----------------------------------------------------------------------: |
+|   **`CTRL + a`**  | Move o cursor para o início da linha de comando.
+|   **`CTRL + e`**  | Move o cursor para o fim da linha de comando.
+|   **`CTRL + k`**  | Deleta do ponto do cursor ate o fim da linha.
+|   **`CTRL + u`**  | Deleta do ponto do cursor ate o começo da linha.
+|   **`CTRL + w`**  | Delete do ponto do cursor ate o final da palavra.
+|   **`CTRL + y`**  | Cola o texto retirado um dos comandos de remoção, como os citados acima.
+|  **`CTRL + xx`**  | Varia a posição do cursor de seu ponto atual ate o início da linha,indo e voltando.
+|   **`CTRL + b`**  | Move-se para trás em um caracter.
+|   **`CTRL + d`**  | Deleta o caracter selecionado pelo cursor.
+|   **`CTRL + h`**  | Deleta o caracter anterior à posição atual do cursor.
+|   **`CTRL + t`**  | Inverte a ordem dos caracteres com o seu anterior.
+|    **`ALT + b`**  | Move-se para trás em uma palavra.
+|    **`ALT + f`**  | Move-se para frente em uma palavra.
+|    **`ALT + d`**  | Deleta do ponto do cursor até o final da palavra.
+|    **`ALT + c`**  | Deixa a primeira letra da palavra que o cursor está maiúscula.
+|    **`ALT + u`**  | Faz o texto a partir do cursor ate o final maiúsculo.
+|    **`ALT + l`**  | Faz o texto a partir do cursor ate o final maiúsculo.
+|    **`ALT + t`**  | Troca a palavra atual pela a anterior.
+
+### Chamada de comandos previamente usados
+
+|       Comando     | Descrição                                                                 |
+| :---------------: | :-----------------------------------------------------------------------: |
+|   **`CTRL + r`**  | Abre o modo de pesquisa de comandos executados
+|   **`CTRL + g`**  | Sai do modo de pesquisa de comandos executados.
+|   **`CTRL + p`**  | Retorna o comando anterior do histórico.
+|   **`CTRL + n`**  | Retorna o próximo comando do histórico.
+|    **`ALT + .`**  | Retorna a última palavra do último comando.
+
+### Controle de comandos
+
+|       Comando     | Descrição                                                                 |
+| :---------------: | :-----------------------------------------------------------------------: |
+|   **`CTRL + l`**  | Limpa a tela.
+|   **`CTRL + s`**  | Pausa a aplicação.
+|   **`CTRL + q`**  | Retoma a aplicação.
+|   **`CTRL + c`**  | Termina a execução do comado atual.
+|   **`CTRL + z`**  | Suspende/Para o comando atual.
+
+### Comandos _Bash Bang_
+
+|       Comando     | Descrição                                                                 |
+| :---------------: | :-----------------------------------------------------------------------: |
+|       **!!**      | Executa o último comando executado.
+|    **!`comm`**    | Executa o último comando que foi executado que comece com o o valor informado (`comm`)
+|   **!`comm`:p**  | Retorna o último comando que foi executado que comece com o valor informado.
+|       **!$**      | A última palavra do último comando.
+|      **!$:p**     | Retorna a última palavra do último comando.
+|       **!***      | O último comando executado menos sua última palavra.
+|      **!*:p**     | Retorna o último comando executado menos sua última palavra.
+|**&#94;`comm`&#94;`comm2`**| Substitui do último comando realizado o certo pedaço e o substitui com outro.
