@@ -2,6 +2,125 @@
 
 Anotações sobre Bash/Shell para consulta e estudo.
 
+## Sumário
+
+1. [Conceito básico](##Conceito-Básico)
+
+    1.1. [O que é](###O-que-é)
+
+2. [Construção do arquivo](##Construção-do-arquivo)
+
+    2.1. [Nomenclatura](###Nomenclatura)
+
+    2.2. [Execução](###Execução)
+
+    2.3. [Comentários](###Comentários)
+
+    2.4. [Header do arquivo](###Header-do-arquivo)
+
+    2.4. [Método correto para a saída de um script](###Método-correto-para-a-saída-de-um-script)
+
+    * [Usando um codígo de saída](####Usando-um-código-de-saída)
+
+    2.5. [Criação de uma variável](###Criação-de-uma-variável)
+
+    * [Tipos de variáveis](####Tipos-de-variáveis)
+    * [Comando declare](####Comando-declare)
+
+    2.6. [Uso da variável](###Uso-da-variável)
+
+    2.7. [Variáveis internas](###Variáveis-internas)
+
+    2.8. [Escape](###Escape)
+
+    2.9. [Substituição de parâmetro](###Substituição-de-parâmetro)
+
+    * [Valores padrões](####Valores-padrões)
+    * [Valores padrões imutáveis](####Valores-padrões-imutáveis)
+    * [Substituindo o valor original](####Substituindo-o-valor-original)
+    * [Mensagem de erro padrão](####Mensagem-de-erro-padrão)
+    * [Comprimento de variável](####Comprimento-de-variável)
+    * [Remoção de substring](####Remoção-de-substring)
+    * [Comprimento de String](####Comprimento-de-String)
+    * [Substituição de padrões](####Substituição-de-padrões)
+    * [Listando variáveis com padrão](####Listando-variáveis-com-padrão)
+
+    2.10. [Construtures de teste](###Construtores-de-Teste)
+
+    * [&#91;&#91; ou &#91;](####[[-ou-[])
+
+    2.11. [If, If Else, If Else If](###If,-If-Else,-If-Else-If)
+
+    2.12. [Operadores](###Operadores)
+
+    * [Teste](####Teste)
+    * [Assimilação](####Assimilação)
+    * [Aritméticos](####Aritméticos)
+    * [Lógicos](####Lógicos)
+
+    2.13. [Constantes numéricas](###Constantes-numéricas)
+
+    2.14. [Laços de repetição](###Laços-de-repetição)
+
+    2.15. [Estruturas de seleção](###Estruturas-de-seleção)
+
+    2.16. [Manipulação de Strings](###Manipulação-de-Strings)
+
+    * [Usando awk](####Usando-awk)
+
+    2.17. [Substituição de comando](###Substituição-de-comando)
+
+    2.18. [Expansão aritmética](###Expansão-aritmética)
+
+3. [Boas práticas](##Boas-práticas)
+
+    3.1 [Estética](###Estética)
+
+    * [Tabs ou Espaços](####Tabs-ou-Espaços)
+    * [Colunas por linha](####Colunas-por-linha)
+    * [Espaçamento](####Espaçamento)
+    * [Ponto e virgulas](####Ponto-e-virgulas)
+    * [Estrutura condicional If](####Estrutura-condicional-If)
+    * [Estrutura de repetição While](####Estrutura-de-repetição-While)
+    * [Funções](####Funções)
+
+    3.2. [Exclusividades do Bash](###Exclusividades-do-Bash)
+
+    * [Substituições de comandos](####Substituições-de-comandos)
+    * [Tests](####Tests)
+    * [Sequências](####Sequências)
+    * [Manipulação de inteiros](####Manipulação-de-inteiros)
+    * [Expansão de parâmetros](####Expansão-de-parâmetros)
+    * [Listagem de arquivos](####Listagem-de-arquivos)
+    * [Arrays e Listas](####Arrays-e-Listas)
+
+    3.3. [Comandos externos](###Comandos-externos)
+
+    * [Uso desnecessário do comando cat](####Uso-desnecessário-do-comando-cat)
+
+    3.4. [Estilo de código](###Estilo-de-código)
+
+    * [Citações e uso das aspas](####Citações-e-uso-das-aspas)
+    * [Declaração de variável](####Declaração-de-variável)
+    * [Localização do Bash](####Localização-do-Bash)
+    * [Checagem de erros](####Checagem-de-erros)
+
+    3.5. [Erros comuns](###Erros-comuns)
+
+    * [Usando {} ao invéz de """](####Usando-{}-ao-invés-de-"";)
+
+4. [Caracteres Especiais](##Caracteres-Especiais)
+
+5. [Atalhos](##Atalhos)
+
+    5.1. [Comandos para edição](###Comandos-para-edição)
+
+    5.2. [Chamada de comandos previamente usados](###Chamada-de-comandos-previamente-usados)
+
+    5.3. [Controle de comandos](###Controle-de-comandos)
+
+    5.4. [Comandos Bash Bang](###Comandos-Bash-Bang)
+
 ## Conceito básico
 
 ### O que é
@@ -78,7 +197,7 @@ exit
 
 Em Bash não há tipagem de variáveis, isso é tanto uma benção quanto uma maldição. Não ter tipagem ajuda numa maior flexibilidade do script, mas permit erros e maus hábitos de programação.
 
-#### Comando `declare`
+#### Comando declare
 
 Embora, há possibilidade de declarar uma variável alterando a suas propriedades, sendo assim uma forma bem simples de tipagem.
 
@@ -261,7 +380,7 @@ nome='Stan Lee'
 echo ${#nome} # 8
 ```
 
-#### Remoção de `substring`
+#### Remoção de substring
 
 Pode-se passar um padrão para que seja retirado do começo de uma string, basta apenas escolher a variável e definir o padrão.
 
@@ -281,7 +400,7 @@ echo ${nome%a*n} # haljord
 echo ${nome%%a*n} # h
 ```
 
-#### Comprimento de `string`
+#### Comprimento de string
 
 O valor de uma variável poder ser exibido a partir de certo ponto apenas indicando o mesmo. Ou ainda informando o máximo que a expansão pode alcançar.
 
@@ -331,7 +450,7 @@ echo ${!ezio@} # ezio ezioauditore ezioauditoredelafirenze
 
 Um teste para o Bash é uma estrutura com `[` que retornara um valor de 0 ou 1, sendo 0 verdadeiro e 1 falso. O interpretador enxerga uma estrutura como `[[ $a -lt $b ]]` sendo um elemento único com retorno.
 
-#### `[[` ou `[`
+#### [[ ou [
 
 O comando de teste (`[` ou `test`) e o novo comando de teste (`[[`) são usados para atribuir valor a expressões. Enquanto `[[` funciona perfeitamente no _Bash_, _Zsh_ e _Korn Shell_ e é muito mais poderoso, `[` funciona unicamente em _POSIX_ shells.
 
@@ -488,7 +607,7 @@ fi
     |    ex1 **-a** ex2   | Retorna verdadeiro caso `ex1` e `ex2` sejam verdadeiros, ou seja, um conector logico `and` |
     |    ex1 **-o** ex2   | Retorna verdadeiro caso `ex1` ou `ex2` sejam verdadeiros, ou seja, um conector logico `or` |
 
-#### Assimilação (`assignment`)
+#### Assimilação
 
 |     Operador      |                     Descrição                          |
 |:-----------------:|:------------------------------------------------------:|
@@ -749,7 +868,7 @@ Alem do `if`, existem estruturas de seleção para tratativas de casos que podem
     ```
     > Caso o comando `break` não seja adicionado, a estrutura entrará em um _looping_ infinito, sempre irá refazer o procedimento e o menu de escolha.
 
-### Manipulação de `Strings`
+### Manipulação de Strings
 
 O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e manipular `strings`. Infelizmente não são bem definidas de forma que seu uso seja fácil ou funcional, acontecendo então alguns episódios de erros durante sua utilização.
 
@@ -828,7 +947,7 @@ O Bash conta com um numero surpreendente de funções e maneiras de trabalhar e 
     echo ${string/%isso/aquilo} #issodeveviraraquilo
     ```
 
-#### Usando `awk`
+#### Usando awk
 
 Um script Bash pode escolher chamar as facilidades de manipulação de `strings` do comando `awk` como uma alternativa dos comando nativos para isso.
 
@@ -849,27 +968,6 @@ um=1
 dois=2
 echo $(($um+$dois)) # 3
 echo $(($um+1)) # 2
-```
-
-## Comandos do Bash
-
-Dominar os principais comandos do bash é imprescindível para aprender e aproveitar o máximo que a linguagem pode oferecer.
-
-### `.` (dot)
-
-Representa o diretório atual.
-
-```bash
-# Estando em $HOME/Desktop
-mv $HOME/Downloads/text.txt . # o arquivo .txt vai para o diretorio atual, sendo ele o desktop.
-```
-
-### `ac`
-
-Retorna o tempo em que o usuário está logado, esse dado é retirado de _/var/log/wtmp_.
-
-```bash
-ac # total        <valor de tempo>
 ```
 
 ## Boas práticas
@@ -911,7 +1009,7 @@ if [ $algumaCois ]; then
 fi
 ```
 
-#### Estrutura condicional `If`
+#### Estrutura condicional If
 
 Deve-se usar o `then` na mesma linha de seu respectivo `if`.
 
@@ -927,7 +1025,7 @@ then
 fi
 ```
 
-#### Estrutura de repetição `While`
+#### Estrutura de repetição While
 
 Deve-se assim como no `if`, deixar o `do` na mesma linha de seu `while`.
 
@@ -1078,7 +1176,7 @@ done
 
 Todo o universo não está exclusivo a somente para ser executado em um _GNU_ ou em _Linux_, então evite uso de opções específicas, como `awk`, `sed`, `grep`... para ser o mais multiplataforma possível. Quando estiver escrevendo em bash, irá perceber as muitas maneiras diferentes para se manipular `strings` ao invés de comandos externos.
 
-#### Uso desnecessário do comando `cat`
+#### Uso desnecessário do comando cat
 
 Caso o programa a ser usado suporte leitura como entrada padrão, passe os dados através do redirecionamento do próprio bash.
 
@@ -1156,7 +1254,7 @@ rm ultron.png  # Caso ocorra, o que deletar então?
 
 ### Erros comuns
 
-#### Usando `{}` ao invés de `""`
+#### Usando {} ao invés de ""
 
 Usar `${}` resulta em resultados diferente que `"$f"` pela forma em que a `string` é dividia dependendo do dado que ela contem.
 
@@ -1281,7 +1379,7 @@ done
 |   **`CTRL + c`**  | Termina a execução do comado atual.
 |   **`CTRL + z`**  | Suspende/Para o comando atual.
 
-### Comandos _Bash Bang_
+### Comandos Bash Bang
 
 |       Comando     | Descrição                                                                 |
 | :---------------: | :-----------------------------------------------------------------------: |

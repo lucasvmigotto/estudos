@@ -2,27 +2,67 @@
 
 Do commit ao rebase.
 
+## Sumário
+
+1. [O que é](##O-que-é)
+
+2. [Termos](##Termos)
+
+    2.1. [O que é Repositório](###O-que-é-Repositório)
+
+    2.2. [O que é Commit](###O-que-é-Commit)
+
+    2.3. [O que é Branch](###O-que-é-Branch)
+
+    2.4. [O que é Merge](###O-que-é-Merge)
+
+    2.5. [O que é Rebase](###O-que-é-Rebase)
+
+3. [Comandos](##Comandos)
+
+    3.1. [Init](###Init)
+
+    3.1. [Remote](###Remote)
+
+    3.1. [Branch](###Branch)
+
+    3.1. [Checkout](###Checkout)
+
+    3.1. [Status](###Status)
+
+    3.1. [Add](###Add)
+
+    3.1. [Commit](###Commit)
+
+    3.1. [Push](###Push)
+
+    3.1. [Diff](###Diff)
+
+    3.1. [Rebase](###Rebase)
+
+    3.1. [Merge](###Merge)
+
 ## O que é
 
-> Git é um controle de versionamento `open source` para gerenciamento de um projeto visando a velocidade e eficiência.
+Git é um controle de versionamento `open source` para gerenciamento de um projeto visando a velocidade e eficiência.
 
 ## Termos
 
 ### O que é Repositório
 
-> Local do Git criado para guardar seu projeto e todas as versões que o mesmo possa ter.
+Local do Git criado para guardar seu projeto e todas as versões que o mesmo possa ter.
 
 ### O que é Commit
 
-> Ponto do processo onde é informado as mudanças que foram feitas através de uma mensagem para ser marcada e documentada no histórico do projeto.
+Ponto do processo onde é informado as mudanças que foram feitas através de uma mensagem para ser marcada e documentada no histórico do projeto.
 
 ### O que é Branch
 
-> Uma vertente do projeto onde uma funcionalidade foi ou esta sendo criada em paralelo sem estar afetando o resto do projeto.
+Uma vertente do projeto onde uma funcionalidade foi ou esta sendo criada em paralelo sem estar afetando o resto do projeto.
 
 ### O que é Merge
 
-> O processo de juntar duas `branchs` de trabalho em um so, sendo assim, sincronizando o trabalho e funções de ambas as versões.
+O processo de juntar duas `branchs` de trabalho em um so, sendo assim, sincronizando o trabalho e funções de ambas as versões.
 
 ```mermaid
 graph LR;
@@ -38,7 +78,7 @@ F-->G((Fim))
 
 ### O que é Rebase
 
-> Continua com a mesma ideia do `merge` porem com a ideia agora de passar os `commits` que aconteceram com a `branch` para a `branch` de destino.
+Continua com a mesma ideia do `merge` porem com a ideia agora de passar os `commits` que aconteceram com a `branch` para a `branch` de destino.
 
 1. Antes do `rebase`
 
@@ -68,7 +108,7 @@ F-->G((Fim))
 
 ### Init
 
-> Cria e inicializa uma pasta `.git/` dentro do diretório do projeto.
+Cria e inicializa uma pasta `.git/` dentro do diretório do projeto.
 
 ```bash
 git init
@@ -76,28 +116,35 @@ git init
 
 ### Remote
 
-> Configura o(s) repositório(s) remoto(s).
-1. #### add
-    > Adiciona um novo endereço de repositório remoto.
+Configura o(s) repositório(s) remoto(s).
+
+1. `add`
+
+    Adiciona um novo endereço de repositório remoto.
 
     ```bash
     git remote add <nome> <endereco HTTP ou SHH>
     ```
-2. #### remove
-    > Remove um endereço de um repositório remoto.
+
+2. `remove`
+
+    Remove um endereço de um repositório remoto.
 
     ```bash
     git remote remove <name>
     ```
-3. #### rename
-    > Renomeia um repositório já cadastrado.
+
+3. `rename`
+
+    Renomeia um repositório já cadastrado.
+
     ```bash
     git remote rename <nome velho> <novo nome>
     ```
 
 ### Branch
 
-> Exibe todas as `branches` - remotas e locais - e destaca a que esta em uso.
+Exibe todas as `branches` - remotas e locais - e destaca a que esta em uso.
 
 ```bash
 git branch
@@ -105,27 +152,31 @@ git branch
 
 ### Checkout
 
-> Troca a `branch` de trabalho atual.
+Troca a `branch` de trabalho atual.
 
 ```bash
 git checkout <nome da branch>
 ```
 
 1. `Flag` -b
-    > Ao invés de trocar a `branch`, cria-se uma nova.
+
+    Ao invés de trocar a `branch`, cria-se uma nova.
+
     ```bash
     git checkou -b <nome da nova branch>
     ```
 
 1. Buscar de outra `branch`
-    > Busca um arquivo presente em outra `branch` para a atual.
+
+    Busca um arquivo presente em outra `branch` para a atual.
+
     ```bash
     git checkout <nome da branch> -- <arquivo>
     ```
 
 ### Status
 
-> Mostra como os arquivos da branch local estão em relação a remota.
+Mostra como os arquivos da branch local estão em relação a remota.
 
 ```bash
 git status
@@ -133,7 +184,7 @@ git status
 
 ### Add
 
-> Adiciona arquivos alterados para posteriormente fazer commit dos mesmos.
+Adiciona arquivos alterados para posteriormente fazer commit dos mesmos.
 
 ```bash
 git add <filename>
@@ -141,14 +192,20 @@ git add <filename>
 
 ### Commit
 
-> Armazena os arquivos mudados em um ponto com uma mensagem definida pelo usuário explicando e listando as mudanças.
+Armazena os arquivos mudados em um ponto com uma mensagem definida pelo usuário explicando e listando as mudanças.
+
 1. Opção `-a --all`
-    > Adiciona a mensagem para todos os arquivos alterados.
+
+    Adiciona a mensagem para todos os arquivos alterados.
+
     ```bash
     git commit -a <mensagem>
     ```
+
 2. Opção `-m --message`
-    > Adiciona a mensagem para apenas os aquivos previamente adicionados na `Stage changes`
+
+    Adiciona a mensagem para apenas os aquivos previamente adicionados na `Stage changes`
+
     ```bash
     git commmit -m "<mensagem>"
     git commit --message="<message>"
@@ -156,7 +213,7 @@ git add <filename>
 
 ### Push
 
-> Publica as mudanças adicionadas e `commitadas` no repositório remoto em um determinada `branch` especificada previamente.
+Publica as mudanças adicionadas e `commitadas` no repositório remoto em um determinada `branch` especificada previamente.
 
 ```bash
 git push <repositorio> <branch destino>
@@ -164,7 +221,7 @@ git push <repositorio> <branch destino>
 
 ### Diff
 
-> Exibe a diferença entre duas `branchs` ou dois `commits`
+Exibe a diferença entre duas `branchs` ou dois `commits`
 
 ```bash
 git diff <master..dev>
@@ -174,22 +231,29 @@ git diff <d80daf58..7d85fad8>
 ### Rebase
 
 1. Opção `-i --interactive`
-    > Inicia o processo de `rebase` de forma interativa, abrindo janelas para seguintes configurações.
+
+    Inicia o processo de `rebase` de forma interativa, abrindo janelas para seguintes configurações.
+
     ```bash
     git rebase -i <branch>
     ```
 
 2. Opção --continue
-    > Confirma o processo configurado de `rebase` previamente realizado no `git rebase -i`
+
+    Confirma o processo configurado de `rebase` previamente realizado no `git rebase -i`
 
 3. Opção --abort
-    > Aborta o processo de `rebase`
+
+    Aborta o processo de `rebase`
 
 ### Merge
 
-> Realiza o `merge` de duas `branchs` diferentes.
+Realiza o `merge` de duas `branchs` diferentes.
+
 1. Opção --no-ff
-    > Cria apos o `merge` um `commit` para indicar a junção ocorrida.
+
+    Cria apos o `merge` um `commit` para indicar a junção ocorrida.
+
     ```bash
     git merge --no-ff <branch>
     ```
