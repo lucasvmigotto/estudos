@@ -54,7 +54,7 @@ type Query {
 
 > Requisição no Client
 
-```
+```text
 {
     query {
         users {
@@ -75,7 +75,7 @@ type Query {
                 "name": "John",
                 "email": "john@doe.com"
             },
-            ...
+            //...
         ]
     }
 }
@@ -95,7 +95,7 @@ type Mutation {
 
 > Requisição no Client
 
-```
+```text
 {
     mutation {
         createUser(
@@ -124,24 +124,164 @@ type Mutation {
 
 Define o _schema_ da API, funcionando como um _conatainer_ para os tipos criados para a API.
 
-## NodeJS
+> Definição do Schema
 
-### O que é
+```javascript
+type Schema {
+    query: Query
+    mutation: Mutation
+}
+```
 
-É uma plataforma criada em cima do motor _JavaScript V8_ do Google Chrome que nos possibilita executar códigos _JavaScript_ diretamente no servidor. Ideal para o desenvolvimento de aplicações em que haja uma constante comunicação entre o ***Client*** e o ***Server***, alem de troca de dados entre dispositivos distribuídos. Exemplos de sua aplicabilidade seriam serviços de _Chats_, _Feed de notícias_ e _Web push notifications_.
+### Resolver
 
-### Como funciona
+Para cada compo do _GrqphQL_, deverá exisitir um resolver para cuidar da ação a ser feita.
 
-Ao contrário de outrad liguagens como **Java** ou **Ruby**, **NodeJS** é _single thread_, ou seja, trabalha e executa uma _Thread_ por processo iniciado. Mas existem bibliotecas e outras maneiras que permitem que essa funcionalidade seja incorporada ao **NodeJS**.
+> Definição da query "user" apra busca pelo Id
 
-Outra forma de processamento paralelo em **NodeJS** é o conceito de _Assincronismo_. O NodeJS trabalha com eventos de ***I/O não bloqueantes***, ou seja, caso a aplicação em questão necessite fazer um processo paralelo como ler um grande arquivo, essa tarefa será colocada em _background_, e após a fila de tarefas for terminda, o ***callback*** da leitura do arquivo será chamado.
+```javascript
+type Query {
+    user(id: ID!):User
+}
+```
 
-## Rest
+> Resolver assíncrono para querry "user"
 
-### O que é
+```javascript
+Query {
+    user (parent, args, context, info) {
+        return context.db.UserModel.findById(args.id)
+    }
+}
+```
 
-Padrão de construção para projetar APIs baseadas em ***endpoins*** (_recursos_), ***métodos*** (_verbos_) e ***códigos HTTP***. Esse forma de construção oferece boas ideias e práticas como o ***stateless severs***, não mantendo o estado dos dados no servidor, alem de acesso estruturado aos recursos.
+***parent***: O rootField da query original 
 
-### Como funciona
+***args***: Os argumentos passados na query
 
-Através de uma _requisição HTTP_ feita para uma determinada _URL_ com um dos verbos (_GET_, _POST_, _PUT_...) que esteja sendo ouvida pelo servidor, a API consultada recebe a requisição, usa os parâmetros que podem ter sido passados, e retorna uma resposta em ***json*** na maioria das vezes.
+***context***: O contexto atual, ou um objeto passado para que o seu estado do momento seja usado como um ainstancia de conexão aberta com o banco.
+
+***info***: os campos do tipo requisitados pela query
+
+#### Resolvers triviais
+
+Defini o resolver que será usado por exemplo após um retorno do banco de dados.
+
+> User
+
+```javascript
+type User {
+    name: String!
+    email: String!
+    photo: String
+}
+```
+
+> Resolvers dos campos do objeto "User"
+
+```javascript
+User{
+    name(parent, args, context, info) {
+        return parent.name;
+    },
+    email(parent, args, context, info) {
+        return parent.email;
+    },
+    photo(parent, args, contextm info) {
+        return parent.photo;
+    }
+}
+```
+
+## Scalar Types
+
+Um campo no _GraphQL_ so terminará de ser processado quando passar por um que apresente valor concreto. Os tipos escalres seriam as **[folhas da árvore](###folhas-da-árvore)**
+
+* Int
+
+Um inteiro de 32-bits (assinado)
+
+* Float
+
+Um ponto flutuante de dupla precisão (assinado)
+
+* String
+
+Uma sequência de caracteres UTF-8
+
+* Boolean
+
+**true** ou **false**
+
+* ID
+
+Representa um identificador  único, geralmente usado para rebuscar um objeto ou como chave de cache.
+
+### Folhas da árvore
+
+A forma de como os campos no GraphQL são resolvidos se assemelha bastante com a estrutura de dados do tipo árvore.
+
+```javascript
+type Post {
+    title: String!
+    content: String!
+    photo: String
+    author: User!
+    comments: [ Comments! ]!
+}
+```
+
+```mermaid
+graph TD
+S((Schema))
+M((Mutation))
+Q((Query))
+p1((post))
+p2((posts))
+P((Post))
+t((title))
+a((author))
+c((comments))
+C((Comment))
+cc((comment))
+ca((author))
+cp((post))
+u((User))
+n((name))
+e((email))
+p((photo))
+s1((String))
+s2((String))
+s3((String))
+s4((String))
+s5((String))
+other1{...}
+other2{...}
+other3{...}
+other4{...}
+S-->Q
+Q-->p1
+Q-->p2
+S-->M
+M-->other1
+p2-->other2
+p1-->P
+P-->t
+P-->c
+P-->a
+a-->u
+t-->s1
+u-->n
+u-->e
+u-->p
+n-->s2
+e-->s3
+p-->s4
+c-->C
+cc-->s5
+C-->ca
+C-->cp
+C-->cc
+cp-->other3
+ca-->other4
+```
