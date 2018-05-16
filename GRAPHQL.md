@@ -54,7 +54,7 @@ type Query {
 
 > Requisição no Client
 
-```json
+```
 {
     query {
         users {
@@ -95,7 +95,7 @@ type Mutation {
 
 > Requisição no Client
 
-```json
+```
 {
     mutation {
         createUser(
