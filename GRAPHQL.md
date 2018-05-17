@@ -295,7 +295,8 @@ As APIs montadas com o padrão **REST** retornam um estrutura fixa de dados que 
     No GraphQL não há necessidade de criar vários _endpoints_. Por exemplo, não temos que ter um _endpoint_ para recuperar um usuário, outro para buscar seus seguidores ou para suas fotos como teria que haver no padrão REST.
 
     > Vários _endpoints_ desnecessários
-    ```
+
+    ```text
     /users/<id>
     /users/<id>/posts
     /users/<id>/followers
@@ -337,7 +338,7 @@ As APIs montadas com o padrão **REST** retornam um estrutura fixa de dados que 
 
     > Query
 
-    ```
+    ```text
     {
         query {
             post(id: 73) {
@@ -346,11 +347,11 @@ As APIs montadas com o padrão **REST** retornam um estrutura fixa de dados que 
                     name
                 }
             }
-        } 
+        }
     }
     ```
 
-    Resposta: 
+    Resposta:
 
     ```json
     {
