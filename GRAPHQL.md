@@ -4,7 +4,7 @@ Um primeiro projeto usando GraphQL, endendo e aplicando.
 
 ## O que é
 
-O GraphQL é uma tecnologia de consulta a dados em APIs craida pelo **Facebook** em 2012, e usada por eles desde então. Já em 2015, a empresa disponibilou o recurso como _open source_ para que toda a comunidade pudesse utilizar. Ele não está vinculado com qualquer banco de dados  ou sistema de armazenamento.
+O GraphQL é uma tecnologia de consulta a dados em APIs criada pelo **Facebook** em 2012, e usada por eles desde então. Já em 2015, a empresa disponibilizou o recurso como _open source_ para que toda a comunidade pudesse utilizar. Ele não está vinculado com qualquer banco de dados  ou sistema de armazenamento.
 
 ## O que ele faz
 
@@ -14,7 +14,7 @@ Uma forma eficiente de busca e consulta de dados em APIs utilizando queries de p
 
 ### Type System
 
-Um sistema que  podemos utlizar para definr o tipo de dados que serão trabalhados.
+Um sistema que  podemos utilizar para definir o tipo de dados que serão trabalhados.
 
 ```javascript
 type User {
@@ -42,7 +42,7 @@ type Comment {
 
 ### Queries
 
-Uma forma de opter dados de uma API, sendo uma analogia ao padrão **REST**, podemos dizer que trabalha de forma parecida com o que seria usado para o método _GET_. Porém usando a ideia de consulta do **GraphQL**.
+Uma forma de obter dados de uma API, sendo uma analogia ao padrão **REST**, podemos dizer que trabalha de forma parecida com o que seria usado para o método _GET_. Porém usando a ideia de consulta do **GraphQL**.
 
 > Definição de uma query
 
@@ -122,7 +122,7 @@ type Mutation {
 
 ### Schema
 
-Define o _schema_ da API, funcionando como um _conatainer_ para os tipos criados para a API.
+Define o _schema_ da API, funcionando como um _container_ para os tipos criados para a API.
 
 > Definição do Schema
 
@@ -135,7 +135,7 @@ type Schema {
 
 ### Resolver
 
-Para cada compo do _GrqphQL_, deverá exisitir um resolver para cuidar da ação a ser feita.
+Para cada compo do _GraphQL_, deverá existir um resolver para cuidar da ação a ser feita.
 
 > Definição da query "user" apra busca pelo Id
 
@@ -155,11 +155,11 @@ Query {
 }
 ```
 
-***parent***: O rootField da query original 
+***parent***: O rootField da query original
 
 ***args***: Os argumentos passados na query
 
-***context***: O contexto atual, ou um objeto passado para que o seu estado do momento seja usado como um ainstancia de conexão aberta com o banco.
+***context***: O contexto atual, ou um objeto passado para que o seu estado do momento seja usado como uma instancia de conexão aberta com o banco.
 
 ***info***: os campos do tipo requisitados pela query
 
@@ -195,7 +195,7 @@ User{
 
 ## Scalar Types
 
-Um campo no _GraphQL_ so terminará de ser processado quando passar por um que apresente valor concreto. Os tipos escalres seriam as **[folhas da árvore](###folhas-da-árvore)**
+Um campo no _GraphQL_ so terminará de ser processado quando passar por um que apresente valor concreto. Os tipos escalares seriam as **[folhas da árvore](###folhas-da-árvore)**
 
 * Int
 
@@ -285,3 +285,90 @@ C-->cc
 cp-->other3
 ca-->other4
 ```
+
+## GraphQL > REST
+
+As APIs montadas com o padrão **REST** retornam um estrutura fixa de dados que começou a se mostrar inflexível quanto as requisições dos _Clients_. Para cada conjunto de dados ou dado requerido, devia-se usar _endpoints_ que retornassem somente o desejado, ou que retornassem mais que o necessário e tratar o que seria usado depois. Foi então que o **GraphQL** foi desenvolvido para suprir essa necessidade, trazendo mais eficiência e flexibilidade para as requisições que antes eram tratadas com **REST**.
+
+1. ***no underfetching***
+
+    No GraphQL não há necessidade de criar vários _endpoints_. Por exemplo, não temos que ter um _endpoint_ para recuperar um usuário, outro para buscar seus seguidores ou para suas fotos como teria que haver no padrão REST.
+
+    > Vários _endpoints_ desnecessários
+    ```
+    /users/<id>
+    /users/<id>/posts
+    /users/<id>/followers
+    ```
+
+    > Tipo _User_ para consulta
+
+    ```javascript
+    type User{
+        name: String!
+        email: String!
+        posts: [ Post ]
+        followers: [ User ]
+    }
+    ```
+
+2. ***no overfetching***
+
+    "Poderíamos então para manter o padrão **REST** passar de uma vez todas as informações que estivessem vinculadas com o Usuário por exemplo". Mas isso acabaria acarretando em outro problema que é o _overfetching_, estaríamos criando um intenso tráfego de dados que dificilmente iriam ser 100% usados, acabaríamos requisitando um Usuário inteiro, suas fotos, posts, seguidores... apenas para usar seu nome talvez. Isso é facilmente resolvido com o **GraphQL**, visto que em suas _queries_ podemos dizer exatamente o que usaremos de informação para que não seja transportado informações desnecessárias.
+
+    * Usando REST
+
+     > Requisição: /posts/73
+
+     Resposta:
+
+    ```json
+    {
+        "post": {
+            "title": "Aprendendo GraphQL",
+            "content": "Aula 1",
+            "comments": [...],
+            "author": [...]
+        }
+    }
+    ```
+
+    * Usando GraphQL
+
+    > Query
+
+    ```
+    {
+        query {
+            post(id: 73) {
+                title
+                author{
+                    name
+                }
+            }
+        } 
+    }
+    ```
+
+    Resposta: 
+
+    ```json
+    {
+        "data": {
+            "post": {
+                "title": "Aprendendo GraphQL",
+                "author": {
+                    "name": "John"
+                }
+            }
+        }
+    }
+    ```
+
+3. ***Rápida prototipagem***
+
+    Uma prática comum para evitar o _underfetching_ bem como _overfetching_ no padrão **REST** era criar os _endpoints_ de acordo com as views. Embora não ocorra os dois citados acima, isso apenas criava um problema para alguma manutenção futura no _front-end_, ou seja, caso essa mudança na view alterasse o uso de dados que era usado, teria que mudar também a implementação do _endpoint_ usado. Já com o **GraphQL**, nenhum engenheiro tem que fazer qualquer alteração no _back-end_.
+
+4. ***Schema e Type System***
+
+    O fato de poder ter uma modelagem de dados própria em seus _schemas_faz com que o desenvolvimento seja mais fluído e organizado, visto que a tipagem dos dados pode servir ate como meio de documentação. Assim, em uma primeira reunião, o _back-end_ e _front-end_ poderiam definir a estrutura de dados e seus tipos, após documentar isso usando o **GraphQL**, ambos poderiam trabalhar mais separados agora.
