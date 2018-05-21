@@ -1,0 +1,7 @@
+{
+    "root": "./docs",
+    
+    "title": "Estudos",
+    "author": "Lucas Vidor Migotto",
+    "plugins": [ "mermaid-gb3" ]
+}

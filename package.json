@@ -1,0 +1,35 @@
+{
+  "name": "estudos",
+  "version": "1.0.0",
+  "description": "Conteudo e informacoes sobre algumas tecnologias",
+  "main": "index.js",
+  "scripts": {
+    "start": "gitbook serve",
+    "build": "gitbook build . public",
+    "build:pdf": "gitbook pdf . doc.pdf",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasVmigotto/estudos.git"
+  },
+  "keywords": [
+    "BASH",
+    "GraphQL",
+    "GIT",
+    "NodeJS",
+    "REST"
+  ],
+  "author": "Lucas Vidor Migotto <lucasmigotto@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LucasVmigotto/estudos/issues"
+  },
+  "homepage": "https://github.com/LucasVmigotto/estudos#readme",
+  "devDependencies": {
+    "gitbook-cli": "^2.3.2"
+  },
+  "dependencies": {
+    "gitbook-plugin-mermaid-gb3": "^2.1.0"
+  }
+}

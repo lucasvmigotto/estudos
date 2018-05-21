@@ -80,29 +80,29 @@ F-->G((Fim))
 
 Continua com a mesma ideia do `merge` porem com a ideia agora de passar os `commits` que aconteceram com a `branch` para a `branch` de destino.
 
-1. Antes do `rebase`
+* Antes do `rebase`
 
-    ```mermaid
-      graph LR;
-      Z((Inicio))-->A((Master))
-      A-->B((Dev.1))
-      B-->C((Dev.2))
-      C-->D((Dev.3))
-      D-->E((Dev.4))
-      A-->F((Master.1))
-    ```
+```mermaid
+graph LR;
+Z((Inicio))-->A((Master))
+A-->B((Dev.1))
+B-->C((Dev.2))
+C-->D((Dev.3))
+D-->E((Dev.4))
+A-->F((Master.1))
+```
 
-2. Depois do `rebase`
+* Depois do `rebase`
 
-    ```mermaid
-      graph LR;
-      Z((Inicio))-->A((Master))
-      A-->B((Master.1))
-      B-->C((Dev.1))
-      C-->D((Dev.2))
-      D-->E((Dev.3))
-      E-->F((Dev.4))
-    ```
+```mermaid
+  graph LR;
+  Z((Inicio))-->A((Master))
+  A-->B((Master.1))
+  B-->C((Dev.1))
+  C-->D((Dev.2))
+  D-->E((Dev.3))
+  E-->F((Dev.4))
+```
 
 ## Comandos
 

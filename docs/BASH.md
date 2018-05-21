@@ -460,48 +460,48 @@ Uma comparação entre os recursos, seus usos ou até disponibilidade entre as d
 
 1. Comparações com `strings`
 
-    |        `[[`       |        `[`        |
-    | :---------------: | :---------------: |
-    |       **>**       |       **\>**      |
-    |       **<**       |       **\<**      |
-    |    **= ou ==**    |       **=**       |
-    |       **!=**      |       **!=**      |
+|        `[[`       |        `[`        |
+| :---------------: | :---------------: |
+|       **>**       |       **\>**      |
+|       **<**       |       **\<**      |
+|    **= ou ==**    |       **=**       |
+|       **!=**      |       **!=**      |
 
 2. Comparações com inteiros
 
-    |        `[[`       |        `[`        |
-    | :---------------: | :---------------: |
-    |      **-gt**      |      **-gt**      |
-    |      **-lt**      |      **-lt**      |
-    |      **-ge**      |      **-ge**      |
-    |      **-le**      |      **-le**      |
-    |      **-eq**      |      **-eq**      |
-    |      **-ne**      |      **-ne**      |
+|        `[[`       |        `[`        |
+| :---------------: | :---------------: |
+|      **-gt**      |      **-gt**      |
+|      **-lt**      |      **-lt**      |
+|      **-ge**      |      **-ge**      |
+|      **-le**      |      **-le**      |
+|      **-eq**      |      **-eq**      |
+|      **-ne**      |      **-ne**      |
 
 3. Avaliação de concional
 
-    |        `[[`       |        `[`        |
-    | :---------------: | :---------------: |
-    |       **&&**      |      **-a**       |
-    | **&#124;&#124;**  |      **-o**       |
+|        `[[`       |        `[`        |
+| :---------------: | :---------------: |
+|       **&&**      |      **-a**       |
+| **&#124;&#124;**  |      **-o**       |
 
 4. Agrupamento de expressão
 
-    |        `[[`       |        `[`        |
-    | :---------------: | :---------------: |
-    |     **(...)**     |    **\(...\)**    |
+|        `[[`       |        `[`        |
+| :---------------: | :---------------: |
+|     **(...)**     |    **\(...\)**    |
 
 5. Correspondência de padrões
 
-    |        `[[`       |        `[`        |
-    | :---------------: | :---------------: |
-    |    **= ou ==**    |    **não há**     |
+|        `[[`       |        `[`        |
+| :---------------: | :---------------: |
+|    **= ou ==**    |    **não há**     |
 
 6. Correspondências de expressões regulares
 
-    |        `[[`       |        `[`        |
-    | :---------------: | :---------------: |
-    |       **=~**      |    **não há**     |
+|        `[[`       |        `[`        |
+| :---------------: | :---------------: |
+|       **=~**      |    **não há**     |
 
 A explicação de ponto de vista teórico para a diferença entre `[` e `[[` é que, enquanto o construtor simples é considerado um comando interno que recebe argumentos como qualquer outro, o novo construtor é considerado um comando composto, tendo ele um contexto de avaliação especial, que são executados e analisados antes de qualquer outro processo, tal análise olha e considera de forma especial _palavras reservadas_ ou _operadores de controle_.
 
@@ -546,66 +546,66 @@ fi
 
 1. Arquivos
 
-    |        Operador      |                                     Descrição                             |
-    |  :-----------------:  |  :------------------------------------------------------: |
-    |        **-e**       | Se o arquivo exite |
-    |        **-a**       | Mesmo uso que o `-e` porem descontinuado |
-    |        **-f**        | Se é um arquivo regular e não um diretório |
-    |        **-s**       | Se o arquivo não tem tamanho 0 |
-    |        **-d**       | Se o arquivo é um diretório |
-    |        **-b**       | Se o arquivo é um `block device` |
-    |        **-c**       | Se o arquivo é um `character device` |
-    |        **-p**       | Se o arquivo é um pipe |
-    |        **-h**       | Se o arquivo é um `simbolic link` |
-    |        **-L**       | Meso uso do `-h` |
-    |        **-S**       | Se o arquivo é um Socket |
-    |        **-t**       | Se o arquivo é associado com o terminal |
-    |        **-r**        | Se o arquivo tem permissão de leitura |
-    |        **-w**      | Se o arquivo tem permissão de escrita |
-    |        **-x**       | Se o arquivo tem permissão de execução |
-    |        **-g**       | Se a `flag` `set-group-id` esta setada no arquivo ou diretório |
-    |        **-u**       | Se a `flag` `set-user-id` esta setada no arquivo ou diretório |
-    |        **-k**       | Se a `flag` `sticky by set` esta setada, caso seja em um arquivo ele so terá permissões de leitura, caso seja em um diretório o mesmo não terá permissão de escrita.|
-    |        **-O**       | Se você é o proprietário do arquivo |
-    |        **-G**       | Se o `group-id` é o mesmo que o seu |
-    |        **-N**       | Se o arquivo foi modificado desde a ultima leitura. |
-    | file1 **-nt** file2 | Se o `file1` é mais novo que `file2` |
-    | file1 **-ot** file2 | Se o `file1` é mais velho que `file2` |
-    | file1 **-ef** file2 | Se ambos arquivos são `hard links` para o mesmo destino |
+|        Operador      |                                     Descrição                             |
+|  :-----------------:  |  :------------------------------------------------------: |
+|        **-e**       | Se o arquivo exite |
+|        **-a**       | Mesmo uso que o `-e` porem descontinuado |
+|        **-f**        | Se é um arquivo regular e não um diretório |
+|        **-s**       | Se o arquivo não tem tamanho 0 |
+|        **-d**       | Se o arquivo é um diretório |
+|        **-b**       | Se o arquivo é um `block device` |
+|        **-c**       | Se o arquivo é um `character device` |
+|        **-p**       | Se o arquivo é um pipe |
+|        **-h**       | Se o arquivo é um `simbolic link` |
+|        **-L**       | Meso uso do `-h` |
+|        **-S**       | Se o arquivo é um Socket |
+|        **-t**       | Se o arquivo é associado com o terminal |
+|        **-r**        | Se o arquivo tem permissão de leitura |
+|        **-w**      | Se o arquivo tem permissão de escrita |
+|        **-x**       | Se o arquivo tem permissão de execução |
+|        **-g**       | Se a `flag` `set-group-id` esta setada no arquivo ou diretório |
+|        **-u**       | Se a `flag` `set-user-id` esta setada no arquivo ou diretório |
+|        **-k**       | Se a `flag` `sticky by set` esta setada, caso seja em um arquivo ele so terá permissões de leitura, caso seja em um diretório o mesmo não terá permissão de escrita.|
+|        **-O**       | Se você é o proprietário do arquivo |
+|        **-G**       | Se o `group-id` é o mesmo que o seu |
+|        **-N**       | Se o arquivo foi modificado desde a ultima leitura. |
+| file1 **-nt** file2 | Se o `file1` é mais novo que `file2` |
+| file1 **-ot** file2 | Se o `file1` é mais velho que `file2` |
+| file1 **-ef** file2 | Se ambos arquivos são `hard links` para o mesmo destino |
 
 2. com inteiros
 
-    |       Operador      |                         Descrição                        |
-    | :-----------------: | :------------------------------------------------------: |
-    |  num1 **-eq** num2  | Se `num1` é igual a `num2` |
-    |  num1 **-ne** num2  | Se `num1` não é igual a `num2` |
-    |  num1 **-gt** num2  | Se `num1` é maior que `num2` |
-    |  num1 **-ge** num2  | Se `num1` é maior ou igual a `num2` |
-    |  num1 **-lt** num2  | Se `num1` é menor que `num2` |
-    |  num1 **-le** num2  | Se `num1` é menor ou igual a `num2` |
-    |  num1  **<**  num2  | Se `num1` é menor que `num2` |
-    |  num1 **<=**  num2  | Se `num1` é menor ou igual a `num2` |
-    |  num1  **>**  num2  | Se `num1` é maior que `num2` |
-    |  num1 **>=**  num2  | Se `num1` é maior ou igual a `num2` |
+|       Operador      |                         Descrição                        |
+| :-----------------: | :------------------------------------------------------: |
+|  num1 **-eq** num2  | Se `num1` é igual a `num2` |
+|  num1 **-ne** num2  | Se `num1` não é igual a `num2` |
+|  num1 **-gt** num2  | Se `num1` é maior que `num2` |
+|  num1 **-ge** num2  | Se `num1` é maior ou igual a `num2` |
+|  num1 **-lt** num2  | Se `num1` é menor que `num2` |
+|  num1 **-le** num2  | Se `num1` é menor ou igual a `num2` |
+|  num1  **<**  num2  | Se `num1` é menor que `num2` |
+|  num1 **<=**  num2  | Se `num1` é menor ou igual a `num2` |
+|  num1  **>**  num2  | Se `num1` é maior que `num2` |
+|  num1 **>=**  num2  | Se `num1` é maior ou igual a `num2` |
 
 3. com `strings`
 
-    |       Operador      |                         Descrição                        |
-    | :-----------------: | :------------------------------------------------------: |
-    |   abc1 **=**  abc2  | Se `abc1` é igual a `abc2` |
-    |   abc1 **==** abc2  | Sinônimo para o operador `=` |
-    |   abc1 **!=** abc2  | Se `abc1` é diferente que `abc2` |
-    |   abc1 **<**  abc2  | Se `abc1` é menor que `abc2` em ordem alfabética ASCII  |
-    |   abc1 **>**  abc2  | Se `abc1` é maior que `abc2` em ordem alfabética ASCII  |
-    |        **-z**       | Se a o valor é `null`, ou seja, não tem comprimento |
-    |        **-n**       | Mesmo uso do `-z`, porem precisando estar entre `[[]]` |
+|       Operador      |                         Descrição                        |
+| :-----------------: | :------------------------------------------------------: |
+|   abc1 **=**  abc2  | Se `abc1` é igual a `abc2` |
+|   abc1 **==** abc2  | Sinônimo para o operador `=` |
+|   abc1 **!=** abc2  | Se `abc1` é diferente que `abc2` |
+|   abc1 **<**  abc2  | Se `abc1` é menor que `abc2` em ordem alfabética ASCII  |
+|   abc1 **>**  abc2  | Se `abc1` é maior que `abc2` em ordem alfabética ASCII  |
+|        **-z**       | Se a o valor é `null`, ou seja, não tem comprimento |
+|        **-n**       | Mesmo uso do `-z`, porem precisando estar entre `[[]]` |
 
 4. com tipo logico
 
-    |       Operador      |                         Descrição                        |
-    | :-----------------: | :------------------------------------------------------: |
-    |    ex1 **-a** ex2   | Retorna verdadeiro caso `ex1` e `ex2` sejam verdadeiros, ou seja, um conector logico `and` |
-    |    ex1 **-o** ex2   | Retorna verdadeiro caso `ex1` ou `ex2` sejam verdadeiros, ou seja, um conector logico `or` |
+|       Operador      |                         Descrição                        |
+| :-----------------: | :------------------------------------------------------: |
+|    ex1 **-a** ex2   | Retorna verdadeiro caso `ex1` e `ex2` sejam verdadeiros, ou seja, um conector logico `and` |
+|    ex1 **-o** ex2   | Retorna verdadeiro caso `ex1` ou `ex2` sejam verdadeiros, ou seja, um conector logico `or` |
 
 #### Assimilação
 

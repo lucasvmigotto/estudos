@@ -1,10 +1,14 @@
-# Estudos
+# Como usar
 
-Minhas anotações dos estudos para aprofundamento de conhecimento.
+1. Instale os _node modules_
 
-## Tópicos atuais
+    ```bash
+    npm install
+    ```
 
-1. [Bash](BASH.md)
-2. [Git](GIT.md)
-3. [GraphQL](GRAPHQL.md)
-4. [Tecnologias para desenvolvimento](TECHTODEV.md)
+2. Inicie o serviço do [GitBook](https://goo.gl/Y94U1W)
+
+    ```bash
+    npm start
+    ```
+    > Por default o serviço sera iniciado em localhost:4000
