@@ -11,4 +11,4 @@
     ```bash
     npm start
     ```
-    > Por default o serviço sera iniciado em localhost:4000
+    > Por default o serviço será iniciado em localhost:4000
