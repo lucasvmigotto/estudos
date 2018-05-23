@@ -1,4 +1,17 @@
-# Como usar
+# Estudos
+
+Minhas anotações sobre algumas tecnologias e ferramentas de desenvolvimento.
+
+Tópicos disponíveis:
+
+1. [BASH](docs/BASH.md)
+2. [GIT](docs/GIT.md)
+3. [NodeJS](docs/NODEJS.md)
+4. [GraphQL](docs/GRAPHQL.md)
+5. [REST](docs/REST.md)
+6. [Docker](docs/DOCKER.md)
+
+## Como usar
 
 1. Instale os _node modules_
 
