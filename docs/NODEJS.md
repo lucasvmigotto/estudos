@@ -92,3 +92,141 @@ Note over TQ: Open
 TQ->>ES:.
 end
 ```
+
+## Conceitos e _features_ importantes
+
+### Promises
+
+Sendo em sua ideia principal o retorno de uma operação assíncrona, ou seja, para poder trabalhar com o resultado que será recebido no futuro, utilizamos o conceito de _promise_,  que se apresenta em três possíveis estados:
+
+1._Pending_
+    O estado inicial de uma _promise_.
+
+2._Fulfilled_
+    O estado da _promise_ quando retornada com sucesso.
+
+3._Rejected_
+    O estado da _promise_ quando retornada com erro.
+
+```javascript
+function readFile(filename, enc){
+    return new Promise((fulfill, reject) => {
+        fs.readFile(filename, (err, data) => {
+            if (err) reject(err)
+            fulfill(data)
+        })
+    })
+}
+```
+
+> Um exemplo básico usando a leitura de um arquivo de maneira assíncrona.
+> Criando uma _Promise_ e passando como parâmetro uma função que aceita um _resolver_ (_fulfill_) e um _reject_ (_reject_). Após o termino da leitura, caso retorne um erro, usaremos o _reject_ para rejeitar a _Promise_ retornando o erro, caso contrário, iremos dar a _Promise_ como realizada e retornaremos os dados.
+
+Para operações que retornem _Promises_ podemos encadear a função com o método `then()`, que pode receber dois argumentos, um para quando a _promise_ for realizada e outro para quando for rejeitada.
+
+```javascript
+readFile('./name.txt', 'utf-8').then((result) => {
+    console.log('File read successfully.')
+}, (err) => {
+    console.log('A unespected error occurred.')
+})
+```
+
+Pode-se também encadear múltiplos métodos `then`.
+
+```javascript
+promise.then((value) => {
+    console.log(value) // 1
+    return value + 4
+}).then((value) => {
+    console.log(value) // 5
+})
+```
+
+### Event Emitters
+
+Como o próprio nome já diz (emissor de eventos), apenas fica encarregado de ativar um evento que qualquer um possa ouvir. Diferentes bibliotecas, implementações ou _frameworks_ desencadeiam em diferentes propósitos, porem a ideia continua a mesma, apenas definir uma ação para determinado evento.
+
+No **NodeJS**, essas ações são correspondestes  aos _callbacks_. Defini-se também se essa ação será executada todas as vezes que o evento ocorrer, ou caso seja necessário apenas na primeira vez.
+
+```javascript
+const office = require('office')
+
+office.door.on('knock', () => {
+    console.log('Someone is on the door')
+})
+```
+
+Neste exemplo, utilizamos uma biblioteca fictícia `office`, em que adicionamos um _listener_ com o método `on`, para que cada vez que alguém batesse na porta, um aviso seria retornado.
+
+## NPM (_Node package manager_)
+
+NPM é o repositório oficial de dependências para o **NodeJS**, em que pode-se pesquisar, baixar e publicar novas dependências para seu ambiente de desenvolvimento.
+
+> O NPM já é instalado automaticamente durante o mesmo procedimento do NodeJS
+
+Há uma variedade e uma gama enorme de repositórios disponíveis para uso no NPM, todas as dependências utilizadas ficam registradas no `packagem.json` presente no projeto, como sendo dependência de desenvolvimento ou de produção.
+
+```json
+{
+    "name": "project",
+    "version": "1.0.0",
+    "description": "Sample project",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "nodemon src/index.js"
+    },
+    "repository": {
+        "type": "https://github.com/User/project.git",
+    },
+    "keywords": [
+        "Express",
+        "NodeJs",
+        "MongoDB"
+    ],
+    "author": "User <user@mail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "nodemon": "^1.0.0",
+    },
+    "dependencies": {
+        "express": "1.0.0",
+        "mongoose": "^1.0.0"
+    }
+}
+```
+
+Um exemplo de um arquivo `package.json` com campos alguns compos básicos.
+
+* _name_
+    Nome do projeto
+
+* _version_
+    Versão do projeto
+
+* _description_
+    Descrição do projeto
+
+* _main_
+    Script principal
+
+* _scripts_ [Opcional]
+    Scripts para serem executados pelo _npm_
+
+* _respository_ [Opcional]
+    Informações sobre o repositório
+
+* _keywords_ [Opcional]
+    Tags para pesquisa
+
+* _author_
+    Nome e E-mail do author
+
+* _license_ [Opcional]
+    Tipo da licença do projeto
+
+* _devDependencies_ [Opcional]
+    Dependências de desenvolvimento do projeto
+
+* _dependencies_ [Opcional]
+    Dependências de produção do projeto
