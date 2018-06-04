@@ -23,11 +23,11 @@ Um container usa o mesmo _kernel_ que o _host_, quando executado, se torna um pr
 
 Antigamente para por exemplo para desenvolver uma aplicação em _Python_, um desenvolvedor teria de criar e instalar um ambiente inteiro dentro de sua própria máquina, isso levava também ao fato que aquele ambiente que teria de ser criado necessariamente deveria ser o mesmo do ambiente de produção.
 
-Com _Docker_, precisa-se apenas então de uma imagem _Python_ sem necessidade de instalação, e desenvolver sua aplicação sabendo que código, dependências e ambiente estão andando juntos. Isso tudo é feito dentro de um `Dockerfile`.
+Com **Docker**, precisa-se apenas então de uma imagem _Python_ sem necessidade de instalação, e desenvolver sua aplicação sabendo que código, dependências e ambiente estão andando juntos. Isso tudo é feito dentro de um `Dockerfile`.
 
 ### Hierarquia do _Docker_
 
-Para entender melhor a forma que o _Docker_ trabalha, com como cada uma de suas partes e funcionalidades, existe uma hierarquia que pode exemplificar muito bem como acontece:
+Para entender melhor a forma que o **Docker** trabalha, com como cada uma de suas partes e funcionalidades, existe uma hierarquia que pode exemplificar muito bem como acontece:
 
 ```mermaid
 graph TD
@@ -56,7 +56,7 @@ Para isso, cria-se um arquivo chamado `docker-compose.yml`.
 
 ### Docker compose
 
-É um arquivo [YAML](https://goo.gl/QHGKzM) que define como os containers _Docker_ devem funcionar em ambiente de produção.
+É um arquivo [YAML](https://goo.gl/QHGKzM) que define como os containers **Docker** devem funcionar em ambiente de produção.
 
 ```yml
 # Definir a versão que será usada
@@ -87,7 +87,7 @@ version: '2'
 
 ### Entendendo _Swarm Clusters_
 
-_Swarm_ são grupo de computadores que estão executando _Docker_ e formam um _cluster_. Depois disso, os comandos continuam a ser executados, porem agora apenas pelo _swarm manager_. Podem ser no caso máquinas virtuais ou físicas, após entrarem no _swarm_, são chamadas de _nodes_.
+_Swarm_ são grupo de computadores que estão executando **Docker** e formam um _cluster_. Depois disso, os comandos continuam a ser executados, porem agora apenas pelo _swarm manager_. Podem ser no caso máquinas virtuais ou físicas, após entrarem no _swarm_, são chamadas de _nodes_.
 
 Os _swarm managers_ podem se utilizar de diversas estratégias para executar seus containers, como por exemplo usar a máquina menos utilizada para guardar os containers, ou assegurar que cada uma tenho exatamente uma instancia de um container especificado. Para definir a estratégia, basta apenas específica-la no `docker-compose`.
 
@@ -99,13 +99,13 @@ Uma _stack_ se refere a uma grupo de _services_ que compartilham dependências e
 
 ## _Overview_ do _Docker_
 
-De maneira geral _Docker_ é uma plataforma aberta para desenvolvimento, envio e execução de aplicações. Ela permite que desenvolvedores consigam separar a aplicação da infraestrutura, podendo assim gerenciar ambos da mesma maneira.
+De maneira geral **Docker** é uma plataforma aberta para desenvolvimento, envio e execução de aplicações. Ela permite que desenvolvedores consigam separar a aplicação da infraestrutura, podendo assim gerenciar ambos da mesma maneira.
 
-_Docker_ oferece a capacidade de executar uma aplicação de maneira isolada em determinado ambiente chamado de container. O fato de serem seguros e isolados um dos outros e do _host_ permite a execução de vários ao mesmo tempo. Alem de serem bem leves pois usam o _kernel_ do próprio _host_, fazendo melhor uso do processamento quando comparados a máquinas virtuais.
+**Docker** oferece a capacidade de executar uma aplicação de maneira isolada em determinado ambiente chamado de container. O fato de serem seguros e isolados um dos outros e do _host_ permite a execução de vários ao mesmo tempo. Alem de serem bem leves pois usam o _kernel_ do próprio _host_, fazendo melhor uso do processamento quando comparados a máquinas virtuais.
 
 ### _Docker engine_
 
-A _engine_ do _Docker_ é uma _client-server_ com alguns componentes principais:
+A _engine_ do **Docker** é uma _client-server_ com alguns componentes principais:
 
 * Um server chamado de _daemon_, o comando `dockerd`.
 
@@ -143,21 +143,21 @@ Por sua vez o _daemon_ gerencia a construção e administração dos objetos cri
 
 ## Cenários para se usar _Docker_
 
-_Docker_ agiliza o ciclo de desenvolvimento de uma aplicação, já que oferece uma padronização dos ambientes com containers para sua aplicação e serviços.
+**Docker** agiliza o ciclo de desenvolvimento de uma aplicação, já que oferece uma padronização dos ambientes com containers para sua aplicação e serviços.
 
 ### _Deploy_ e dimensionamento responsivo
 
-Plataformas baseadas em containers _Docker_ são bem portáveis, podendo ser executadas em laptops locais de desenvolvedores, maquinas físicas ou virtuais, _data centers_, provedores de nuvens ou uma mistura de ambientes diferentes.
+Plataformas baseadas em containers **Docker** são bem portáveis, podendo ser executadas em laptops locais de desenvolvedores, maquinas físicas ou virtuais, _data centers_, provedores de nuvens ou uma mistura de ambientes diferentes.
 
 Dado sua portabilidade e baixo uso de processamento, também oferece uma maneira fácil de dinamicamente alocar e gerenciar _workloads_, podendo realizar mudanças quase em tempo real com facilidade dependendo da necessidade.
 
 ### Executando mais _workloads_ no mesmo Hardware
 
-Outro diferencial levantado por sua leveza é o fato de oferece uma alternativa ás máquinas virtuais, sendo assim, podendo exigir mais da máquina que está sendo usada. _Docker_ é ideal para ambientes densos e complexos para pequenos ou médios _deploys_ que necessitam de menos recursos.
+Outro diferencial levantado por sua leveza é o fato de oferece uma alternativa ás máquinas virtuais, sendo assim, podendo exigir mais da máquina que está sendo usada. **Docker** é ideal para ambientes densos e complexos para pequenos ou médios _deploys_ que necessitam de menos recursos.
 
 ## Arquitetura _Docker_
 
-_Docker_ utiliza uma arquitetura de _client-server_. O _client_ do _Docker_ se comunica com o _daemon_ que fica responsável por construir, executar e distribuir seus containers. Tanto _client_ quanto _daemon_ podem estar no mesmo sistema, ou um acessando o outro de forma remota, neste último, o _client_ irá se comunicar através da API REST e de _sockets_ UNIX para com o _daemon_.
+**Docker** utiliza uma arquitetura de _client-server_. O _client_ do **Docker** se comunica com o _daemon_ que fica responsável por construir, executar e distribuir seus containers. Tanto _client_ quanto _daemon_ podem estar no mesmo sistema, ou um acessando o outro de forma remota, neste último, o _client_ irá se comunicar através da API REST e de _sockets_ UNIX para com o _daemon_.
 
 ```mermaid
 graph LR
@@ -195,7 +195,7 @@ PG1-.->PG2
 
 ### _Docker daemon_
 
-Responde as requisições da API REST, controla, gere e administra objetos _Docker_ como imagens, containers, _networks_ e volumes. _Daemons_ podem também se comunicar entre si para administrar serviços _Docker_.
+Responde as requisições da API REST, controla, gere e administra objetos **Docker** como imagens, containers, _networks_ e volumes. _Daemons_ podem também se comunicar entre si para administrar serviços **Docker**.
 
 ### _Docker client_
 
@@ -203,26 +203,26 @@ Responde as requisições da API REST, controla, gere e administra objetos _Dock
 
 ### _Docker registry_
 
-Armazena as imagens disponíveis para criação de containers, _Docker Hub_ e _Docker Cloud_ são repositórios públicos que todos podem usar. Por padrão, _Docker_ busca imagens no _Docker Hub_. Mas também pode-se adicionar repositórios para uso.
+Armazena as imagens disponíveis para criação de containers, _Docker Hub_ e _Docker Cloud_ são repositórios públicos que todos podem usar. Por padrão, **Docker** busca imagens no _Docker Hub_. Mas também pode-se adicionar repositórios para uso.
 
-Quando se executa comandos como `docker pull` ou `docker run`, _Docker_ automaticamente busca as imagens requisitadas nos repositórios disponíveis, adicionados ou informados.
+Quando se executa comandos como `docker pull` ou `docker run`, **Docker** automaticamente busca as imagens requisitadas nos repositórios disponíveis, adicionados ou informados.
 
 ### _Docker objects_
 
-Usando _Docker_, está automaticamente criando Imagens, Volumes, Containers, _Networks_, Plugins e outros objetos.
+Usando **Docker**, está automaticamente criando Imagens, Volumes, Containers, _Networks_, Plugins e outros objetos.
 
 * Images
     São templates de leitura com instruções de criação de containers para uso. Frequentemente usa-se uma imagem para poder criar outra com serviços ou _features_ adicionais. Como por exemplo, criar uma imagem de `Ubuntu`, utilizando uma imagem oficial e configura-la para instalar um Apache Web Server, bem como configurações adicionais para a aplicação caso necessário.
 
 * Containers
-    É uma instancia criada a partir de uma imagem especificada. Essa instancia pode ser criada, iniciada, parada, movida ou removida usando a API _Docker_ ou a `CLI`. Um container pode estar conectado a uma ou mais _networks_, receber armazenamento, ou servir de modelo para a criação de uma imagem de seu estado atual.
+    É uma instancia criada a partir de uma imagem especificada. Essa instancia pode ser criada, iniciada, parada, movida ou removida usando a API **Docker** ou a `CLI`. Um container pode estar conectado a uma ou mais _networks_, receber armazenamento, ou servir de modelo para a criação de uma imagem de seu estado atual.
 
 * Services
-    Permitem que containers trabalhem com múltiplos _daemons_, que quando juntos trabalham em _swarm_ gerenciando vários _workers_. Cada membro do _swarm_ é um _daemon_ que se comunica através da API _Docker_.
+    Permitem que containers trabalhem com múltiplos _daemons_, que quando juntos trabalham em _swarm_ gerenciando vários _workers_. Cada membro do _swarm_ é um _daemon_ que se comunica através da API **Docker**.
 
 ## Tecnologia _underlying_
 
-Escrito em [GO](https://goo.gl/Wbspxt), _Docker_ utiliza o _kernel_ do Linux para poder demonstrar e apresentar sua funcionalidade e praticidade.
+Escrito em [GO](https://goo.gl/Wbspxt), **Docker** utiliza o _kernel_ do Linux para poder demonstrar e apresentar sua funcionalidade e praticidade.
 
 ### _Namespaces_
 
