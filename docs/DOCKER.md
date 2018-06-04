@@ -119,18 +119,106 @@ N[Network]
 C[Container]
 I[Image]
 D[Data Volumes]
+subgraph
 DC[Docker CLI]
+subgraph
 R[REST API]
+subgraph
 DD[Daemon Docker]
-N-->DC
-C-->DC
-I-->DC
-D-->DC
+end
+end
+end
+N-->|Gere|DC
+C-->|Gere|DC
+I-->|Gere|DC
+D-->|Gere|DC
 DC-->R
-R-->DD
 R-.->DC
+R-->DD
 DD-.->R
 ```
+
+A interface de comando por linha utiliza a API REST para se comunicar com o _daemon_ por comandos ou scripts.
+Por sua vez o _daemon_ gerencia a construção e administração dos objetos criados bem como seus volumes, _networks_ e imagens.
+
+## Cenários para se usar _Docker_
+
+_Docker_ agiliza o ciclo de desenvolvimento de uma aplicação, já que oferece uma padronização dos ambientes com containers para sua aplicação e serviços.
+
+### _Deploy_ e dimensionamento responsivo
+
+Plataformas baseadas em containers _Docker_ são bem portáveis, podendo ser executadas em laptops locais de desenvolvedores, maquinas físicas ou virtuais, _data centers_, provedores de nuvens ou uma mistura de ambientes diferentes.
+
+Dado sua portabilidade e baixo uso de processamento, também oferece uma maneira fácil de dinamicamente alocar e gerenciar _workloads_, podendo realizar mudanças quase em tempo real com facilidade dependendo da necessidade.
+
+### Executando mais _workloads_ no mesmo Hardware
+
+Outro diferencial levantado por sua leveza é o fato de oferece uma alternativa ás máquinas virtuais, sendo assim, podendo exigir mais da máquina que está sendo usada. _Docker_ é ideal para ambientes densos e complexos para pequenos ou médios _deploys_ que necessitam de menos recursos.
+
+## Arquitetura _Docker_
+
+_Docker_ utiliza uma arquitetura de _client-server_. O _client_ do _Docker_ se comunica com o _daemon_ que fica responsável por construir, executar e distribuir seus containers. Tanto _client_ quanto _daemon_ podem estar no mesmo sistema, ou um acessando o outro de forma remota, neste último, o _client_ irá se comunicar através da API REST e de _sockets_ UNIX para com o _daemon_.
+
+```mermaid
+graph LR
+subgraph Client
+db[Docker build]
+dp[Docker pull]
+dr[Docker run]
+end
+subgraph DOCKER_HOST
+dd[Docker daemon]
+subgraph Containers
+three[Container]
+two[Container]
+one[Container]
+end
+subgraph Images
+U2[Ubuntu]
+PG2[PostgreSQL]
+end
+end
+subgraph Registry
+U1[Ubuntu]
+PG1[PostgreSQL]
+N[NGINX]
+end
+db-.->dd
+dp-.->dd
+dr-.->dd
+dd==>U2
+U2==>one
+dd-.->U2
+dd-.->PG1
+PG1-.->PG2
+```
+
+### _Docker daemon_
+
+Responde as requisições da API REST, controla, gere e administra objetos _Docker_ como imagens, containers, _networks_ e volumes. _Daemons_ podem também se comunicar entre si para administrar serviços _Docker_.
+
+### _Docker client_
+
+É a maneira de como a maioria dos usuários se comunica com o _daemon_, através dos comandos que executaram e realizarão as requisições com API REST para o _daemon_.
+
+### _Docker registry_
+
+Armazena as imagens disponíveis para criação de containers, _Docker Hub_ e _Docker Cloud_ são repositórios públicos que todos podem usar. Por padrão, _Docker_ busca imagens no _Docker Hub_. Mas também pode-se adicionar repositórios para uso.
+
+Quando se executa comandos como `docker pull` ou `docker run`, _Docker_ automaticamente busca as imagens requisitadas nos repositórios disponíveis, adicionados ou informados.
+
+### _Docker objects_
+
+Usando _Docker_, está automaticamente criando Imagens, Volumes, Containers, _Networks_, Plugins e outros objetos.
+
+* Images
+    São templates de leitura com instruções de criação de containers para uso. Frequentemente usa-se uma imagem para poder criar outra com serviços ou _features_ adicionais. Como por exemplo, criar uma imagem de `Ubuntu`, utilizando uma imagem oficial e configura-la para instalar um Apache Web Server, bem como configurações adicionais para a aplicação caso necessário.
+
+* Containers
+    É uma instancia criada a partir de uma imagem especificada. Essa instancia pode ser criada, iniciada, parada, movida ou removida usando a API _Docker_ ou a `CLI`. Um container pode estar conectado a uma ou mais _networks_, receber armazenamento, ou servir de modelo para a criação de uma imagem de seu estado atual.
+
+* Services
+    Permitem que containers trabalhem com múltiplos _daemons_, que quando juntos trabalham em _swarm_ gerenciando vários _workers_. Cada membro do _swarm_ é um _daemon_ que se comunica através da API _Docker_.
 
 ## Imagens oficiais
 
