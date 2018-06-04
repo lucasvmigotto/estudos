@@ -220,6 +220,36 @@ Usando _Docker_, está automaticamente criando Imagens, Volumes, Containers, _Ne
 * Services
     Permitem que containers trabalhem com múltiplos _daemons_, que quando juntos trabalham em _swarm_ gerenciando vários _workers_. Cada membro do _swarm_ é um _daemon_ que se comunica através da API _Docker_.
 
+## Tecnologia _underlying_
+
+Escrito em [GO](https://goo.gl/Wbspxt), _Docker_ utiliza o _kernel_ do Linux para poder demonstrar e apresentar sua funcionalidade e praticidade.
+
+### _Namespaces_
+
+Utilizando uma tecnologia denominada `namespace` que promove uma _workspace_ única e isolada para containers. Assim no momento de criação de um container, um novo `namespace` é criado.
+
+Essa tecnologia possibilita que o container seja executado em uma camada isolada e dedicada a apenas ele, limitando seu acesso a somente seu próprio `namespace`.
+
+Alguns `namespaces` utilizados pela _Docker engine_ que também são utilizadas no Linux:
+
+* `pid` - Isolamento do processo
+* `net` - Gerenciamento de interfaces de rede
+* `ipc` - Gerenciamento de acesso para recursos IPC
+* `mnt` - Gerenciamento de _filesystem mount points_
+* `uts` - Isolamento de Kernel e identificadores de versão
+
+### Grupos de controle
+
+_Docker engine_ sendo usada em um ambiente Linux dispõe também de uma tecnologia chamada _control groups_ (`cgroups`). Um _control group_ define e restringe para uma aplicação um conjunto fechado de recursos de hardware para serem usadas. Pode-se por exemplo definir uma quantidade limitada de memória que poderá ser utilizada por um específico container.
+
+### _Union file system_
+
+Criam layers para a operação do containers, fazendo-os assim leves e rápidos. A _Docker engine_ utiliza `UnionFS` para prover a construção de blocos para os containers.
+
+### Formato do container
+
+É a maneira que a _Docker engine_ utiliza `namespaces`, `control groups` e `UnionFS` para a criação de um _wrapper_ chamado `container format`.
+
 ## Imagens oficiais
 
 Algumas imagens oficiais são oferecidas no [Docker Hub](https://goo.gl/zTQasP) para serem usadas. Assim, tirando a necessidade de construir o _Dockerfile_.
