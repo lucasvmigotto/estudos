@@ -2,7 +2,7 @@
 
 ## O que é
 
-Padrão de construção para projetar APIs baseadas em _endpoints_ (_resources_), métodos (_verbs_) e códigos HTTP. Essa forma de construção oferece boas ideias e práticas como o _stateless severs_, não mantendo o estado dos dados no servidor, alem de acesso estruturado aos recursos.
+REST ou _**RE**presentational **S**tate **T**ransfer_ é um padrão de construção para projetar APIs baseadas em _endpoints_ (_resources_), métodos (_verbs_) e códigos HTTP. Essa forma de construção oferece boas ideias e práticas como o _stateless severs_, não mantendo o estado dos dados no servidor, alem de acesso estruturado aos recursos.
 
 ## Entendendo conceitos básicos
 
@@ -76,3 +76,45 @@ Uma requisição do _client_ para o _server_ deve contar com algumas partes.
     ```
 
     > _JSON_ passado no _body_ da requisição para informar os dados para o usuário a ser criado pelo _server_
+
+#### _Responses_ (Respostas)
+
+Quando o _server_ termina de processar uma _request_ e vai responder para o _client_ que a requisitou, a _response_ que deverá ser enviada deve conter algumas informações, como:
+
+1. _Content-type_
+
+    Caso seja o caso do _server_ retornam alum dado que possa ser utilizado pelo _client_ como uma coleção de dados, é preciso informar no _header_ da requisição o `content-type`. Esse campo informa para o _client_ o tipo do dado que está sendo mandado, necessariamente deve estar de acordo com um dos especificados como aceitos na requisição no compo `accept`. Os tipos aceitos no `content-type` também são _MIME types_.
+
+    ```http
+    GET domain.com/articles/23
+    Accept: text/html, application/xhtml
+    ```
+
+    > Uma requisição que aceita _HTML_ e _XHTML_
+
+    ```http
+    HTTP/1.1 200 (OK)
+    Content-type: text/html
+    ```
+
+    > A resposta do _server_ indicando que o tipo da resposta enviada é fo tipo `text/html`, um dos tipos aceitos pelo _client_
+
+2. _Response code_ (código de resposta)
+
+    _Response codes_ são códigos que o _server_ retorna para o _client_ alertando que tipo de retorno e como a operação foi finalizada, seja com erro, ou sucesso. Não há necessidade para os desenvolvedores saberem todos já que existem [muitos](https://goo.gl/L9dmrA), mas alguns devem ser entendidos por serem frequentemente mais usados.
+
+|           Status Code         |             Meaning
+| :---------------------------: | :---------------------------|
+|            200 (OK)           | O código padrão de resposta HTTP para sucesso
+|         201 (_created_)       | O código padrão de resposta HTTP pra quando um _resource_ for criado com sucesso
+|       204 (_no content_)      | O código padrão de resposta HTTP para uma response que não tem elemento de retorno
+|       400 (_bad request_)     | A requisição não pode ser concluída por um erro de sintaxe, tamanho excessivo ou um erro do _client_
+|        403 (_forbidden_)      | O _client_ não tem acesso a esse conteúdo
+|        404 (_not found_)      | O _resource_ requisitado não foi encontrado ou não existe.
+| 500 (_internal server error_) | Uma resposta genérica do para quando um erro interno sem informação adicional ocorrer
+
+> Para cada verbo _HTTP_, existe um _response code_ esperado para ser retornado:
+> * _GET_ - 200 (OK)
+> * _POST_ - 201 (_CREATED_)
+> * _PUT_ - 200 (OK)
+> * _DELETE_ - 204 (_no content_)
