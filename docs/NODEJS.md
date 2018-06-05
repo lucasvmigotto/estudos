@@ -6,11 +6,11 @@
 
 ## Como funciona
 
-Ao contrário de outras linguagens como **Java** ou **Ruby**, **NodeJS** é _single thread_, ou seja, trabalha e executa uma _Thread_ por processo iniciado. Mas existem bibliotecas e outras maneiras que permitem que essa funcionalidade seja incorporada ao **NodeJS**.
+Ao contrário de outras linguagens como Java ou Ruby, NodeJS é _single thread_, ou seja, trabalha e executa uma _Thread_ por processo iniciado. Mas existem bibliotecas e outras maneiras que permitem que essa funcionalidade seja incorporada ao NodeJS.
 
 Outra forma de processamento paralelo é o conceito de _Assincronismo_. O _NodeJS_ trabalha com eventos de _I/O não bloqueantes_, ou seja, caso a aplicação em questão necessite fazer um processo paralelo como ler um grande arquivo, essa tarefa será colocada em _background_, e após a fila de tarefas for terminada, o _callback_ da leitura do arquivo será chamado.
 
-Um exemplo de uma de suas principais características é poder trabalhar com múltiplas conexões e trabalhar com cada uma, a partir da requisição, o _callback_ é acionado e a _response_ é enviada. Caso não haja processos a serem trabalhados, o **NodeJS** irá dormir.
+Um exemplo de uma de suas principais características é poder trabalhar com múltiplas conexões e trabalhar com cada uma, a partir da requisição, o _callback_ é acionado e a _response_ é enviada. Caso não haja processos a serem trabalhados, o NodeJS irá dormir.
 
 ```javascript
 const http = require('http')
@@ -30,15 +30,15 @@ server.listen(port, hostname, () => {
 
 ## Por que NodeJS
 
-Isso é um grande contraste com a maneira atual, onde operações com o sistema operacional são empregadas. Sendo _threads_ baseadas em rede relativamente difíceis e ineficientes para serem usadas. Porem usuários do **NodeJS** estão livres de processos _dead-locking_, já que quase nenhuma função no Node realiza _I/O_, então o processo nunca é interrompido.
+Isso é um grande contraste com a maneira atual, onde operações com o sistema operacional são empregadas. Sendo _threads_ baseadas em rede relativamente difíceis e ineficientes para serem usadas. Porem usuários do NodeJS estão livres de processos _dead-locking_, já que quase nenhuma função no Node realiza _I/O_, então o processo nunca é interrompido.
 
 ### Entendendo _blocking_ e _non-blocking_
 
- _Blocking_ se refere quado a execução tem que ser interrompida pois **JavaScript** adicional teve que esperar para que operações **non-JavaScript** fossem executadas. Isso ocorre pois não se pode executar **JavaScript** enquanto um  processo _blocking_ está ocorrendo.
+ _Blocking_ se refere quado a execução tem que ser interrompida pois JavaScript adicional teve que esperar para que operações _non_-JavaScript fossem executadas. Isso ocorre pois não se pode executar JavaScript enquanto um  processo _blocking_ está ocorrendo.
 
-Em **NodeJS**, o **JavaScript** que apresenta um uso insatisfatório da _CPU_ ao invés de aguardar um processo **non-JavaScript** como _I/O_ geralmente não é referenciado como _blocking_. Métodos síncronos são os mais comuns usando operações  de _blocking_. Módulos nativos do **NodeJS** também tem métodos _blocking_.
+Em NodeJS, o JavaScript que apresenta um uso insatisfatório da _CPU_ ao invés de aguardar um processo _non_-JavaScript como _I/O_ geralmente não é referenciado como _blocking_. Métodos síncronos são os mais comuns usando operações  de _blocking_. Módulos nativos do NodeJS também tem métodos _blocking_.
 
-Todos os métodos que realizam _I/O_ no **NodeJS** oferecem alternativas assíncronas sendo _non-blocking_, aceitando funções de _callback_. Para esses métodos, funções síncronas, sendo _blocking_, também são oferecidas, apresentado como sufixo _Sync_.
+Todos os métodos que realizam _I/O_ no NodeJS oferecem alternativas assíncronas sendo _non-blocking_, aceitando funções de _callback_. Para esses métodos, funções síncronas, sendo _blocking_, também são oferecidas, apresentado como sufixo _Sync_.
 
 * Uma operação síncrona (_blocking_)
 
@@ -70,7 +70,7 @@ Para entender melhor, no primeiro exemplo, `moreWork()` será executada após `c
 
 ## _Event Loop_
 
-O **NodeJS** é totalmente guiado por eventos, termo que ficou conhecido como _Event Driven_, por sua vez, esse conceito se refere a um fluxo determinado de acontecimentos, eventos ou alterações de estado que possam ocorrer, em que caso essas mudanças ocorram, _callback_ definidas para cada uma sejam ativados e chamados. Isso já em bem conhecido e popular para usuários de **JavaScript** no _front-end_ como o _onClick, _onHide_, _onHide_ que são bem comuns.
+O NodeJS é totalmente guiado por eventos, termo que ficou conhecido como _Event Driven_, por sua vez, esse conceito se refere a um fluxo determinado de acontecimentos, eventos ou alterações de estado que possam ocorrer, em que caso essas mudanças ocorram, _callback_ definidas para cada uma sejam ativados e chamados. Isso já em bem conhecido e popular para usuários de JavaScript no _front-end_ como o _onClick, _onHide_, _onHide_ que são bem comuns.
 
 ```mermaid
 sequenceDiagram
@@ -147,7 +147,7 @@ promise.then((value) => {
 
 Como o próprio nome já diz (emissor de eventos), apenas fica encarregado de ativar um evento que qualquer um possa ouvir. Diferentes bibliotecas, implementações ou _frameworks_ desencadeiam em diferentes propósitos, porem a ideia continua a mesma, apenas definir uma ação para determinado evento.
 
-No **NodeJS**, essas ações são correspondestes  aos _callbacks_. Defini-se também se essa ação será executada todas as vezes que o evento ocorrer, ou caso seja necessário apenas na primeira vez.
+No NodeJS, essas ações são correspondestes  aos _callbacks_. Defini-se também se essa ação será executada todas as vezes que o evento ocorrer, ou caso seja necessário apenas na primeira vez.
 
 ```javascript
 const office = require('office')
@@ -161,7 +161,7 @@ Neste exemplo, utilizamos uma biblioteca fictícia `office`, em que adicionamos 
 
 ## NPM (_Node package manager_)
 
-NPM é o repositório oficial de dependências para o **NodeJS**, em que pode-se pesquisar, baixar e publicar novas dependências para seu ambiente de desenvolvimento.
+NPM é o repositório oficial de dependências para o NodeJS, em que pode-se pesquisar, baixar e publicar novas dependências para seu ambiente de desenvolvimento.
 
 > O NPM já é instalado automaticamente durante o mesmo procedimento do NodeJS
 
@@ -196,37 +196,37 @@ Há uma variedade e uma gama enorme de repositórios disponíveis para uso no NP
 }
 ```
 
-Um exemplo de um arquivo `package.json` com campos alguns compos básicos.
+Um exemplo de um arquivo `package.json` com alguns campos básicos.
 
-* _name_
-    Nome do projeto
+* _name_:
+    > Nome do projeto
 
 * _version_
-    Versão do projeto
+    > Versão do projeto
 
 * _description_
-    Descrição do projeto
+    > Descrição do projeto
 
 * _main_
-    Script principal
+    > Script principal
 
-* _scripts_ [Opcional]
-    Scripts para serem executados pelo _npm_
+* _scripts_ ***[Opcional]***
+    > Scripts para serem executados pelo _npm_
 
-* _respository_ [Opcional]
-    Informações sobre o repositório
+* _respository_ ***[Opcional]***
+    > Informações sobre o repositório
 
-* _keywords_ [Opcional]
-    Tags para pesquisa
+* _keywords_ ***[Opcional]***
+    > Tags para pesquisa
 
 * _author_
-    Nome e E-mail do author
+    > Nome e E-mail do author
 
-* _license_ [Opcional]
-    Tipo da licença do projeto
+* _license_ ***[Opcional]***
+    > Tipo da licença do projeto
 
-* _devDependencies_ [Opcional]
-    Dependências de desenvolvimento do projeto
+* _devDependencies_ ***[Opcional]***
+    > Dependências de desenvolvimento do projeto
 
-* _dependencies_ [Opcional]
-    Dependências de produção do projeto
+* _dependencies_ ***[Opcional]***
+    > Dependências de produção do projeto
