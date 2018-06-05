@@ -11,7 +11,7 @@ Tópicos disponíveis:
 5. [REST](docs/REST.md)
 6. [Docker](docs/DOCKER.md)
 
-## Como usar
+## Como usar o GitBook
 
 1. Instale os _node modules_
 
