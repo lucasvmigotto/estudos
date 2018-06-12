@@ -2,46 +2,6 @@
 
 Do commit ao rebase.
 
-## Sumário
-
-1. [O que é](##O-que-é)
-
-2. [Termos](##Termos)
-
-    2.1. [O que é Repositório](###O-que-é-Repositório)
-
-    2.2. [O que é Commit](###O-que-é-Commit)
-
-    2.3. [O que é Branch](###O-que-é-Branch)
-
-    2.4. [O que é Merge](###O-que-é-Merge)
-
-    2.5. [O que é Rebase](###O-que-é-Rebase)
-
-3. [Comandos](##Comandos)
-
-    3.1. [Init](###Init)
-
-    3.1. [Remote](###Remote)
-
-    3.1. [Branch](###Branch)
-
-    3.1. [Checkout](###Checkout)
-
-    3.1. [Status](###Status)
-
-    3.1. [Add](###Add)
-
-    3.1. [Commit](###Commit)
-
-    3.1. [Push](###Push)
-
-    3.1. [Diff](###Diff)
-
-    3.1. [Rebase](###Rebase)
-
-    3.1. [Merge](###Merge)
-
 ## O que é
 
 Git é um controle de versionamento `open source` para gerenciamento de um projeto visando a velocidade e eficiência.
