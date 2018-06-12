@@ -16,7 +16,7 @@ Uma forma eficiente de busca e consulta de dados em APIs utilizando queries de p
 
 Um sistema que  podemos utilizar para definir o tipo de dados que serão trabalhados.
 
-```javascript
+```graphql
 type User {
     name: String!
     email: String!
@@ -46,7 +46,7 @@ Uma forma de obter dados de uma API, sendo uma analogia ao padrão _REST_, podem
 
 > Definição de uma query
 
-```javascript
+```graphql
 type Query {
     users: [ User! ]!
 }
@@ -54,7 +54,7 @@ type Query {
 
 > Requisição no Client
 
-```text
+```graphql
 {
     query {
         users {
@@ -87,7 +87,7 @@ Para alterações dos dados da API, voltando a analogia com o padrão _REST_, po
 
 > Definição da Mutatiion
 
-```javascript
+```graphql
 type Mutation {
     createUser(name: String!, email: String!): User!
 }
@@ -95,7 +95,7 @@ type Mutation {
 
 > Requisição no Client
 
-```text
+```graphql
 {
     mutation {
         createUser(
@@ -126,7 +126,7 @@ Define o _schema_ da API, funcionando como um _container_ para os tipos criados 
 
 > Definição do Schema
 
-```javascript
+```graphql
 type Schema {
     query: Query
     mutation: Mutation
@@ -139,7 +139,7 @@ Para cada compo do ***GraphQL***, deverá existir um resolver para cuidar da aç
 
 > Definição da query "user" apra busca pelo Id
 
-```javascript
+```graphql
 type Query {
     user(id: ID!):User
 }
@@ -169,7 +169,7 @@ Defini o resolver que será usado para manipular com um atributo por exemplo ap�
 
 > User
 
-```javascript
+```graphql
 type User {
     name: String!
     email: String!
@@ -221,7 +221,7 @@ Representa um identificador  único, geralmente usado para rebuscar um objeto ou
 
 A forma de como os campos no ***GraphQL*** são resolvidos se assemelha bastante com a estrutura de dados do tipo árvore.
 
-```javascript
+```graphql
 type Post {
     title: String!
     content: String!
@@ -338,7 +338,7 @@ As APIs montadas com o padrão _REST_ retornam um estrutura fixa de dados que co
 
     > Query
 
-    ```text
+    ```graphql
     {
         query {
             post(id: 73) {
@@ -416,7 +416,7 @@ Para realizar uma consulta no _GraphQL_, usa-se uma forma diferente para se cons
 
     * Método sem parâmetro
 
-    ```text
+    ```graphql
     query List {
         list{
             id name email
@@ -426,7 +426,7 @@ Para realizar uma consulta no _GraphQL_, usa-se uma forma diferente para se cons
 
     * Método com parâmetro
 
-    ```text
+    ```graphql
     query Read($id: ID!){
         read(id: $id){
             id name email
