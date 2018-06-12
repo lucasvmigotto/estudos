@@ -165,7 +165,7 @@ Query {
 
 #### Resolvers triviais
 
-Defini o resolver que será usado por exemplo após um retorno do banco de dados.
+Defini o resolver que será usado para manipular com um atributo por exemplo após um retorno do banco de dados.
 
 > User
 
@@ -373,3 +373,69 @@ As APIs montadas com o padrão _REST_ retornam um estrutura fixa de dados que co
 4. **Schema e Type System**
 
     O fato de poder ter uma modelagem de dados própria em seus _schemas_faz com que o desenvolvimento seja mais fluído e organizado, visto que a tipagem dos dados pode servir ate como meio de documentação. Assim, em uma primeira reunião, o _back-end_ e _front-end_ poderiam definir a estrutura de dados e seus tipos, após documentar isso usando o **[GraphQL](##GraphQL)**, ambos poderiam trabalhar mais separados agora.
+
+## Como realizar a consulta
+
+Para realizar uma consulta no _GraphQL_, usa-se uma forma diferente para se consumir os dados da API se comparados ao padrão _REST_. Podemos consumir de forma direta, passando todas as informações necessárias no corpo de uma requisição ou dividir as tarefas, construindo um método para estrar no _body_ e os dados como _Query Parameters_ na _URL_.
+
+1. De forma direta
+
+    Pode-se usar então tanto com o verbo _POST_ quanto _GET_ mudando apenas a maneira de se usar.
+    * _POST_
+
+    Com uma _Query_
+    ```json
+    {
+        "query": "{ list { id name email}}"
+    }
+    ```
+
+    Com uma _Mutation_
+
+    ```json
+    {
+        "query": "mutation { create( input: { name:\"John Doe\", email:\"john.doe@mail.com\" } ) }"
+    }
+    ```
+
+    > Mesmo sendo uma _mutation_, o parâmetro do _JSON_ continua sendo `query`
+
+    * _GET_
+
+    Com uma requisição _GET_, deve ser informado na URL a _query_ ou _mutation_ que será realizada. Usa-se a URL básica como por exemplo `http://localhost:8000/users` e adicionamos `?query=<query ou mutation>`.
+
+    ```http
+    query=%7Blist%7Bid%20name%20email%7D%7D
+    ```
+
+    > Exemplo para listar os usuários
+
+2. Usando métodos
+
+    Para se usar métodos, basta passa-los no corpo da requisição como `text/plain`. Caso os mesmos usem algum parâmetro, os argumentos devem ser informados na _URL_ como _Query Parameter_.
+
+    * Método sem parâmetro
+
+    ```text
+    query List {
+        list{
+            id name email
+        }
+    }
+    ```
+
+    * Método com parâmetro
+
+    ```text
+    query Read($id: ID!){
+        read(id: $id){
+            id name email
+        }
+    }
+    ```
+
+    ```http
+    http://localhost:8000/users?variables={"id":"<id do usuário>"}
+    ```
+
+    > Informando o valor do argumento na _URL_
