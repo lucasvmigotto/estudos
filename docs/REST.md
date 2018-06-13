@@ -118,3 +118,7 @@ Quando o _server_ termina de processar uma _request_ e vai responder para o _cli
 > * _POST_ - 201 (_CREATED_)
 > * _PUT_ - 200 (OK)
 > * _DELETE_ - 204 (_no content_)
+
+## Como realizar a consulta
+
+Para algumas requisições é possível fazer consultas apenas colocando a _URL_ e _endpoint_ no próprio navegador - caso de uma requisição _GET_, usando linha de comando em um terminal como por exemplo [`curl`](https://goo.gl/vCvFsZ). Ferramentas propriamente destinadas para esse fim também são oferecidas, como o caso do [_Postman_](https://goo.gl/i2TnM8), uma das mais famosas e fáceis de serem usadas.

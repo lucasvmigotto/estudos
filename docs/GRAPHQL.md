@@ -376,7 +376,9 @@ As APIs montadas com o padrão _REST_ retornam um estrutura fixa de dados que co
 
 ## Como realizar a consulta
 
-Para realizar uma consulta no _GraphQL_, usa-se uma forma diferente para se consumir os dados da API se comparados ao padrão _REST_. Podemos consumir de forma direta, passando todas as informações necessárias no corpo de uma requisição ou dividir as tarefas, construindo um método para estrar no _body_ e os dados como _Query Parameters_ na _URL_.
+As opções de plataforma para realizar a consulta pode variar desde um simples navegador, ate ferramentas mais conhecidas como o [_Postman_](https://goo.gl/i2TnM8) ou ainda em linha de comando de um terminal - [`curl`](https://goo.gl/vCvFsZ) por exemplo. Algumas APIs oferecem a ferramenta [_GraphiQL_](https://goo.gl/cgYDMJ), uma IDE para testar as requisições possíveis em um ambiente propriamente construído para esse fim, onde é possível ate ver a documentação da API.
+
+Na consulta _GraphQL_, usa-se uma forma diferente para se consumir os dados da API se comparados ao padrão _REST_. Podemos consumir de forma direta, passando todas as informações necessárias no corpo de uma requisição ou dividir as tarefas, construindo um método para estrar no _body_ e os dados como _Query Parameters_ na _URL_.
 
 1. De forma direta
 
