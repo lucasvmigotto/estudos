@@ -130,55 +130,55 @@ echo $MSG
 
 O Bash dispõe de algumas variáveis internas com informações úteis para o script como versão do Bash, diretórios de importantes arquivos e informações básicas de usuários.
 
-|        Variável        |                Valor                |
+|        Variável        | Valor                               |
 |:----------------------:|:-----------------------------------:|
-|       **$RANDOM**      | Retorna um valor inteiro randômico entre 0 e 32767 |
-|        **$BASH**       | Retorna o caminho para o arquivo binário do Bash |
-|      **$BASH_ENV**     | Variável que será lida quando um script for invocado |
-|    **$BASH_SUBSHELL**  | Indica o nível do subshell atual |
-|      **$BASHPID**      | Retorna o ID do processo da instancia atual do Bash, não é o mesmo que `$$` embora de o mesmo resultado |
-|    **$BASH_VERSION**   | Retorna a versão do Bash instalada no sistema |
-|  **$BASH_VERSINFO[n]** | Mesma informação que $BASH_VERSION, porem muito mais especificada em um Array de 6 posições contento informações |
-|      **$DIRSTACK**     | O primeiro valor da pilha do diretório |
-|       **$EDITOR**      | O editor padrão para edição de script |
-|        **$EUID**       | O ID do usuário |
-|      **$FUNCNAME**     | O nome da função atual |
-|     **$GLOBIGNORE**    | Lista de padrões de nomes para serem excluídas de caminhos de arquivos |
-|       **$GROUPS**      | O grupo que o usuário atual pertence |
-|        **$HOME**       | O diretório base do usuário, geralmente `home/usuário` |
-|      **$HOSTNAME**     | O nome do computador |
-|      **$HOSTTYPE**     | O tipo de `host`, como `x86_32`, `x86_64`... |
-|        **$IFS**        | Determina como o Bash reconhece campos e limites de palavras quando identificadas como `strings` |
-|     **$IGNOREEOF**     | Quantos `end-of-files` o Shell vai ignorar antes de sair |
-|     **$LC_COLLATE**    | Rege pela verificação de padroes e expansões de nomes de arquivos |
-|      **$LC_CTYPE**     | Controla o tipo de interpretação de caracter que será utilizado |
-|       **$LINENO**      | o número da linha que está sendo executado, grande uso para propósitos de depuração |
-|      **$MACHTYPE**     | Identifica o hardware do sistema |
-|       **$OLDPWD**      | Especifica o ultimo diretório de trabalho utilizado |
-|       **$OSTYPE**      | Especifica o sistema operacional |
-|        **$PATH**       | Exibe o(s) diretório(s) em que os arquivos binários estão alocados. |
-|     **$PIPESTATUS**    | `Array` que guarda os últimos valores de saída de processos de `pipe` feitos em `foreground` |
-|         **$PPID**      | O `ID` do processo pai em execução |
-|   **$PROMPT_COMMNAD**  |  |
-|          **$PS1**      | A linha do `prompt` principal |
-|          **$PS2**      | A linha de um `prompt` secundário, como padrão `>` |
-|          **$PS3**      | A linha de um `prompt` terciário apresentada em um `select loop` |
-|          **$PS4**      | A linha de um `prompt` quaternário que será exibida quando um comando for executado com `-x`. Por padrão `+` |
-|          **$PWD**      | Retorna o diretório de trabalho atual |
-|         **$REPLAY**    | Guarda o valor do ultimo `read` realizado sem uma variável para guardar o valor a ser recebido |
-|        **$SECONDS**    | O numero de segundos que o script vem sendo executado |
-|       **$SHELLOPTS**   | Retorna uma variável apenas de leitura com todas as opções habilitadas do shell |
-|         **$SHLVL**     | Retorna o nivel que o bash esta sendo executado, quando em linha de comando é 1, quando em script é 2. Porem não indica `sub shells`, para esse uso, utilize `$BASH_SUBSHELL` |
-|        **$TMOUT**      | Caso seja definida para um valor diferente de zero, o script irá encerrar após o numero de segundos informados |
-|         **$UID**       | Valor para o `ID` de uso atual que o usuário esta usando |
-|     **$1, $2, $3...**  | Valor que retorna os parâmetros passando para a execução do script |
-|          **$#**        | Numero de parâmetros passados |
-|          **$***        | Todos os parâmetros passados porem em uma so palavra |
-|          **$@**        | Mesmo uso que `$*` porem retorna as palavras contidas em `"` |
-|          **$!**        | Retorna o `ID` do processo do ultimo trabalho executado em `basckground` |
-|          **$_**        | O valor do parâmetro passado no ultimo comando |
-|          **$?**        | O valor de saída do ultimo comando, função ou ate mesmo do script em si |
-|          **$$**        | O valor de `PID (Proccess ID)` - Identificador do procedimento. |
+|       **$RANDOM**      | Retorna um valor inteiro randômico entre 0 e 32767.
+|        **$BASH**       | Retorna o caminho para o arquivo binário do Bash.
+|      **$BASH_ENV**     | Variável que será lida quando um script for invocado.
+|    **$BASH_SUBSHELL**  | Indica o nível do subshell atual.
+|      **$BASHPID**      | Retorna o ID do processo da instancia atual do Bash, não é o mesmo que `$$` embora de o mesmo resultado.
+|    **$BASH_VERSION**   | Retorna a versão do Bash instalada no sistema.
+|  **$BASH_VERSINFO[n]** | Mesma informação que $BASH_VERSION, porem muito mais especificada em um Array de 6 posições content.informações.
+|      **$DIRSTACK**     | O primeiro valor da pilha do diretório.
+|       **$EDITOR**      | O editor padrão para edição de script.
+|        **$EUID**       | O ID do usuário.
+|      **$FUNCNAME**     | O nome da função atual.
+|     **$GLOBIGNORE**    | Lista de padrões de nomes para serem excluídas de caminhos de arquivos.
+|       **$GROUPS**      | O grupo que o usuário atual pertence.
+|        **$HOME**       | O diretório base do usuário, geralmente `home/usuário`.
+|      **$HOSTNAME**     | O nome do computador.
+|      **$HOSTTYPE**     | O tipo de `host`, como `x86_32`, `x86_64`....
+|        **$IFS**        | Determina como o Bash reconhece campos e limites de palavras quando identificadas como `strings`.
+|     **$IGNOREEOF**     | Quantos `end-of-files` o Shell vai ignorar antes de sair.
+|     **$LC_COLLATE**    | Rege pela verificação de padroes e expansões de nomes de arquivos.
+|      **$LC_CTYPE**     | Controla o tipo de interpretação de caracter que será utilizado.
+|       **$LINENO**      | o número da linha que está sendo executado, grande uso para propósitos de depuração.
+|      **$MACHTYPE**     | Identifica o hardware do sistema.
+|       **$OLDPWD**      | Especifica o ultimo diretório de trabalho utilizado.
+|       **$OSTYPE**      | Especifica o sistema operacional.
+|        **$PATH**       | Exibe o(s) diretório(s) em que os arquivos binários estão alocados..
+|     **$PIPESTATUS**    | `Array` que guarda os últimos valores de saída de processos de `pipe` feitos em `foreground`.
+|         **$PPID**      | O `ID` do processo pai em execução.
+|   **$PROMPT_COMMNAD**  | .
+|          **$PS1**      | A linha do `prompt` principal.
+|          **$PS2**      | A linha de um `prompt` secundário, como padrão `>`.
+|          **$PS3**      | A linha de um `prompt` terciário apresentada em um `select loop`.
+|          **$PS4**      | A linha de um `prompt` quaternário que será exibida quando um comando for executado com `-x`. Por padrã.`+`.
+|          **$PWD**      | Retorna o diretório de trabalho atual.
+|         **$REPLAY**    | Guarda o valor do ultimo `read` realizado sem uma variável para guardar o valor a ser recebido.
+|        **$SECONDS**    | O numero de segundos que o script vem sendo executado.
+|       **$SHELLOPTS**   | Retorna uma variável apenas de leitura com todas as opções habilitadas do shell.
+|         **$SHLVL**     | Retorna o nivel que o bash esta sendo executado, quando em linha de comando é 1, quando em script é 2.Porem não indica `sub shells`, para esse uso, utilize `$BASH_SUBSHELL`.
+|        **$TMOUT**      | Caso seja definida para um valor diferente de zero, o script irá encerrar após o numero de segundo.informados.
+|         **$UID**       | Valor para o `ID` de uso atual que o usuário esta usando.
+|     **$1, $2, $3...**  | Valor que retorna os parâmetros passando para a execução do script.
+|          **$#**        | Numero de parâmetros passados.
+|          **$***        | Todos os parâmetros passados porem em uma so palavra.
+|          **$@**        | Mesmo uso que `$*` porem retorna as palavras contidas em `"`.
+|          **$!**        | Retorna o `ID` do processo do ultimo trabalho executado em `basckground`.
+|          **$_**        | O valor do parâmetro passado no ultimo comando.
+|          **$?**        | O valor de saída do ultimo comando, função ou ate mesmo do script em si.
+|          **$$**        | O valor de `PID (Proccess ID)` - Identificador do procedimento..
 
 ### Escape
 
@@ -186,13 +186,13 @@ Escapar um caracter é um método para apresentar ao interpretador de script o c
 
 |       Caracter        |            Significado            |
 | :-------------------: | :-------------------------------: |
-|         **\n**        | Representa uma nova linha
-|         **\r**        | Representa o retorno
-|         **\t**        | Representa um _tab_
-|         **\v**        | Representa um _tab_ vertical
-|         **\b**        | Representa um _basckspace_
-|         **\a**        | Representa um _alert_
-|         **\0xx**      | Representa o retorno em ASCII de um valor octal
+|         **\n**        | Representa uma nova linha.
+|         **\r**        | Representa o retorno.
+|         **\t**        | Representa um _tab_.
+|         **\v**        | Representa um _tab_ vertical.
+|         **\b**        | Representa um _basckspace_.
+|         **\a**        | Representa um _alert_.
+|         **\0xx**      | Representa o retorno em ASCII de um valor octal.
 
 ### Substituição de parâmetro
 
@@ -341,48 +341,48 @@ Uma comparação entre os recursos, seus usos ou até disponibilidade entre as d
 
 1. Comparações com `strings`
 
-|        `[[`       |        `[`        |
-| :---------------: | :---------------: |
-|       **>**       |       **\>**      |
-|       **<**       |       **\<**      |
-|    **= ou ==**    |       **=**       |
-|       **!=**      |       **!=**      |
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |       **>**       |       **\>**      |
+    |       **<**       |       **\<**      |
+    |    **= ou ==**    |       **=**       |
+    |       **!=**      |       **!=**      |
 
 2. Comparações com inteiros
 
-|        `[[`       |        `[`        |
-| :---------------: | :---------------: |
-|      **-gt**      |      **-gt**      |
-|      **-lt**      |      **-lt**      |
-|      **-ge**      |      **-ge**      |
-|      **-le**      |      **-le**      |
-|      **-eq**      |      **-eq**      |
-|      **-ne**      |      **-ne**      |
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |      **-gt**      |      **-gt**      |
+    |      **-lt**      |      **-lt**      |
+    |      **-ge**      |      **-ge**      |
+    |      **-le**      |      **-le**      |
+    |      **-eq**      |      **-eq**      |
+    |      **-ne**      |      **-ne**      |
 
 3. Avaliação de concional
 
-|        `[[`       |        `[`        |
-| :---------------: | :---------------: |
-|       **&&**      |      **-a**       |
-| **&#124;&#124;**  |      **-o**       |
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |       **&&**      |      **-a**       |
+    | **&#124;&#124;**  |      **-o**       |
 
 4. Agrupamento de expressão
 
-|        `[[`       |        `[`        |
-| :---------------: | :---------------: |
-|     **(...)**     |    **\(...\)**    |
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |     **(...)**     |    **\(...\)**    |
 
 5. Correspondência de padrões
 
-|        `[[`       |        `[`        |
-| :---------------: | :---------------: |
-|    **= ou ==**    |    **não há**     |
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |    **= ou ==**    |    **não há**     |
 
 6. Correspondências de expressões regulares
 
-|        `[[`       |        `[`        |
-| :---------------: | :---------------: |
-|       **=~**      |    **não há**     |
+    |        `[[`       |        `[`        |
+    | :---------------: | :---------------: |
+    |       **=~**      |    **não há**     |
 
 A explicação de ponto de vista teórico para a diferença entre `[` e `[[` é que, enquanto o construtor simples é considerado um comando interno que recebe argumentos como qualquer outro, o novo construtor é considerado um comando composto, tendo ele um contexto de avaliação especial, que são executados e analisados antes de qualquer outro processo, tal análise olha e considera de forma especial _palavras reservadas_ ou _operadores de controle_.
 
@@ -427,96 +427,96 @@ fi
 
 1. Arquivos
 
-|        Operador      |                                     Descrição                             |
-|  :-----------------:  |  :------------------------------------------------------: |
-|        **-e**       | Se o arquivo exite |
-|        **-a**       | Mesmo uso que o `-e` porem descontinuado |
-|        **-f**        | Se é um arquivo regular e não um diretório |
-|        **-s**       | Se o arquivo não tem tamanho 0 |
-|        **-d**       | Se o arquivo é um diretório |
-|        **-b**       | Se o arquivo é um `block device` |
-|        **-c**       | Se o arquivo é um `character device` |
-|        **-p**       | Se o arquivo é um pipe |
-|        **-h**       | Se o arquivo é um `simbolic link` |
-|        **-L**       | Meso uso do `-h` |
-|        **-S**       | Se o arquivo é um Socket |
-|        **-t**       | Se o arquivo é associado com o terminal |
-|        **-r**        | Se o arquivo tem permissão de leitura |
-|        **-w**      | Se o arquivo tem permissão de escrita |
-|        **-x**       | Se o arquivo tem permissão de execução |
-|        **-g**       | Se a `flag` `set-group-id` esta setada no arquivo ou diretório |
-|        **-u**       | Se a `flag` `set-user-id` esta setada no arquivo ou diretório |
-|        **-k**       | Se a `flag` `sticky by set` esta setada, caso seja em um arquivo ele so terá permissões de leitura, caso seja em um diretório o mesmo não terá permissão de escrita.|
-|        **-O**       | Se você é o proprietário do arquivo |
-|        **-G**       | Se o `group-id` é o mesmo que o seu |
-|        **-N**       | Se o arquivo foi modificado desde a ultima leitura. |
-| file1 **-nt** file2 | Se o `file1` é mais novo que `file2` |
-| file1 **-ot** file2 | Se o `file1` é mais velho que `file2` |
-| file1 **-ef** file2 | Se ambos arquivos são `hard links` para o mesmo destino |
+    |        Operador      | Descrição                                                |
+    | :-----------------:  | :------------------------------------------------------: |
+    |        **-e**        | Se o arquivo exite.
+    |        **-a**        | Mesmo uso que o `-e` porem descontinuado.
+    |        **-f**        | Se é um arquivo regular e não um diretório.
+    |        **-s**        | Se o arquivo não tem tamanho 0.
+    |        **-d**        | Se o arquivo é um diretório.
+    |        **-b**        | Se o arquivo é um `block device`.
+    |        **-c**        | Se o arquivo é um `character device`.
+    |        **-p**        | Se o arquivo é um pipe.
+    |        **-h**        | Se o arquivo é um `simbolic link`.
+    |        **-L**        | Meso uso do `-h`.
+    |        **-S**        | Se o arquivo é um Socket.
+    |        **-t**        | Se o arquivo é associado com o terminal.
+    |        **-r**        | Se o arquivo tem permissão de leitura.
+    |        **-w**        | Se o arquivo tem permissão de escrita.
+    |        **-x**        | Se o arquivo tem permissão de execução.
+    |        **-g**        | Se a `flag` `set-group-id` esta setada no arquivo ou diretório.
+    |        **-u**        | Se a `flag` `set-user-id` esta setada no arquivo ou diretório.
+    |        **-k**        | Se a `flag` `sticky by set` esta setada, caso seja em um arquivo ele so terá     permissões de leitura, caso seja em um diretório o mesmo não terá permissão de escrita.
+    |        **-O**        | Se você é o proprietário do arquivo.
+    |        **-G**        | Se o `group-id` é o mesmo que o seu.
+    |        **-N**        | Se o arquivo foi modificado desde a ultima leitura..
+    | file1 **-nt** file2  | Se o `file1` é mais novo que `file2`.
+    | file1 **-ot** file2  | Se o `file1` é mais velho que `file2`.
+    | file1 **-ef** file2  | Se ambos arquivos são `hard links` para o mesmo destino.
 
 2. com inteiros
 
-|       Operador      |                         Descrição                        |
-| :-----------------: | :------------------------------------------------------: |
-|  num1 **-eq** num2  | Se `num1` é igual a `num2` |
-|  num1 **-ne** num2  | Se `num1` não é igual a `num2` |
-|  num1 **-gt** num2  | Se `num1` é maior que `num2` |
-|  num1 **-ge** num2  | Se `num1` é maior ou igual a `num2` |
-|  num1 **-lt** num2  | Se `num1` é menor que `num2` |
-|  num1 **-le** num2  | Se `num1` é menor ou igual a `num2` |
-|  num1  **<**  num2  | Se `num1` é menor que `num2` |
-|  num1 **<=**  num2  | Se `num1` é menor ou igual a `num2` |
-|  num1  **>**  num2  | Se `num1` é maior que `num2` |
-|  num1 **>=**  num2  | Se `num1` é maior ou igual a `num2` |
+    |       Operador      | Descrição                                                |
+    | :-----------------: | :------------------------------------------------------: |
+    |  num1 **-eq** num2  | Se `num1` é igual a `num2`.
+    |  num1 **-ne** num2  | Se `num1` não é igual a `num2`.
+    |  num1 **-gt** num2  | Se `num1` é maior que `num2`.
+    |  num1 **-ge** num2  | Se `num1` é maior ou igual a `num2`.
+    |  num1 **-lt** num2  | Se `num1` é menor que `num2`.
+    |  num1 **-le** num2  | Se `num1` é menor ou igual a `num2`.
+    |  num1  **<**  num2  | Se `num1` é menor que `num2`.
+    |  num1 **<=**  num2  | Se `num1` é menor ou igual a `num2`.
+    |  num1  **>**  num2  | Se `num1` é maior que `num2`.
+    |  num1 **>=**  num2  | Se `num1` é maior ou igual a `num2`.
 
 3. com `strings`
 
-|       Operador      |                         Descrição                        |
-| :-----------------: | :------------------------------------------------------: |
-|   abc1 **=**  abc2  | Se `abc1` é igual a `abc2` |
-|   abc1 **==** abc2  | Sinônimo para o operador `=` |
-|   abc1 **!=** abc2  | Se `abc1` é diferente que `abc2` |
-|   abc1 **<**  abc2  | Se `abc1` é menor que `abc2` em ordem alfabética ASCII  |
-|   abc1 **>**  abc2  | Se `abc1` é maior que `abc2` em ordem alfabética ASCII  |
-|        **-z**       | Se a o valor é `null`, ou seja, não tem comprimento |
-|        **-n**       | Mesmo uso do `-z`, porem precisando estar entre `[[]]` |
+    |       Operador      | Descrição                                                |
+    | :-----------------: | :------------------------------------------------------: |
+    |   abc1 **=**  abc2  | Se `abc1` é igual a `abc2`.
+    |   abc1 **==** abc2  | Sinônimo para o operador `=`.
+    |   abc1 **!=** abc2  | Se `abc1` é diferente que `abc2`.
+    |   abc1 **<**  abc2  | Se `abc1` é menor que `abc2` em ordem alfabética ASCII.
+    |   abc1 **>**  abc2  | Se `abc1` é maior que `abc2` em ordem alfabética ASCII.
+    |        **-z**       | Se a o valor é `null`, ou seja, não tem comprimento.
+    |        **-n**       | Mesmo uso do `-z`, porem precisando estar entre `[[]]`.
 
 4. com tipo logico
 
-|       Operador      |                         Descrição                        |
-| :-----------------: | :------------------------------------------------------: |
-|    ex1 **-a** ex2   | Retorna verdadeiro caso `ex1` e `ex2` sejam verdadeiros, ou seja, um conector logico `and` |
-|    ex1 **-o** ex2   | Retorna verdadeiro caso `ex1` ou `ex2` sejam verdadeiros, ou seja, um conector logico `or` |
+    |       Operador      | Descrição                                                |
+    | :-----------------: | :------------------------------------------------------: |
+    |    ex1 **-a** ex2   | Retorna verdadeiro caso `ex1` e `ex2` sejam verdadeiros, ou seja, um conector logico `and`.
+    |    ex1 **-o** ex2   | Retorna verdadeiro caso `ex1` ou `ex2` sejam verdadeiros, ou seja, um conector logico `or`.
 
 #### Assimilação
 
-|     Operador      |                     Descrição                          |
+|     Operador      | Descrição                                              |
 |:-----------------:|:------------------------------------------------------:|
-|       **=**       | Associa um valor a uma variável, alterando o antigo |
+|       **=**       | Associa um valor a uma variável, alterando o antigo.
 
 #### Aritméticos
 
-|     Operador      |                     Descrição                          |
+|     Operador      | Descrição                                              |
 |:-----------------:|:------------------------------------------------------:|
-|      **+**        | Operador para soma de valores |
-|      **-**        | Operador para a subtração de valores |
-|     **&#42;**     | Operador para a multiplicação de valores |
-|      **/**        | Operador para a divisão de valores |
-|     **&#42;**     | Operador para potenciação de valores |
-|      **%**        | Operador para modulo de valores |
-|      **+=**       | Operador de soma que associa o resultado ao valor original |
-|      **-=**       | Operador de subtração que associa o resultado ao valor original |
-|     **&#42;=**    | Operador de multiplicação que associa o resultado ao valor original |
-|      **/=**       | Operador de divisão que associa o resultado ao valor original |
-|      **%=**       | Operador de modulo que associa o resultado ao valor original |
+|      **+**        | Operador para soma de valores.
+|      **-**        | Operador para a subtração de valores.
+|     **&#42;**     | Operador para a multiplicação de valores.
+|      **/**        | Operador para a divisão de valores.
+|     **&#42;**     | Operador para potenciação de valores.
+|      **%**        | Operador para modulo de valores.
+|      **+=**       | Operador de soma que associa o resultado ao valor original.
+|      **-=**       | Operador de subtração que associa o resultado ao valor original.
+|     **&#42;=**    | Operador de multiplicação que associa o resultado ao valor original.
+|      **/=**       | Operador de divisão que associa o resultado ao valor original.
+|      **%=**       | Operador de modulo que associa o resultado ao valor original.
 
 #### Lógicos
 
-|     Operador      |                     Descrição                          |
+|     Operador      | Descrição                                              |
 |:-----------------:|:------------------------------------------------------:|
-|      **!**        | Operador lógico `NOT`, inverte a saída para o seu oposto |
-|      **&&**       | Operador lógico `AND`, retorna verdadeiro se todos os valores assim forem |
-| **&#124;&#124;**  | Operador lógico `OR`, retorna verdadeiro com apenas um deles sendo verdadeiro |
+|      **!**        | Operador lógico `NOT`, inverte a saída para o seu oposto.
+|      **&&**       | Operador lógico `AND`, retorna verdadeiro se todos os valores assim forem.
+| **&#124;&#124;**  | Operador lógico `OR`, retorna verdadeiro com apenas um deles sendo verdadeiro.
 
 ### Constantes numéricas
 
